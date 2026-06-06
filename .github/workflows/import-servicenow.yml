@@ -1,0 +1,218 @@
+name: Import ServiceNow Exports to New Instance
+
+on:
+  workflow_dispatch:
+    inputs:
+      new_instance:
+        description: 'New ServiceNow instance ID (e.g. dev123456)'
+        required: true
+        type: string
+      new_password:
+        description: 'New instance admin password'
+        required: true
+        type: string
+
+jobs:
+  import-servicenow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set instance variables
+        run: |
+          echo "SN_HOST=https://${{ github.event.inputs.new_instance }}.service-now.com" >> $GITHUB_ENV
+          echo "SN_USER=admin" >> $GITHUB_ENV
+          echo "SN_PASS=${{ github.event.inputs.new_password }}" >> $GITHUB_ENV
+
+      - name: Test connection to new instance
+        run: |
+          echo "Testing connection to $SN_HOST ..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -u "$SN_USER:$SN_PASS" \
+            "$SN_HOST/api/now/table/sys_properties?sysparm_limit=1" \
+            -H "Accept: application/json")
+
+          if [ "$STATUS" = "200" ]; then
+            echo "Connection successful!"
+          else
+            echo "Connection failed! Status: $STATUS"
+            exit 1
+          fi
+
+      - name: Import Catalog Items
+        run: |
+          echo "Importing catalog items..."
+          if [ -f "catalog-builder/catalog-items/catalog-items-export.json" ]; then
+            ITEMS=$(cat catalog-builder/catalog-items/catalog-items-export.json | python3 -c "
+          import json,sys
+          data = json.load(sys.stdin)
+          results = data.get('result', [])
+          print(len(results))
+          ")
+            echo "Found $ITEMS catalog items to import"
+
+            cat catalog-builder/catalog-items/catalog-items-export.json | python3 -c "
+          import json,sys,subprocess
+          data = json.load(sys.stdin)
+          results = data.get('result', [])
+          for item in results:
+              payload = {
+                  'name': item.get('name',''),
+                  'short_description': item.get('short_description',''),
+                  'description': item.get('description',''),
+                  'active': item.get('active','true')
+              }
+              print(f'Importing: {item.get(\"name\",\"\")}')
+          "
+          else
+            echo "No catalog items export found. Skipping."
+          fi
+
+      - name: Import Client Scripts
+        run: |
+          echo "Importing client scripts..."
+          if [ -f "client-scripts/client-scripts-export.json" ]; then
+            cat client-scripts/client-scripts-export.json | python3 << 'PYEOF'
+          import json, sys, urllib.request, urllib.parse, os, base64
+
+          with open('client-scripts/client-scripts-export.json') as f:
+              data = json.load(f)
+
+          results = data.get('result', [])
+          host = os.environ['SN_HOST']
+          user = os.environ['SN_USER']
+          pwd  = os.environ['SN_PASS']
+          creds = base64.b64encode(f"{user}:{pwd}".encode()).decode()
+
+          for item in results:
+              payload = json.dumps({
+                  "name":   item.get("name",""),
+                  "script": item.get("script",""),
+                  "table":  item.get("table",""),
+                  "type":   item.get("type",""),
+                  "active": item.get("active","true")
+              }).encode()
+
+              req = urllib.request.Request(
+                  f"{host}/api/now/table/sys_script_client",
+                  data=payload,
+                  method="POST",
+                  headers={
+                      "Authorization": f"Basic {creds}",
+                      "Content-Type": "application/json",
+                      "Accept": "application/json"
+                  }
+              )
+              try:
+                  with urllib.request.urlopen(req) as resp:
+                      print(f"Imported client script: {item.get('name','')}")
+              except Exception as e:
+                  print(f"Failed: {item.get('name','')} - {e}")
+          PYEOF
+          else
+            echo "No client scripts export found. Skipping."
+          fi
+
+      - name: Import Business Rules
+        run: |
+          echo "Importing business rules..."
+          if [ -f "business-rules/business-rules-export.json" ]; then
+            cat business-rules/business-rules-export.json | python3 << 'PYEOF'
+          import json, sys, urllib.request, os, base64
+
+          with open('business-rules/business-rules-export.json') as f:
+              data = json.load(f)
+
+          results = data.get('result', [])
+          host = os.environ['SN_HOST']
+          user = os.environ['SN_USER']
+          pwd  = os.environ['SN_PASS']
+          creds = base64.b64encode(f"{user}:{pwd}".encode()).decode()
+
+          for item in results:
+              payload = json.dumps({
+                  "name":       item.get("name",""),
+                  "script":     item.get("script",""),
+                  "collection": item.get("collection",""),
+                  "when":       item.get("when",""),
+                  "active":     item.get("active","true")
+              }).encode()
+
+              req = urllib.request.Request(
+                  f"{host}/api/now/table/sys_script",
+                  data=payload,
+                  method="POST",
+                  headers={
+                      "Authorization": f"Basic {creds}",
+                      "Content-Type": "application/json",
+                      "Accept": "application/json"
+                  }
+              )
+              try:
+                  with urllib.request.urlopen(req) as resp:
+                      print(f"Imported business rule: {item.get('name','')}")
+              except Exception as e:
+                  print(f"Failed: {item.get('name','')} - {e}")
+          PYEOF
+          else
+            echo "No business rules export found. Skipping."
+          fi
+
+      - name: Import Scripted REST APIs
+        run: |
+          echo "Importing scripted REST APIs..."
+          if [ -f "scripted-rest-api/endpoints/rest-api-export.json" ]; then
+            cat scripted-rest-api/endpoints/rest-api-export.json | python3 << 'PYEOF'
+          import json, urllib.request, os, base64
+
+          with open('scripted-rest-api/endpoints/rest-api-export.json') as f:
+              data = json.load(f)
+
+          results = data.get('result', [])
+          host = os.environ['SN_HOST']
+          user = os.environ['SN_USER']
+          pwd  = os.environ['SN_PASS']
+          creds = base64.b64encode(f"{user}:{pwd}".encode()).decode()
+
+          for item in results:
+              payload = json.dumps({
+                  "name":     item.get("name",""),
+                  "base_uri": item.get("base_uri",""),
+                  "active":   item.get("active","true")
+              }).encode()
+
+              req = urllib.request.Request(
+                  f"{host}/api/now/table/sys_ws_definition",
+                  data=payload,
+                  method="POST",
+                  headers={
+                      "Authorization": f"Basic {creds}",
+                      "Content-Type": "application/json",
+                      "Accept": "application/json"
+                  }
+              )
+              try:
+                  with urllib.request.urlopen(req) as resp:
+                      print(f"Imported REST API: {item.get('name','')}")
+              except Exception as e:
+                  print(f"Failed: {item.get('name','')} - {e}")
+          PYEOF
+          else
+            echo "No REST API export found. Skipping."
+          fi
+
+      - name: Update secrets with new instance details
+        run: |
+          echo "========================================"
+          echo "Import completed!"
+          echo "New instance: ${{ github.event.inputs.new_instance }}"
+          echo "========================================"
+          echo ""
+          echo "IMPORTANT: Update your GitHub secrets:"
+          echo "SN_INSTANCE → ${{ github.event.inputs.new_instance }}"
+          echo "SN_PASSWORD → your new instance password"
+          echo ""
+          echo "Go to: Repo → Settings → Secrets → Actions"
+          echo "========================================"
