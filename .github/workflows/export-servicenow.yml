@@ -1,0 +1,106 @@
+name: Export ServiceNow Instance to GitHub
+
+on:
+  schedule:
+    - cron: '0 8 */2 * *'    # Every 2 days at 8 AM UTC
+  workflow_dispatch:           # Manual trigger anytime
+
+jobs:
+  export-servicenow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git identity
+        run: |
+          git config user.name "Piyush Vyas"
+          git config user.email "piyushv080@gmail.com"
+
+      - name: Create export folders
+        run: |
+          mkdir -p catalog-builder/catalog-items
+          mkdir -p catalog-builder/variable-sets
+          mkdir -p flow-designer/flows
+          mkdir -p flow-designer/subflows
+          mkdir -p integration-hub/spokes
+          mkdir -p client-scripts
+          mkdir -p business-rules
+          mkdir -p scripted-rest-api/endpoints
+
+      - name: Export Catalog Items
+        run: |
+          curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
+            "https://${{ secrets.SN_INSTANCE }}.service-now.com/api/now/table/sc_cat_item?sysparm_fields=name,sys_id,short_description,description,category,active&sysparm_limit=100" \
+            -H "Accept: application/json" \
+            -o catalog-builder/catalog-items/catalog-items-export.json
+          echo "Catalog items exported"
+
+      - name: Export Variable Sets
+        run: |
+          curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
+            "https://${{ secrets.SN_INSTANCE }}.service-now.com/api/now/table/item_option_new_set?sysparm_fields=name,sys_id,short_description&sysparm_limit=100" \
+            -H "Accept: application/json" \
+            -o catalog-builder/variable-sets/variable-sets-export.json
+          echo "Variable sets exported"
+
+      - name: Export Flow Designer Flows
+        run: |
+          curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
+            "https://${{ secrets.SN_INSTANCE }}.service-now.com/api/now/table/sys_hub_flow?sysparm_fields=name,sys_id,description,active,internal_name&sysparm_limit=100" \
+            -H "Accept: application/json" \
+            -o flow-designer/flows/flows-export.json
+          echo "Flows exported"
+
+      - name: Export Subflows
+        run: |
+          curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
+            "https://${{ secrets.SN_INSTANCE }}.service-now.com/api/now/table/sys_hub_subflow?sysparm_fields=name,sys_id,description,active,internal_name&sysparm_limit=100" \
+            -H "Accept: application/json" \
+            -o flow-designer/subflows/subflows-export.json
+          echo "Subflows exported"
+
+      - name: Export Client Scripts
+        run: |
+          curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
+            "https://${{ secrets.SN_INSTANCE }}.service-now.com/api/now/table/sys_script_client?sysparm_fields=name,sys_id,script,table,type,active&sysparm_limit=100" \
+            -H "Accept: application/json" \
+            -o client-scripts/client-scripts-export.json
+          echo "Client scripts exported"
+
+      - name: Export Business Rules
+        run: |
+          curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
+            "https://${{ secrets.SN_INSTANCE }}.service-now.com/api/now/table/sys_script?sysparm_fields=name,sys_id,script,collection,when,active&sysparm_limit=100" \
+            -H "Accept: application/json" \
+            -o business-rules/business-rules-export.json
+          echo "Business rules exported"
+
+      - name: Export Scripted REST APIs
+        run: |
+          curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
+            "https://${{ secrets.SN_INSTANCE }}.service-now.com/api/now/table/sys_ws_definition?sysparm_fields=name,sys_id,base_uri,active&sysparm_limit=100" \
+            -H "Accept: application/json" \
+            -o scripted-rest-api/endpoints/rest-api-export.json
+          echo "Scripted REST APIs exported"
+
+      - name: Export Update Sets
+        run: |
+          curl -s -u "${{ secrets.SN_USERNAME }}:${{ secrets.SN_PASSWORD }}" \
+            "https://${{ secrets.SN_INSTANCE }}.service-now.com/api/now/table/sys_update_set?sysparm_fields=name,sys_id,description,state,release_date&sysparm_limit=100" \
+            -H "Accept: application/json" \
+            -o docs/update-sets-export.json
+          echo "Update sets exported"
+
+      - name: Save export timestamp
+        run: |
+          echo "Last exported: $(date +'%Y-%m-%d %H:%M UTC')" > docs/last-export.txt
+
+      - name: Commit and push exports
+        run: |
+          git add .
+          git diff --cached --quiet || git commit -m "ServiceNow export - $(date +'%d %b %Y')"
+          git push origin main
