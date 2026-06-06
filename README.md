@@ -43,7 +43,6 @@ No proprietary or employer-specific code is included.
 ## GitHub Actions Workflows
 | Workflow | Trigger | What It Does |
 |---|---|---|
-| `create-servicenow-knowledge-base.yml` | Manual / push to docs/ | Creates markdown study guides in repo |
 | `export-servicenow.yml` | Scheduled (every 2 days) | Exports SN instance config to GitHub |
 | `import-servicenow.yml` | Manual | Restores SN instance from exported files |
 ---
