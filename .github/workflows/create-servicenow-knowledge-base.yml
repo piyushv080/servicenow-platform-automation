@@ -1,0 +1,327 @@
+name: Create ServiceNow Knowledge Base Files
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  create-knowledge-base:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create directory structure
+        run: mkdir -p docs/certifications
+
+      - name: Create CIS-ITOM + CMDB Health study guide
+        run: |
+          cat > docs/certifications/CIS-ITOM-Quick-Reference.md << 'MDEOF'
+# ServiceNow CIS-ITOM — Quick Reference Guide
+
+## 1. IRE Operations — Know These Cold
+
+| Trigger Word | Answer |
+|---|---|
+| "No duplicate created" | IRE Identification Rule working |
+| "Source not trusted" | Reconciliation Rule priority |
+| "Non-CMDB table" | Add to property + CI Identifiers module |
+| "Transform Map duplicates" | Call `CMDBTransformUtil().identifyAndReconcile()` |
+
+---
+
+## 2. Business Application vs Application Service
+
+| Keyword | Answer |
+|---|---|
+| logical, portfolio, cost, risk, lifecycle | Business Application (ONE per app) |
+| running, production, operational, instance | Application Service (MANY per app) |
+| used on Incident | Application Service ALWAYS |
+
+---
+
+## 3. CSDM Maturity — Memorize This
+
+| Stage | Signal |
+|---|---|
+| Foundation | "Do we have data?" |
+| Crawl | App Service ↔ Business App linked |
+| Walk | Technical Services, Dynamic CI Groups, Offerings |
+| Run | Incident/Change/Problem integrated |
+| Fly | Business capabilities, cost, risk alignment |
+
+---
+
+## 4. Compliance Score = 0 Trap
+
+Only **Desired State Audit** and **Scripted Audit** feed CMDB Health Compliance score.
+Any other audit type = score stays 0.
+
+---
+
+## 5. Duplicate Remediation Not Working Trap
+
+Remediation only works on CIs flagged by IRE where `discovery_source = duplicate`.
+Manually created CIs = remediation will **never** find them.
+
+---
+
+## 6. CMDB Data Manager — Trigger Words
+
+| Trigger | Answer |
+|---|---|
+| "after X months" | CMDB Data Manager |
+| "approval required" | Attestation Policy |
+| "retire stale CIs" | CMDB Data Manager |
+| "archive records" | CMDB Data Manager |
+
+> NOT a Scheduled Job. NOT Discovery. NOT Remediation.
+
+---
+
+## 7. ACC Security Allow List
+
+Agent installed + policy active + script denied = script **not on ACC Security Allow List**. Always.
+
+---
+
+## 8. System Properties — Know These 4
+
+| Property | Value | Effect |
+|---|---|---|
+| glide.required.attribute.enabled | false | Discovery failing fast fix |
+| glide.identification_engine.multisource_enabled | true | Enable CMDB 360 |
+| glide.class.switch.enabled | false | Creates reclassification tasks |
+| glide.identification_engine.non_cmdb_tables | table list | Non-CMDB IRE support |
+
+---
+
+## 9. Static vs Dynamic Reconciliation
+
+| Type | Logic | Requires |
+|---|---|---|
+| Static | WHO sent the data (source priority number) | Priority rankings |
+| Dynamic | WHAT the data says (most reported, largest, smallest) | Multisource CMDB enabled |
+
+---
+
+## 10. Discovery 4 Phases — In Order
+
+| Phase | Name | What Happens |
+|---|---|---|
+| 1 | Scan | Find active IPs |
+| 2 | Classify | What type of device |
+| 3 | Identify | Collect unique attributes |
+| 4 | Explore | Full CI details → send to IRE |
+
+---
+
+## Your Biggest Advantage
+
+You have done hands-on lab work on:
+- IRE identification rules (INSERT / UPDATE / NO_CHANGE)
+- Reconciliation rules (Static + Dynamic)
+- Data Refresh Rules
+- Multisource CMDB
+- CMDB Health scorecards
+
+Most candidates only read theory. You have actually built and tested these.
+That is a significant edge on scenario-based questions.
+MDEOF
+
+      - name: Create CMDB Health Lab Reference
+        run: |
+          cat > docs/certifications/ServiceNow-CMDB-Health-Lab-Reference.md << 'MDEOF'
+# ServiceNow CMDB Health — Complete Lab Reference (Yokohama)
+
+## Lab Overview
+
+| Field | Value |
+|---|---|
+| Course | CMDB Health Micro-Certification Simulator (Yokohama) |
+| Role | CMDB Administrator (Cloud Dimensions) |
+| Goal | Configure and maintain CMDB health across Completeness, Compliance, and Correctness |
+
+---
+
+## TASK 1 — Scheduled Jobs (Twice Daily at 7AM and 7PM)
+
+**Navigation:** All → Scheduled Script Executions
+
+**Jobs to configure:**
+- CMDB Health Dashboard - Completeness Score Calculation
+- CMDB Health Dashboard - Compliance Score Calculation
+- CMDB Health Dashboard - Correctness Score Calculation
+
+| Field | Value |
+|---|---|
+| Run | Periodically |
+| Repeat Interval | 0 Days, 12 Hours, 00 Minutes |
+| Starting | Today 07:00:00 |
+| Active | Checked |
+
+> **Real-World:** Align job frequency with your discovery tool sync cadence.
+> If Discovery runs every 12 hours, health jobs should match so dashboards reflect fresh data.
+
+---
+
+## TASK 2 — Recommended Fields (Completeness)
+
+**Navigation:** All → CI Class Manager → Server → Health → Completeness → Recommended Fields tab
+
+**Add these fields:**
+- Location
+- Owned by
+- Support group
+
+**Verify:** CMDB Workspace → Health Dashboard → Unix and Windows Servers
+- 110 of 114 CIs missing one or more recommended fields (96% gap)
+
+> **Real-World:** Mark fields used for incident routing (Support group), asset tracking (Location),
+> and ownership reporting (Owned by) as recommended.
+
+---
+
+## TASK 3 — Desired State Audit (Compliance)
+
+**Navigation:** CI Class Manager → Windows Server → Health → Compliance
+
+### Certification Filter
+| Field | Value |
+|---|---|
+| Name | Windows Servers Filter |
+| Table | Windows Server [cmdb_ci_win_server] |
+| Conditions | None (includes ALL 123 Windows Servers) |
+
+### Certification Template
+| Field | Value |
+|---|---|
+| Name | Windows Servers Template |
+| Filter | Windows Servers Filter |
+| Audit type | Desired State |
+
+**Attribute Condition:**
+| Column | Operator | Values |
+|---|---|---|
+| Operating System | is one of | Windows 2012 R2 Standard, Windows 2016 Standard, Windows 2019 Datacenter |
+
+### Audit
+- Name: Windows Audit
+- Deactivate all pre-existing baseline audits
+- Run: CMDB Health Dashboard - Compliance Score Calculation
+
+**Result:** Compliance = 56% (54/123 servers failed — running unsupported OS)
+
+> **Real-World:** Use desired state audits to enforce OS patching standards, EOL tracking,
+> and software license compliance.
+
+---
+
+## TASK 4 — Orphan Rules (Correctness)
+
+**Navigation:** CI Class Manager → Email Server → Health → Correctness → Orphan Rules tab
+
+| Field | Value |
+|---|---|
+| Relationship type | Runs On::Runs |
+| Related class | Server [cmdb_ci_server] |
+
+**Result:** Orphan metric = 36% (4/11 Email Servers healthy — 7 orphaned)
+
+> **Real-World:** Orphan rules detect application servers with no hardware relationship —
+> indicating discovery gaps or decommissioned hardware not properly recorded.
+
+---
+
+## TASK 5 — Staleness Rules (Correctness)
+
+**Navigation:** CI Class Manager → [Class] → Health → Correctness → Staleness Rules tab
+
+| CI Class | Staleness Period | Reason |
+|---|---|---|
+| Windows Server | 7 Days | Daily discovery cadence |
+| Unix Server | 14 Days | Weekly agentless discovery |
+
+> **Real-World:** Match staleness thresholds to your discovery schedule.
+> Stale CIs trigger alerts before they cause automation failures.
+
+---
+
+## TASK 6 — Remediate Duplicate CIs
+
+**Navigation:** CI Class Manager → Windows Server → Health → Correctness → Duplicates tab
+
+**Deduplication Wizard for OWA-SD-01:**
+
+| Step | Action |
+|---|---|
+| Select Main CI | Choose oldest record (Created: 2012-05-25) |
+| Merge Attribute Values | Cost Center=Customer Support, Company=ACME Australia, Assigned to=Kyle Ferri |
+| Merge Relationships | Move all to Selected (main) CI |
+| Duplicate CI Actions | Delete the duplicate |
+
+**Result:** 122/122 non-duplicates. Single OWA-SD-01 with merged attributes.
+
+> **Real-World:** Always use the Remediation wizard — not manual deletion —
+> to preserve relationship history.
+
+---
+
+## TASK 7 — Reclassification System Properties
+
+**Navigation:** All → System Properties → search `glide.class`
+
+| Property | Set To | Effect |
+|---|---|---|
+| glide.class.upgrade.auto | false | Prevents silent class upgrades |
+| glide.class.downgrade.auto | false | Prevents silent class downgrades |
+| glide.class.switch.auto | false | Forces manual reclassification review |
+
+> **Real-World:** Automatic reclassification can silently break relationships and automation.
+> Force manual review so CMDB managers validate before changes propagate.
+
+---
+
+## TASK 8 — CMDB Query Builder (Simple Query)
+
+**Query:** Windows Servers running approved OS versions
+
+| Setting | Value |
+|---|---|
+| Starting node | Windows Server |
+| Filter | Operating System is one of: Windows 2012 R2 Standard, Windows 2016 Standard, Windows 2019 Datacenter |
+
+> **Real-World:** Save reusable queries for compliance reviews and scheduled reporting.
+
+---
+
+## TASK 9 — CMDB Query Builder (Non-CMDB Table)
+
+**Query:** Critical Incidents with No Owner
+
+| Node | Filter |
+|---|---|
+| Configuration Item | Owned by is empty |
+| Incident (Non-CMDB Tables tab) | Priority is 1 - Critical |
+
+> **Real-World:** Focus CMDB cleanup on CIs actively causing incidents with no owner.
+> Feed results into Problem Management for root cause analysis.
+
+---
+
+## TASK 10 — Remediation Workflow
+
+### Workflow
+- **Name:** Remediate Orphan WF
+- **Table:** Orphan CI Remediation [orphan_ci_remediation]
+
+**Script Activity:**
+```javascript
+current.short_description = 'Workflow launched for task number ' + current.number;
+current.update();
