@@ -7,10 +7,20 @@ import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
-from urllib.request import Request, urlopen
+from urllib.request import ProxyHandler, Request, build_opener
+
+
+# Match the AWX integration behavior: the ServiceNow developer-instance edge
+# has intermittently returned generic 500 responses, and inherited proxies
+# can route requests through an unintended path.
+DIRECT_OPENER = build_opener(ProxyHandler({}))
+RETRYABLE_HTTP_CODES = {429, 500, 502, 503, 504}
+MAX_RETRIES = 3
+RETRY_DELAY_SECONDS = 5
 
 
 def required_env(name: str) -> str:
@@ -31,16 +41,26 @@ def api_get(instance: str, username: str, password: str, table: str, params: dic
             "Authorization": f"Basic {token}",
         },
     )
-    try:
-        with urlopen(request, timeout=60) as response:
-            return json.load(response)
-    except HTTPError as exc:
-        # Do not print the request URL or credentials; ServiceNow's error body is
-        # useful for diagnosing ACL/table access failures.
-        body = exc.read().decode("utf-8", errors="replace")[:1000]
-        raise RuntimeError(f"ServiceNow returned HTTP {exc.code} for {table}: {body}") from exc
-    except URLError as exc:
-        raise RuntimeError(f"Could not connect to ServiceNow for table {table}: {exc.reason}") from exc
+    for attempt in range(MAX_RETRIES + 1):
+        try:
+            with DIRECT_OPENER.open(request, timeout=60) as response:
+                return json.load(response)
+        except HTTPError as exc:
+            if exc.code in RETRYABLE_HTTP_CODES and attempt < MAX_RETRIES:
+                exc.close()
+                print(
+                    f"ServiceNow returned HTTP {exc.code} for {table}; "
+                    f"retrying in {RETRY_DELAY_SECONDS}s ({attempt + 1}/{MAX_RETRIES})"
+                )
+                time.sleep(RETRY_DELAY_SECONDS)
+                continue
+
+            # Do not print the request URL or credentials; the response body is
+            # useful for diagnosing ACL/table access failures.
+            body = exc.read().decode("utf-8", errors="replace")[:2000]
+            raise RuntimeError(f"ServiceNow returned HTTP {exc.code} for {table}: {body}") from exc
+        except URLError as exc:
+            raise RuntimeError(f"Could not connect to ServiceNow for table {table}: {exc.reason}") from exc
 
 
 def slug(value: str) -> str:

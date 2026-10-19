@@ -43,7 +43,7 @@ No proprietary or employer-specific code is included.
 ## GitHub Actions Workflows
 | Workflow | Trigger | What It Does |
 |---|---|---|
-| `export-servicenow.yml` | Scheduled (every 2 days) or manual | Exports selected table snapshots and archives a named update set |
+| `export-servicenow.yml` | Scheduled (every 2 days) or manual | Archives a named update set; optional supplemental table snapshots |
 | `import-servicenow.yml` | Manual | Experimental partial import; does not restore update sets or a full instance |
 
 ### Archive a specific update set
@@ -53,7 +53,8 @@ The export workflow also archives the selected update set and its Customer Updat
 1. Add `SN_INSTANCE`, `SN_USERNAME`, and the rotated `SN_PASSWORD` as GitHub Actions secrets in a **private repository**. The ServiceNow account must be allowed to read `sys_update_set` and `sys_update_xml`.
 2. Open **Actions → Export ServiceNow Instance to GitHub → Run workflow**.
 3. Enter the exact update set name (for example, `aws update set`). The scheduled run uses `aws update set` by default.
-4. After the run, review `update-sets/<update-set-name>/manifest.json` and the `customer-updates-*.json` files. The latter contain each Customer Update's `payload` field.
+4. Leave **Also export supplemental table snapshots** unchecked for this update-set test. Those broad table calls are optional and run separately from the targeted archive.
+5. After the run, review `update-sets/<update-set-name>/manifest.json` and the `customer-updates-*.json` files. The latter contain each Customer Update's `payload` field.
 
 This archives the records captured in that update set; it is not a full-instance backup. Confirm that the catalog item, its related configuration, and the flow changes appear in the update set's **Customer Updates** list before running the workflow. ServiceNow notes that some kinds of platform changes are not represented in `sys_update_xml`, so test restoration into a separate PDI before relying on the archive. The workflow's import counterpart does not restore update sets.
 ---
