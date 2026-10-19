@@ -19,7 +19,7 @@ from urllib.request import ProxyHandler, Request, build_opener
 # can route requests through an unintended path.
 DIRECT_OPENER = build_opener(ProxyHandler({}))
 RETRYABLE_HTTP_CODES = {429, 500, 502, 503, 504}
-MAX_RETRIES = 3
+MAX_RETRIES = 8
 RETRY_DELAY_SECONDS = 5
 
 
@@ -47,12 +47,13 @@ def api_get(instance: str, username: str, password: str, table: str, params: dic
                 return json.load(response)
         except HTTPError as exc:
             if exc.code in RETRYABLE_HTTP_CODES and attempt < MAX_RETRIES:
+                delay = min(RETRY_DELAY_SECONDS * (2**attempt), 30)
                 exc.close()
                 print(
                     f"ServiceNow returned HTTP {exc.code} for {table}; "
-                    f"retrying in {RETRY_DELAY_SECONDS}s ({attempt + 1}/{MAX_RETRIES})"
+                    f"retrying in {delay}s ({attempt + 1}/{MAX_RETRIES})"
                 )
-                time.sleep(RETRY_DELAY_SECONDS)
+                time.sleep(delay)
                 continue
 
             # Do not print the request URL or credentials; the response body is
