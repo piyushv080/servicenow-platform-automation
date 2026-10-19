@@ -44,66 +44,66 @@ jobs:
 
       - name: Export Catalog Items
         run: |
-          curl --fail --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
+          curl --fail-with-body --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
             "https://${SN_INSTANCE}.service-now.com/api/now/table/sc_cat_item?sysparm_fields=name,sys_id,short_description,description,category,active&sysparm_limit=100" \
             -H "Accept: application/json" \
-            -o catalog-builder/catalog-items/catalog-items-export.json
+            -o catalog-builder/catalog-items/catalog-items-export.json || { echo 'ServiceNow response for catalog items (first 2000 bytes):'; head -c 2000 catalog-builder/catalog-items/catalog-items-export.json || true; exit 1; }
           echo "Catalog items exported"
 
       - name: Export Variable Sets
         run: |
-          curl --fail --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
+          curl --fail-with-body --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
             "https://${SN_INSTANCE}.service-now.com/api/now/table/item_option_new_set?sysparm_fields=name,sys_id,short_description&sysparm_limit=100" \
             -H "Accept: application/json" \
-            -o catalog-builder/variable-sets/variable-sets-export.json
+            -o catalog-builder/variable-sets/variable-sets-export.json || { echo 'ServiceNow response for variable sets (first 2000 bytes):'; head -c 2000 catalog-builder/variable-sets/variable-sets-export.json || true; exit 1; }
           echo "Variable sets exported"
 
       - name: Export Flow Designer Flows
         run: |
-          curl --fail --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
+          curl --fail-with-body --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
             "https://${SN_INSTANCE}.service-now.com/api/now/table/sys_hub_flow?sysparm_fields=name,sys_id,description,active,internal_name&sysparm_limit=100" \
             -H "Accept: application/json" \
-            -o flow-designer/flows/flows-export.json
+            -o flow-designer/flows/flows-export.json || { echo 'ServiceNow response for flows (first 2000 bytes):'; head -c 2000 flow-designer/flows/flows-export.json || true; exit 1; }
           echo "Flows exported"
 
       - name: Export Subflows
         run: |
-          curl --fail --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
+          curl --fail-with-body --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
             "https://${SN_INSTANCE}.service-now.com/api/now/table/sys_hub_subflow?sysparm_fields=name,sys_id,description,active,internal_name&sysparm_limit=100" \
             -H "Accept: application/json" \
-            -o flow-designer/subflows/subflows-export.json
+            -o flow-designer/subflows/subflows-export.json || { echo 'ServiceNow response for subflows (first 2000 bytes):'; head -c 2000 flow-designer/subflows/subflows-export.json || true; exit 1; }
           echo "Subflows exported"
 
       - name: Export Client Scripts
         run: |
-          curl --fail --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
+          curl --fail-with-body --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
             "https://${SN_INSTANCE}.service-now.com/api/now/table/sys_script_client?sysparm_fields=name,sys_id,script,table,type,active&sysparm_limit=100" \
             -H "Accept: application/json" \
-            -o client-scripts/client-scripts-export.json
+            -o client-scripts/client-scripts-export.json || { echo 'ServiceNow response for client scripts (first 2000 bytes):'; head -c 2000 client-scripts/client-scripts-export.json || true; exit 1; }
           echo "Client scripts exported"
 
       - name: Export Business Rules
         run: |
-          curl --fail --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
+          curl --fail-with-body --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
             "https://${SN_INSTANCE}.service-now.com/api/now/table/sys_script?sysparm_fields=name,sys_id,script,collection,when,active&sysparm_limit=100" \
             -H "Accept: application/json" \
-            -o business-rules/business-rules-export.json
+            -o business-rules/business-rules-export.json || { echo 'ServiceNow response for business rules (first 2000 bytes):'; head -c 2000 business-rules/business-rules-export.json || true; exit 1; }
           echo "Business rules exported"
 
       - name: Export Scripted REST APIs
         run: |
-          curl --fail --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
+          curl --fail-with-body --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
             "https://${SN_INSTANCE}.service-now.com/api/now/table/sys_ws_definition?sysparm_fields=name,sys_id,base_uri,active&sysparm_limit=100" \
             -H "Accept: application/json" \
-            -o scripted-rest-api/endpoints/rest-api-export.json
+            -o scripted-rest-api/endpoints/rest-api-export.json || { echo 'ServiceNow response for scripted REST APIs (first 2000 bytes):'; head -c 2000 scripted-rest-api/endpoints/rest-api-export.json || true; exit 1; }
           echo "Scripted REST APIs exported"
 
       - name: Export Update Sets
         run: |
-          curl --fail --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
+          curl --fail-with-body --show-error --silent -u "$SN_USERNAME:$SN_PASSWORD" \
             "https://${SN_INSTANCE}.service-now.com/api/now/table/sys_update_set?sysparm_fields=name,sys_id,description,state,release_date&sysparm_limit=100" \
             -H "Accept: application/json" \
-            -o docs/update-sets-export.json
+            -o docs/update-sets-export.json || { echo 'ServiceNow response for update sets (first 2000 bytes):'; head -c 2000 docs/update-sets-export.json || true; exit 1; }
           echo "Update sets exported"
 
       - name: Export selected update set and customer update payloads
