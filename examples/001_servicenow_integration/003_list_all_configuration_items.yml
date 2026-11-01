@@ -1,0 +1,23 @@
+---
+- name: Retrieve all configuration items from ServiceNow
+  hosts: localhost
+  gather_facts: false
+  vars:
+    servicenow_instance: "{{ lookup('env', 'SERVICENOW_INSTANCE') }}"
+    servicenow_user: "{{ lookup('env', 'SERVICENOW_USER') }}"
+    servicenow_password: "{{ lookup('env', 'SERVICENOW_PASSWORD') }}"
+
+  tasks:
+    - name: Retrieve all configuration items
+      uri:
+        url: "{{ servicenow_instance }}/api/now/table/cmdb_ci"
+        method: GET
+        user: "{{ servicenow_user }}"
+        password: "{{ servicenow_password }}"
+        headers:
+          Accept: "application/json"
+      register: cmdb_items_response
+
+    - name: Print all configuration items
+      ansible.builtin.debug:
+        msg: "Retrieved {{ cmdb_items_response.json.result | length }} configuration items."

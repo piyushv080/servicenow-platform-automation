@@ -1,0 +1,80 @@
+---
+- name: Restart a Windows service without using win_service module
+  hosts: all
+  vars:
+    service_name: ""
+  tasks:
+    - name: Check connection to the host using PowerShell
+      ansible.windows.win_shell: |
+        if (Test-Connection -ComputerName {{ IP_Address }} -Count 1 -Quiet) {
+          exit 0
+        } else {
+          exit 1
+        }
+      register: ping_result
+      ignore_unreachable: true
+      failed_when: false
+
+    - name: Set failure variable if unable to connect
+      set_fact:
+        connection_status: "Failed to connect to {{ device_name }} {{ IP_Address }}"
+      when: ping_result.rc != 0
+
+    - name: Set success variable if able to connect
+      set_fact:
+        connection_status: "Successfully connected to {{ IP_Address }}"
+      when: ping_result.rc == 0
+
+    - name: Set connection status for next template
+      set_stats:
+        data:
+          mail_subject_failure: "{{ connection_status }}"
+
+    - name: Fail if unable to connect to the host
+      ansible.builtin.fail:
+        msg: "Unable to connect to the requested IP: {{ IP_Address }}"
+      when: ping_result.rc != 0
+
+    - name: Restart the service
+      win_shell: |
+        $errorMessage = ""
+
+        try {
+            $service = Restart-Service -Name "{{ service_name }}" -PassThru -ErrorAction Stop
+            $status = $service.Status
+        } catch {
+            $service = Get-Service -Name "{{ service_name }}" -ErrorAction SilentlyContinue
+            if ($null -eq $service) {
+                $service = Get-WmiObject -Class Win32_Service -Filter "Name='{{ service_name }}'"
+            }
+            $status = "Unsuccessful"
+            $errorMessage = $_.Exception.Message
+        }
+
+        $html = ""
+        $html += "<table style='border: 1px solid; border-collapse: collapse;'><tr style='background-color: blue;'><th style='border: 1px solid; color: white;'>Status</th><th style='border: 1px solid; color: white;'>Name</th><th style='border: 1px solid; color: white;'>DisplayName</th>"
+
+        if ($errorMessage) {
+            $html += "<th style='border: 1px solid; color: white;'>Error</th>"
+        }
+
+        $html += "</tr><tr><td style='border: 1px solid;'>$status</td><td style='border: 1px solid;'>$($service.Name)</td><td style='border: 1px solid;'>$($service.DisplayName)</td>"
+
+        if ($errorMessage) {
+            $html += "<td style='border: 1px solid;'>$errorMessage</td>"
+        }
+
+        $html += "</tr></table>"
+        $html
+      register: win_service_restart
+      when: ping_result.rc == 0
+
+    - debug:
+        msg: "{{ win_service_restart.stdout }}"
+      when: ping_result.rc == 0
+
+    - name: Set data for next template
+      set_stats:
+        data:
+          mail_subject_success: "{{ win_service_restart.stdout }}"
+      when: ping_result.rc == 0

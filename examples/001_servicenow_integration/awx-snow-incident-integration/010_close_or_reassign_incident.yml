@@ -1,0 +1,106 @@
+---
+- name: Service Restart and Incident Management
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    servicenow_instance: "{{ lookup('env', 'SERVICENOW_INSTANCE') }}"
+    servicenow_user: "{{ lookup('env', 'SERVICENOW_USER') }}"
+    servicenow_password: "{{ lookup('env', 'SERVICENOW_PASSWORD') }}"
+    INC_SysID: ""
+    incident_number: ""
+    requestor_email: ""
+    service_name: ""
+    close_code: "Solution provided"
+    close_notes: "Service {{ service_name }} has been successfully restarted"
+    assigned_to: ""
+    reassign_group: ""
+
+  tasks:
+    - name: Check if service restarted successfully
+      set_fact:
+        service_status: "{{ 'Running' in mail_subject_success }}"
+
+    - name: Close the incident if service_status is true
+      when: service_status
+      uri:
+        url: "{{ servicenow_instance }}/api/now/table/incident/{{ INC_SysID }}"
+        method: PATCH
+        user: "{{ servicenow_user }}"
+        password: "{{ servicenow_password }}"
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+        body: |
+          {
+            "state": "6",
+            "close_code": "{{ close_code }}",
+            "work_notes": "[code] {{ mail_subject_success | regex_replace('\r?\n', '') | safe }} [/code]",
+            "close_notes": " {{close_notes}} "
+          }
+        body_format: json
+        validate_certs: yes
+      register: result_close
+
+    - name: Re-assign the incident if service_status is false
+      when: not service_status
+      uri:
+        url: "{{ servicenow_instance }}/api/now/table/incident/{{ INC_SysID }}"
+        method: PATCH
+        user: "{{ servicenow_user }}"
+        password: "{{ servicenow_password }}"
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+        body: |
+          {
+            "assigned_to": "",
+            "work_notes": "[code] {{ mail_subject_success | regex_replace('\r?\n', '') | safe }} [/code]",
+            "assignment_group": "{{ reassign_group }}"
+          }
+        body_format: json
+        validate_certs: yes
+      register: result_reassign
+
+    - name: Display result of closing the incident
+      when: service_status
+      debug:
+        var: result_close
+
+    - name: Display result of re-assigning the incident
+      when: not service_status
+      debug:
+        var: result_reassign
+
+    - name: Set email subject and body based on service status
+      set_fact:
+        email_subject: >-
+          {% if service_status %}
+          {{ incident_number }} | Ansible Automation | Service Restarted [Successfully]
+          {% else %}
+          {{ incident_number }} | Ansible Automation | Service Restart [Unsuccessful]
+          {% endif %}
+        email_body: >-
+          {% if service_status %}
+          Hi Team,<br><br> The <b>{{ service_name }}</b> service was <font color="green"><b>Successfully</b></font> restarted through automation. Below is the outcome for your reference.<br><br>
+          {{ mail_subject_success | regex_replace('\r?\n', '<br>') | safe }}
+          Incident : <b>{{ incident_number }}</b> has been closed.<br><br>
+          <br>Regards,<br><b>Ansible Automation</b><br><a href="mailto:automation-support@example.com?subject={{ incident_number }} | Ansible Automation | Service Restart [Successfully]">For More Support</a></html>
+          {% else %}
+          Hi Team,<br><br> The <b>{{ service_name }}</b> service restart was <font color="red"><b>Unsuccessful</b></font> through automation. Below is the outcome for your reference.<br><br>
+          {{ mail_subject_success | regex_replace('\r?\n', '<br>') | safe }}
+          Incident : <b>{{ incident_number }}</b> has been reassigned to <b>"{{reassign_group}}"</b> for further investigation.<br><br>
+          <br>Regards,<br><b>Ansible Automation</b><br><a href="mailto:automation-support@example.com?subject={{ incident_number }} | Ansible Automation | Service Restart [Unsuccessful]">For More Support</a></html>
+          {% endif %}
+
+    - name: Sending a HTML email
+      community.general.notification.mail:
+        host:
+        port:
+        from:
+        to: "{{ requestor_email }}"
+        subject: "{{ email_subject }}"
+        subtype: html
+        body: "{{ email_body }}"
+      delegate_to: localhost

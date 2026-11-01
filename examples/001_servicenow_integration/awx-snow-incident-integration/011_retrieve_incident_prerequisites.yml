@@ -1,0 +1,67 @@
+---
+- name: Update ServiceNow Incident
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    servicenow_instance: "{{ lookup('env', 'SERVICENOW_INSTANCE') }}"
+    servicenow_user: "{{ lookup('env', 'SERVICENOW_USER') }}"
+    servicenow_password: "{{ lookup('env', 'SERVICENOW_PASSWORD') }}"
+    INC_SysID: ""
+    assigned_to: ""
+
+  tasks:
+    - name: Retrieve incident details
+      uri:
+        url: "{{ servicenow_instance }}/api/now/table/incident/{{ INC_SysID }}"
+        method: GET
+        user: "{{ servicenow_user }}"
+        password: "{{ servicenow_password }}"
+        headers:
+          Accept: "application/json"
+        validate_certs: yes
+      register: incident_details
+
+    - name: Set incident number as a stat
+      set_stats:
+        data:
+          incident_number: "{{ incident_details.json.result.number }}"
+
+    - name: Retrieve requestor email
+      uri:
+        url: "{{ servicenow_instance }}/api/now/table/sys_user/{{ incident_details.json.result.caller_id.value }}"
+        method: GET
+        user: "{{ servicenow_user }}"
+        password: "{{ servicenow_password }}"
+        headers:
+          Accept: "application/json"
+        validate_certs: yes
+      register: requestor_details
+
+    - name: Set requestor email as a stat
+      set_stats:
+        data:
+          requestor_email: "{{ requestor_details.json.result.email }}"
+
+    - name: Change incident status to "Work in Progress" and assign the ticket
+      uri:
+        url: "{{ servicenow_instance }}/api/now/table/incident/{{ INC_SysID }}"
+        method: PATCH
+        user: "{{ servicenow_user }}"
+        password: "{{ servicenow_password }}"
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+        body: |
+          {
+            "assigned_to": "{{ assigned_to }}",
+            "state": "2"
+          }
+        body_format: json
+        validate_certs: yes
+      register: result
+
+    - name: Display result
+      debug:
+        var: result

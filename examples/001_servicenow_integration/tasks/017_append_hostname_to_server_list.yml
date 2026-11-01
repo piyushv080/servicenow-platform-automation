@@ -1,0 +1,8 @@
+- name: Append the deployed host to the local server list
+  ansible.builtin.lineinfile:
+    path: /opt/scripts/snow/linux_servers
+    insertafter: EOF
+    line: "{{ test_hostname }}"
+    state: present
+  when: ansible_distribution == "RedHat"
+  delegate_to: test-delegate.example.com

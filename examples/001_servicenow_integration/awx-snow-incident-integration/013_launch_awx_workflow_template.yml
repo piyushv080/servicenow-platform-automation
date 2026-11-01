@@ -1,0 +1,74 @@
+---
+- name: Trigger Ansible Workflow Job Template
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    tower_host: "{{ lookup('env', 'AWX_HOST') }}"
+    tower_username: "{{ lookup('env', 'AWX_USERNAME') }}"
+    tower_password: "{{ lookup('env', 'AWX_PASSWORD') }}"
+    workflow_template_id: ""
+    service_name: ""
+    INC_SysID: ""
+    INC_Desc: ""
+
+  tasks:
+    - name: Extract service_name from INC_Desc
+      set_fact:
+        service_name: "{{ (INC_Desc | regex_findall('Service Name: *([^\\r\\n]+)'))[0] }}"
+
+    - name: Extract device_name from INC_Desc
+      set_fact:
+        device_name_list: "{{ (INC_Desc | regex_findall('Device: *([^\\r\\n]+)')) }}"
+
+    - name: Set device_name
+      set_fact:
+        device_name: "{{ device_name_list[0] }}"
+
+    - name: Extract IP address from INC_Desc
+      set_fact:
+        IP_Address: "{{ (INC_Desc | regex_findall('IP address:\\s*(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})'))[0] }}"
+
+    - name: Get AWX API token
+      uri:
+        url: "{{ tower_host }}/api/v2/tokens/"
+        method: POST
+        user: "{{ tower_username }}"
+        password: "{{ tower_password }}"
+        force_basic_auth: yes
+        status_code: 201
+        body_format: json
+        headers:
+          Content-Type: "application/json"
+        body:
+          description: "Token for triggering workflow"
+      register: token_response
+
+    - name: Extract token
+      set_fact:
+        awx_token: "{{ token_response.json.token }}"
+
+    - name: Trigger the workflow job template
+      uri:
+        url: "{{ tower_host }}/api/v2/workflow_job_templates/{{ workflow_template_id }}/launch/"
+        method: POST
+        headers:
+          Authorization: "Bearer {{ awx_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          extra_vars:
+            service_name: "{{ service_name }}"
+            INC_SysID: "{{ INC_SysID }}"
+            IP_Address: "{{ IP_Address }}"
+            device_name: "{{ device_name }}"
+        status_code: 201
+      register: workflow_result
+
+    - name: Display workflow result
+      debug:
+        var: workflow_result
+
+    - name: Display workflow job URL
+      debug:
+        msg: "Workflow job URL: {{ workflow_result.location }}"

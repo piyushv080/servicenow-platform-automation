@@ -1,0 +1,46 @@
+---
+- name: create incident in servicenow
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+  - name: Create a synthetic incident for integration testing
+    servicenow.itsm.incident:
+      state: new
+      short_description: "ServiceNow integration test incident"
+      description: "Synthetic incident for validating the example integration."
+      other:
+        commits: "Example work note for a synthetic test incident."
+        cmdb_ci: server2.example.com
+      impact: high
+      urgency: high
+    delegate_to: localhost
+    register: incident_info
+
+  - name: get incident information
+    servicenow.itsm.incident_info:
+      number: "{{ incident_info.record.number }}"
+    register: incident_details
+
+  - name: print incident details
+    debug:
+      msg: "{{ incident_details}}"
+
+  - pause:
+
+  - name: Add an example progress note
+    servicenow.itsm.incident:
+      number: "{{ incident_info.record.number }}"
+      state: in_progress
+      other:
+        comments: "Example progress note for a synthetic test incident."
+  - pause:
+
+  - name: Close the synthetic incident
+    servicenow.itsm.incident:
+      number: "{{ incident_info.record.number }}"
+      state: closed
+      close_code: "Solved (Permanently)"
+      close_notes: "Synthetic test incident resolved by the example workflow."
+      other:
+        comments: "Example closure comment for a synthetic test incident."

@@ -1,0 +1,17 @@
+#!/usr/bin/env ansible-playbook
+- hosts: all
+  become: true
+
+  tasks:
+
+    - debug:
+        msg: "FQDN: {{ facter_networking.fqdn }}"
+
+    - debug:
+        msg: "IP: {{ ansible_default_ipv4.address }}"
+
+    - debug:
+        msg: "IP: {{ ansible_default_ipv4.macaddress }}"
+
+    - debug:
+        msg: "Product: {{ facter_dmi.product.name }}, {{ facter_dmi.product.serial_number }}"

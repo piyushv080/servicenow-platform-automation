@@ -1,0 +1,55 @@
+---
+- name: Re-assign Incident
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    servicenow_instance: "{{ lookup('env', 'SERVICENOW_INSTANCE') }}"
+    servicenow_user: "{{ lookup('env', 'SERVICENOW_USER') }}"
+    servicenow_password: "{{ lookup('env', 'SERVICENOW_PASSWORD') }}"
+    INC_SysID: ""
+    requestor_email : ""
+    reassign_group: ""
+
+  tasks:
+    - name: Re-assign the C task
+      uri:
+        url: "{{ servicenow_instance }}/api/now/table/incident/{{ INC_SysID }}"
+        method: PATCH
+        user: "{{ servicenow_user }}"
+        password: "{{ servicenow_password }}"
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+        body: |
+          {
+            "assigned_to": "",
+            "work_notes": "[code] {{ mail_subject_failure | regex_replace('\r?\n', '') | safe }} [/code]",
+            "assignment_group": "{{ reassign_group }}"
+          }
+        body_format: json
+        validate_certs: yes
+      register: result_reassign
+
+    - name: Display result of re-assigning the C task
+      debug:
+        var: result_reassign
+
+    - name: Sending a HTML email
+      community.general.notification.mail:
+        host:
+        port:
+        from:
+        to: "{{ requestor_email }}"
+        cc:
+        subject: Ansible Automation | Service Restart - Unable to connect to server
+        subtype: html
+        body: |
+          Hi Windows Team,<br><br>
+          Please find below failure details.<br><br>
+          {{ mail_subject_failure | regex_replace('\r?\n', '') | safe }}.<br><br>
+          Incident : <b>{{ incident_number }}</b> has been reassigned to <b>"{{reassign_group}}"</b> for further investigation.<br><br>
+          <br>Regards<br>
+          <b>Ansible Automation Team</b>
+      delegate_to: localhost

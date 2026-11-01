@@ -1,0 +1,31 @@
+- name: Load ServiceNow variables
+  include_vars: ../vars/022_create_ci_example_variables.yml
+
+- name: Create CI record
+  servicenow:
+    password: "{{ lookup('env', 'SERVICENOW_PASSWORD') }}"
+    hostname: "{{ ansible_hostname }}"
+    operating_system: "{{ ansible_distribution }}"
+    manufacturer: "{{ test_manufacturer }}"
+    used_for: "{{ test_usage }}"
+    serial_number: "{{ test_serial }}"
+    model_id: "{{ ansible_product_name }}"
+    owned_by: "Test Owner"
+    managed_by: "Test Manager"
+    supported_by: "Test Support"
+    comments: "{{ test_comments | default('') }}"
+    fqdn: "{{ test_fqdn }}"
+    mac_address: "{{ ansible_default_ipv4.macaddress }}"
+    os_domain: "{{ ansible_domain }}"
+    os_version: "{{ ansible_distribution_major_version }}"
+    virtual: "{{ test_virtual }}"
+    proxy_host: "proxy.example.com"
+    proxy_port: 8080
+    headless: "{{ test_headless | default(True) | bool }}"
+  register: snow
+  delegate_to: localhost
+  become: false
+
+- debug:
+    var: snow.msg
+    verbosity: 1

@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+- hosts: all
+  become: true
+  gather_facts: true
+  serial: 1
+
+  tasks:
+    - name: Create a configuration item from host facts
+      import_tasks: tasks/018_create_ci_record_task.yml

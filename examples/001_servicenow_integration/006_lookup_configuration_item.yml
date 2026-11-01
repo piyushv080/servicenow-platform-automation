@@ -1,0 +1,20 @@
+---
+- name: Demonstrate CMDB item info retrieval
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Set the configuration-item ID from the environment
+      ansible.builtin.set_fact:
+        incident:
+          record:
+            cmdb_ci: "{{ lookup('env', 'SERVICENOW_CI_SYS_ID') }}"
+
+    - name: Retrieve information about CMDB item
+      servicenow.itsm.configuration_item_info:
+        sys_id: "{{ incident.record.cmdb_ci }}"
+      register: cmdb_info
+
+    - name: Print CMDB item name
+      ansible.builtin.debug:
+        var: cmdb_info.records[0].name

@@ -1,0 +1,8 @@
+#!/usr/bin/env ansible-playbook
+- hosts: all
+  become: true
+  gather_facts: true
+  serial: 1
+  tasks:
+    - name: Append the deployed host to the local server list
+      import_tasks: tasks/017_append_hostname_to_server_list.yml

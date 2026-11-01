@@ -1,0 +1,38 @@
+#!/usr/bin/env ansible-playbook
+
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Create test CI entry
+      servicenow:
+        username: "{{ lookup('env', 'TEST_USER') }}"
+        password: "{{ test_pass }}"
+        hostname: "test-ci01"
+        manufacturer: "Test Manufacturer"
+        location: "Test Location"
+        used_for: "Testing"
+        serial_number: "test-ci01-serial"
+        model_id: "Test Virtual Platform"
+        owned_by: "Test Owner"
+        managed_by: "Test Manager"
+        supported_by: "Test Support"
+        short_description: "Automated test description"
+        comments: "Automated test comments"
+        fqdn: "test-ci01.example.com"
+        mac_address: "00:00:00:00:00:00"
+        os_domain: "example.local"
+        os_version: "1"
+        virtual: true
+        headless: true
+      register: snow
+      delegate_to: test-delegate.example.com
+      vars:
+        ansible_python_interpreter: "/opt/testenv/bin/python"
+      environment:
+        DISPLAY: "localhost:12.0"
+
+    - debug:
+        var: snow

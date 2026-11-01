@@ -1,0 +1,8 @@
+# Synthetic values used by the CI task example. Replace for a development lab.
+test_manufacturer: "Example Manufacturer"
+test_usage: "Testing"
+test_serial: "example-ci-serial-001"
+test_virtual: true
+test_headless: true
+test_fqdn: "example-ci01.example.test"
+test_comments: "Synthetic CI created by the example playbook."
