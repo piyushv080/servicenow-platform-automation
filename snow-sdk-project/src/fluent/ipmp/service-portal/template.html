@@ -1,0 +1,108 @@
+<div class="ipm-app" ng-class="{'ipm-loading': c.loading}">
+  <aside class="ipm-sidebar" aria-label="Problem management navigation">
+    <div class="ipm-brand"><span class="ipm-brand-mark">IP</span><span>Problem<br>Management</span></div>
+    <nav class="ipm-navigation">
+      <a class="ipm-nav-item active" href="javascript:void(0)"><span aria-hidden="true">▦</span>Intelligent Problem Dashboard</a>
+      <a class="ipm-nav-item" href="javascript:void(0)" ng-click="c.refresh()"><span aria-hidden="true">◷</span>Refresh Incidents</a>
+      <a class="ipm-nav-item" href="javascript:void(0)" ng-click="c.loadPredictive()"><span aria-hidden="true">✧</span>Predictive Patterns</a>
+    </nav>
+    <div class="ipm-sidebar-note">Incident patterns help teams investigate recurring issues. Confirm root cause with evidence.</div>
+  </aside>
+
+  <main class="ipm-main">
+    <header class="ipm-header">
+      <div>
+        <div class="ipm-breadcrumb">Problem Management <span>›</span> <strong>Intelligent Problem Dashboard</strong></div>
+        <h1><span class="ipm-brain" aria-hidden="true">✧</span> Intelligent Problem Dashboard</h1>
+        <p class="ipm-subtitle">Identify recurring incidents, investigate trends and draft Problems with AI assistance.</p>
+      </div>
+      <div class="ipm-header-actions">
+        <button class="ipm-button ipm-button-light" ng-click="c.refresh()" ng-disabled="c.loading">↻ Refresh</button>
+      </div>
+    </header>
+
+    <div class="ipm-notice" ng-if="c.notice" ng-class="'ipm-notice-' + c.noticeType" role="status">{{c.notice}}</div>
+    <div class="ipm-alert" ng-if="c.data.dashboard && !c.data.dashboard.success">{{c.data.dashboard.message}}</div>
+
+    <section class="ipm-kpi-grid" aria-label="Problem management summary">
+      <article class="ipm-kpi-card blue"><div class="ipm-kpi-icon">▤</div><div class="ipm-kpi-value">{{c.data.dashboard.kpis.incidents || 0}}</div><div class="ipm-kpi-label">Incidents in result set</div></article>
+      <article class="ipm-kpi-card amber"><div class="ipm-kpi-icon">◷</div><div class="ipm-kpi-value">{{c.data.dashboard.kpis.recurringPatterns || 0}}</div><div class="ipm-kpi-label">Repeated descriptions on page</div><small>Heuristic matches, not confirmed causes</small></article>
+      <article class="ipm-kpi-card green"><div class="ipm-kpi-icon">✓</div><div class="ipm-kpi-value">{{c.data.dashboard.kpis.highPriorityIncidents || 0}}</div><div class="ipm-kpi-label">High priority on this page</div></article>
+      <article class="ipm-kpi-card purple"><div class="ipm-kpi-icon">▣</div><div class="ipm-kpi-value">{{c.data.dashboard.kpis.problems || 0}}</div><div class="ipm-kpi-label">Problems visible to you</div></article>
+    </section>
+
+    <div class="ipm-content-grid">
+      <section class="ipm-panel ipm-incident-panel">
+        <div class="ipm-panel-heading">
+          <div><h2>Incident patterns</h2><p>Repeated short descriptions grouped by configuration item</p></div>
+          <button class="ipm-button ipm-button-primary" ng-click="c.loadPredictive()" ng-disabled="c.loading">✧ Load PI clusters</button>
+        </div>
+        <div class="ipm-filter-bar">
+          <label class="ipm-search"><span aria-hidden="true">⌕</span><input type="search" ng-model="c.filters.search" placeholder="Search number, description or CI"></label>
+          <label>Priority<select ng-model="c.filters.priority" ng-change="c.refresh()"><option value="">All</option><option value="1">Critical</option><option value="2">High</option><option value="3">Moderate</option><option value="4">Low</option><option value="5">Planning</option></select></label>
+          <label>State<select ng-model="c.filters.state" ng-change="c.refresh()"><option value="">All</option><option value="1">New</option><option value="2">In Progress</option><option value="3">On Hold</option><option value="6">Resolved</option><option value="7">Closed</option><option value="8">Canceled</option></select></label>
+        </div>
+        <div class="ipm-table-wrap">
+          <table class="ipm-table">
+            <thead><tr><th>Incident</th><th>Short description</th><th>Configuration item</th><th>Priority</th><th>State</th><th></th></tr></thead>
+            <tbody>
+              <tr ng-repeat="incident in c.visibleIncidents() track by incident.sys_id" ng-class="{'selected': c.selectedIncident.sys_id === incident.sys_id}">
+                <td><a class="ipm-link" ng-href="/incident.do?sys_id={{incident.sys_id}}" target="_blank" rel="noopener">{{incident.number}}</a></td>
+                <td>{{incident.short_description}}</td><td>{{incident.cmdb_ci || '—'}}</td>
+                <td><span class="ipm-pill" ng-class="'priority-' + incident.priority">{{incident.priority_display || ('P' + incident.priority)}}</span></td>
+                <td>{{incident.state_display}}</td>
+                <td><button class="ipm-link-button" ng-click="c.selectIncident(incident)">Investigate</button></td>
+              </tr>
+              <tr ng-if="!c.visibleIncidents().length"><td colspan="6" class="ipm-empty">No incidents match these filters.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ipm-pagination">
+          <span>Showing {{(c.options.offset + 1)}}–{{c.options.offset + c.data.dashboard.incidents.records.length}} of {{c.data.dashboard.incidents.totalCount}}</span>
+          <div><button class="ipm-button ipm-button-light" ng-click="c.previousPage()" ng-disabled="c.options.offset === 0">Previous</button><button class="ipm-button ipm-button-light" ng-click="c.nextPage()" ng-disabled="c.options.offset + c.options.limit >= c.data.dashboard.incidents.totalCount">Next</button></div>
+        </div>
+        <div class="ipm-predictive" ng-if="c.data.dashboard.predictive.requested">
+          <strong>Predictive Intelligence</strong>
+          <span ng-if="!c.data.dashboard.predictive.available">{{c.data.dashboard.predictive.message}}</span>
+          <span ng-if="c.data.dashboard.predictive.available">{{c.data.dashboard.predictive.clusters.length}} clusters returned. Validate their meaning against your configured solution.</span>
+        </div>
+      </section>
+
+      <aside class="ipm-detail-column">
+        <section class="ipm-panel ipm-detail-panel">
+          <div class="ipm-panel-heading"><div><h2>Investigation</h2><p ng-if="c.selectedIncident">{{c.selectedIncident.number}} · {{c.selectedIncident.short_description}}</p><p ng-if="!c.selectedIncident">Select an Incident to begin.</p></div></div>
+          <div class="ipm-detail-body" ng-if="c.selectedIncident">
+            <button class="ipm-button ipm-button-outline" ng-click="c.analyze()" ng-disabled="c.analyzing">{{c.analyzing ? 'Analyzing…' : '✧ Analyze with Now Assist'}}</button>
+            <div class="ipm-analysis" ng-if="c.analysis && c.analysis.success">
+              <h3>Summary</h3><p>{{c.analysis.executive_summary}}</p>
+              <h3>Possible causes</h3><ul><li ng-repeat="item in c.analysis.possible_causes track by $index">{{item}}</li><li ng-if="!c.analysis.possible_causes.length">No causes returned.</li></ul>
+              <h3>Evidence</h3><ul><li ng-repeat="item in c.analysis.evidence track by $index">{{item}}</li><li ng-if="!c.analysis.evidence.length">No evidence returned.</li></ul>
+              <p class="ipm-muted">AI output is a draft for review, not a confirmed root cause.</p>
+            </div>
+            <div class="ipm-form" ng-if="c.analysis && c.analysis.success">
+              <h3>Problem draft</h3>
+              <label>Short description<input maxlength="160" ng-model="c.draft.short_description"></label>
+              <label>Description<textarea rows="5" maxlength="4000" ng-model="c.draft.description"></textarea></label>
+              <div class="ipm-form-row"><label>Impact<select ng-model="c.draft.impact"><option value="1">High</option><option value="2">Medium</option><option value="3">Low</option></select></label><label>Urgency<select ng-model="c.draft.urgency"><option value="1">High</option><option value="2">Medium</option><option value="3">Low</option></select></label></div>
+              <button class="ipm-button ipm-button-primary ipm-full" ng-click="c.requestApproval()" ng-disabled="c.savingApproval">{{c.savingApproval ? 'Saving…' : 'Request manager approval'}}</button>
+            </div>
+            <p class="ipm-error" ng-if="c.analysis && !c.analysis.success">{{c.analysis.message}}</p>
+          </div>
+        </section>
+
+        <section class="ipm-panel ipm-approval-panel">
+          <div class="ipm-panel-heading"><div><h2>Manager review</h2><p>Saved requests and approvals</p></div><span class="ipm-count">{{c.data.dashboard.pendingApprovals.length || 0}}</span></div>
+          <div class="ipm-approval-row" ng-repeat="approval in c.data.dashboard.pendingApprovals track by approval.sys_id">
+            <div><strong>{{approval.short_description}}</strong><small>{{approval.requested_by}} · {{approval.created}}</small><span class="ipm-state">{{approval.state}}</span></div>
+            <div class="ipm-approval-actions">
+              <button class="ipm-link-button" ng-if="approval.state === 'requested'" ng-click="c.approve(approval)" ng-disabled="c.savingApproval">Approve</button>
+              <button class="ipm-link-button" ng-if="approval.state === 'approved'" ng-click="c.createProblem(approval)" ng-disabled="c.savingApproval">Create Problem</button>
+            </div>
+          </div>
+          <p class="ipm-empty" ng-if="!c.data.dashboard.pendingApprovals.length">No approval requests to review.</p>
+        </section>
+      </aside>
+    </div>
+    <footer class="ipm-footer">Data and actions are filtered by your ServiceNow access. AI suggestions require human review.</footer>
+  </main>
+</div>
