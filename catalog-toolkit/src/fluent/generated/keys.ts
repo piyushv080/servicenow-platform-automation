@@ -18,6 +18,10 @@ declare global {
                         id: 'ddb94cbf24ff44f8b2de3115367a887e'
                         deleted: true
                     }
+                    CatalogRequestUtils: {
+                        table: 'sys_script_include'
+                        id: '6f3b740ace044f56b4e79d5ad21ccbbe'
+                    }
                     cs0: {
                         table: 'sys_script_client'
                         id: '1f86da27f68c414e99e8f986e74169b3'
@@ -38,6 +42,10 @@ declare global {
                     src_server_script_ts: {
                         table: 'sys_module'
                         id: 'df0653f5b2ab4fd5a750d7a245239bbd'
+                    }
+                    'src_server_script-includes_catalog-request-utils_js': {
+                        table: 'sys_module'
+                        id: '8964153184bb4355b24c469fd5320fda'
                     }
                 }
                 composite: [
