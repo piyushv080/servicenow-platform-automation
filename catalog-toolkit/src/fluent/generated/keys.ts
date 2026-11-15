@@ -18,6 +18,14 @@ declare global {
                         id: 'ddb94cbf24ff44f8b2de3115367a887e'
                         deleted: true
                     }
+                    catalog_request_log_step: {
+                        table: 'sys_hub_step_instance'
+                        id: '4965ceb0f53343b39564b7044321b2a3'
+                    }
+                    catalog_request_logging: {
+                        table: 'sys_hub_action_type_definition'
+                        id: 'be3949ef96d8457fb6c1efa6f4621aba'
+                    }
                     catalog_request_valid: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '6f6c857d3fdd4e6b89fdffdb5e3edd84'
@@ -79,6 +87,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: '00629b968b3c4ff3a62b4971e9d6d152'
+                        key: {
+                            model: 'be3949ef96d8457fb6c1efa6f4621aba'
+                            element: '__dont_treat_as_error__'
+                        }
+                    },
+                    {
                         table: 'sys_hub_flow_input'
                         id: '014dc148fadd40b49b42116e038e26cb'
                         key: {
@@ -134,6 +150,24 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_element_mapping'
+                        id: '1b06b6e8906e45edb27a0fb29514b252'
+                        key: {
+                            id: '4965ceb0f53343b39564b7044321b2a3'
+                            table: 'var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1'
+                            field: 'log_message'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '1c34b52d6c3c4a2f8ca4b743ce032641'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_be3949ef96d8457fb6c1efa6f4621aba'
+                            element: 'logged'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_ui_element'
                         id: '1daf64c8f743430283fedc562916372e'
                         key: {
@@ -169,6 +203,15 @@ declare global {
                             name: 'var__m_sys_hub_flow_input_8c74266b0b45403b85c13359e01f67c6'
                             element: 'businessJustification'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '2ee3e8c6c8af47ff905a0eae74d0f4e9'
+                        key: {
+                            id: 'be3949ef96d8457fb6c1efa6f4621aba'
+                            table: 'var__m_sys_hub_action_output_be3949ef96d8457fb6c1efa6f4621aba'
+                            field: 'logged'
                         }
                     },
                     {
@@ -218,6 +261,23 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '6184c10f32a64db59ef0ee8e7ed18b49'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_be3949ef96d8457fb6c1efa6f4621aba'
+                            element: '__action_status__'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_input'
+                        id: '70c9e45e84414cddbe3b2bebea7a8a0a'
+                        key: {
+                            model: 'be3949ef96d8457fb6c1efa6f4621aba'
+                            element: 'requestNumber'
+                        }
+                    },
+                    {
                         table: 'sys_db_object'
                         id: '777a2be0fef54ecb8067edd62621f90b'
                         key: {
@@ -237,6 +297,15 @@ declare global {
                                 }
                             }
                             sys_domain: 'global'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '8094234ccd0542ce972a93955670ae96'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_be3949ef96d8457fb6c1efa6f4621aba'
+                            element: '__dont_treat_as_error__'
+                            language: 'en'
                         }
                     },
                     {
@@ -315,6 +384,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: 'a5b92a5f3951496c9fb24c8a2d954e2b'
+                        key: {
+                            model: 'be3949ef96d8457fb6c1efa6f4621aba'
+                            element: 'logged'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: 'b85ff466bc21425b97205e24e88ab251'
                         key: {
@@ -329,6 +406,22 @@ declare global {
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'environment'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_input'
+                        id: 'c380b487fcb74e5d9eb799eac118ed2c'
+                        key: {
+                            model: 'be3949ef96d8457fb6c1efa6f4621aba'
+                            element: 'logMessage'
+                        }
+                    },
+                    {
+                        table: 'sys_variable_value'
+                        id: 'c3acea20be69485e817c875f723b9efc'
+                        key: {
+                            document_key: '4965ceb0f53343b39564b7044321b2a3'
+                            variable: 'ab123adbc712220061f553c6f0976387'
                         }
                     },
                     {
@@ -425,6 +518,32 @@ declare global {
                             }
                             element: 'integration_enabled'
                             position: '2'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: 'f8c8c7aa3bd241c5aa394ea24ea6c898'
+                        key: {
+                            model: 'be3949ef96d8457fb6c1efa6f4621aba'
+                            element: '__action_status__'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'fc96d9ed9b3b48548c3383f88a36bd78'
+                        key: {
+                            name: 'var__m_sys_hub_action_input_be3949ef96d8457fb6c1efa6f4621aba'
+                            element: 'logMessage'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'fe11d93d8f784532bf9fb0eeef429d67'
+                        key: {
+                            name: 'var__m_sys_hub_action_input_be3949ef96d8457fb6c1efa6f4621aba'
+                            element: 'requestNumber'
+                            language: 'en'
                         }
                     },
                 ]
