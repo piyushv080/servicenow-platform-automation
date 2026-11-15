@@ -18,6 +18,26 @@ declare global {
                         id: 'ddb94cbf24ff44f8b2de3115367a887e'
                         deleted: true
                     }
+                    catalog_request_valid: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '6f6c857d3fdd4e6b89fdffdb5e3edd84'
+                    }
+                    catalog_request_validation: {
+                        table: 'sys_hub_flow'
+                        id: '8c74266b0b45403b85c13359e01f67c6'
+                    }
+                    catalog_validation_failed: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '690f3100d01e46f3bfabdf4a96f2cb3d'
+                    }
+                    catalog_validation_failure: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: 'b5b00be11ad042559ba0daf5310fd820'
+                    }
+                    catalog_validation_success: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '34b49e0c4c204e808910cc541cd5b571'
+                    }
                     CatalogRequestUtils: {
                         table: 'sys_script_include'
                         id: '6f3b740ace044f56b4e79d5ad21ccbbe'
@@ -51,11 +71,44 @@ declare global {
                 composite: [
                     {
                         table: 'sys_documentation'
+                        id: '0030b4a582ef4fedb214513996b9da51'
+                        key: {
+                            name: 'var__m_sys_hub_flow_output_8c74266b0b45403b85c13359e01f67c6'
+                            element: 'message'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '014dc148fadd40b49b42116e038e26cb'
+                        key: {
+                            model: '8c74266b0b45403b85c13359e01f67c6'
+                            element: 'businessJustification'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '06bfc18bb6764c86a85ed3b0f9433b64'
+                        key: {
+                            model: '8c74266b0b45403b85c13359e01f67c6'
+                            element: 'requestType'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: '10700983268c4f8daa1feb073e540c44'
                         key: {
                             name: 'x_servicenow_catal_config'
                             element: 'NULL'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_output'
+                        id: '1088c348c07b42c2b41853eb8a5e04d9'
+                        key: {
+                            model: '8c74266b0b45403b85c13359e01f67c6'
+                            element: 'message'
                         }
                     },
                     {
@@ -107,6 +160,15 @@ declare global {
                         id: '22581ffb780149ae8cab9625f1ca4bd7'
                         key: {
                             name: 'x_servicenow_catal_config'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '2a8dfb22bf9640f3bb48ffaa2251c91b'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_8c74266b0b45403b85c13359e01f67c6'
+                            element: 'businessJustification'
+                            language: 'en'
                         }
                     },
                     {
@@ -262,11 +324,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_flow_input'
+                        id: 'bcc76a2ecb0e40adabe6856b76f34ea8'
+                        key: {
+                            model: '8c74266b0b45403b85c13359e01f67c6'
+                            element: 'environment'
+                        }
+                    },
+                    {
                         table: 'catalog_ui_policy_action'
                         id: 'c99664db3c6d49eea285ba5ebabaec4f'
                         key: {
                             ui_policy: '228acba5c19446599b92f79cb989886d'
                             catalog_variable: 'IO:additional_information'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'ca4ef534efea4820bbc3e3692c17c2d5'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_8c74266b0b45403b85c13359e01f67c6'
+                            element: 'environment'
+                            language: 'en'
                         }
                     },
                     {
@@ -298,6 +377,32 @@ declare global {
                         key: {
                             name: 'x_servicenow_catal_config'
                             element: 'integration_enabled'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_output'
+                        id: 'dc272a03f5574b9ba54316fab2d01627'
+                        key: {
+                            model: '8c74266b0b45403b85c13359e01f67c6'
+                            element: 'isValid'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'e7da79b94cb94345b6c2d5a679d5c220'
+                        key: {
+                            name: 'var__m_sys_hub_flow_output_8c74266b0b45403b85c13359e01f67c6'
+                            element: 'isValid'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'f535929a0d544a678a1157456e8c9385'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_8c74266b0b45403b85c13359e01f67c6'
+                            element: 'requestType'
+                            language: 'en'
                         }
                     },
                     {
