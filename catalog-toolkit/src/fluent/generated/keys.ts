@@ -18,6 +18,10 @@ declare global {
                         id: 'ddb94cbf24ff44f8b2de3115367a887e'
                         deleted: true
                     }
+                    catalog_request_fulfillment: {
+                        table: 'sys_hub_flow'
+                        id: '6e1091481a854d5392207ad270e08466'
+                    }
                     catalog_request_log_step: {
                         table: 'sys_hub_step_instance'
                         id: '4965ceb0f53343b39564b7044321b2a3'
@@ -59,9 +63,17 @@ declare global {
                         table: 'sc_cat_item'
                         id: 'a676a847b4e84741afc14fe6f675bfbd'
                     }
+                    generic_request_catalog_trigger: {
+                        table: 'sys_hub_trigger_instance_v2'
+                        id: '6d942fd9afda41ebbd98b0175256bb71'
+                    }
                     generic_request_validation: {
                         table: 'catalog_script_client'
                         id: '61b676ac7aac4ee09718fe74aeb056f7'
+                    }
+                    log_catalog_request: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '07802911f3244e76b412e280bf87da4f'
                     }
                     package_json: {
                         table: 'sys_module'
