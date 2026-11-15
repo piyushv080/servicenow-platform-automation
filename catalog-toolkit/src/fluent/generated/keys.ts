@@ -5,6 +5,10 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    access_request_details_policy: {
+                        table: 'catalog_ui_policy'
+                        id: '228acba5c19446599b92f79cb989886d'
+                    }
                     bom_json: {
                         table: 'sys_module'
                         id: '7b94ae1e78834f05b9ee270705a084da'
@@ -22,6 +26,10 @@ declare global {
                     generic_it_service_request: {
                         table: 'sc_cat_item'
                         id: 'a676a847b4e84741afc14fe6f675bfbd'
+                    }
+                    generic_request_validation: {
+                        table: 'catalog_script_client'
+                        id: '61b676ac7aac4ee09718fe74aeb056f7'
                     }
                     package_json: {
                         table: 'sys_module'
@@ -243,6 +251,14 @@ declare global {
                             name: 'x_servicenow_catal_config'
                             element: 'active'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'catalog_ui_policy_action'
+                        id: 'c99664db3c6d49eea285ba5ebabaec4f'
+                        key: {
+                            ui_policy: '228acba5c19446599b92f79cb989886d'
+                            catalog_variable: 'IO:additional_information'
                         }
                     },
                     {
