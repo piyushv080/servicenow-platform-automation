@@ -27,11 +27,6 @@ Flow(
     ),
 
     (params) => {
-        const requestNumber = wfa.dataPill(
-            params.trigger.request_item.number,
-            'string',
-        )
-
         const request = wfa.action(
             read_catalog_request,
             {
@@ -57,14 +52,8 @@ Flow(
                         $id: Now.ID['validate_catalog_request'],
                     },
                     {
-                        requestType: wfa.dataPill(
-                            request.requestType,
-                            'string',
-                        ),
-                        environment: wfa.dataPill(
-                            request.environment,
-                            'string',
-                        ),
+                        requestType: wfa.dataPill(request.requestType, 'string'),
+                        environment: wfa.dataPill(request.environment, 'string'),
                         businessJustification: wfa.dataPill(
                             request.businessJustification,
                             'string',
@@ -101,7 +90,7 @@ Flow(
                                 $id: Now.ID['log_request_success'],
                             },
                             {
-                                requestNumber,
+                                requestNumber: 'Generic IT Request',
                                 logMessage:
                                     'Request validated successfully. Fulfillment task created.',
                             },
@@ -120,7 +109,7 @@ Flow(
                                 $id: Now.ID['log_validation_failure'],
                             },
                             {
-                                requestNumber,
+                                requestNumber: 'Generic IT Request',
                                 logMessage: wfa.dataPill(
                                     validation.message,
                                     'string',
@@ -143,7 +132,7 @@ Flow(
                         $id: Now.ID['log_request_not_found'],
                     },
                     {
-                        requestNumber,
+                        requestNumber: 'Generic IT Request',
                         logMessage:
                             'Unable to read submitted catalog request variables.',
                     },
