@@ -39,10 +39,76 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: '114cc3fb8f0941c29859af47d6df4c97'
+                        key: {
+                            sys_ui_section: {
+                                id: '807ec15e2d624915836ffc142e94f1b7'
+                                key: {
+                                    name: 'x_servicenow_catal_config'
+                                    caption: 'Configuration Details'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'active'
+                            position: '1'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '1daf64c8f743430283fedc562916372e'
+                        key: {
+                            sys_ui_section: {
+                                id: '807ec15e2d624915836ffc142e94f1b7'
+                                key: {
+                                    name: 'x_servicenow_catal_config'
+                                    caption: 'Configuration Details'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'name'
+                            position: '0'
+                        }
+                    },
+                    {
                         table: 'ua_table_licensing_config'
                         id: '22581ffb780149ae8cab9625f1ca4bd7'
                         key: {
                             name: 'x_servicenow_catal_config'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '4562cb07623542fd9d486b88f922a670'
+                        key: {
+                            sys_ui_section: {
+                                id: '807ec15e2d624915836ffc142e94f1b7'
+                                key: {
+                                    name: 'x_servicenow_catal_config'
+                                    caption: 'Configuration Details'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'description'
+                            position: '3'
                         }
                     },
                     {
@@ -66,6 +132,21 @@ declare global {
                         id: '777a2be0fef54ecb8067edd62621f90b'
                         key: {
                             name: 'x_servicenow_catal_config'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_section'
+                        id: '807ec15e2d624915836ffc142e94f1b7'
+                        key: {
+                            name: 'x_servicenow_catal_config'
+                            caption: 'Configuration Details'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
                         }
                     },
                     {
@@ -95,6 +176,39 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_form_section'
+                        id: 'a0b85216190a497b863f3bf9ce4b582f'
+                        key: {
+                            sys_ui_form: {
+                                id: 'cf66b29371514bf0bde17e835e8e2256'
+                                key: {
+                                    name: 'x_servicenow_catal_config'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            sys_ui_section: {
+                                id: '807ec15e2d624915836ffc142e94f1b7'
+                                key: {
+                                    name: 'x_servicenow_catal_config'
+                                    caption: 'Configuration Details'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'a2a7ddbe5cca41eda5317b60e4d0e03c'
                         key: {
@@ -121,11 +235,47 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_form'
+                        id: 'cf66b29371514bf0bde17e835e8e2256'
+                        key: {
+                            name: 'x_servicenow_catal_config'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'd3ff31443c2b4555b518275c69ff11d1'
                         key: {
                             name: 'x_servicenow_catal_config'
                             element: 'integration_enabled'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: 'f5d38daa051a46bab1514322d90c6657'
+                        key: {
+                            sys_ui_section: {
+                                id: '807ec15e2d624915836ffc142e94f1b7'
+                                key: {
+                                    name: 'x_servicenow_catal_config'
+                                    caption: 'Configuration Details'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'integration_enabled'
+                            position: '2'
                         }
                     },
                 ]
