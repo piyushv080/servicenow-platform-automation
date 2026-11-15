@@ -6,6 +6,7 @@ import {
 } from '@servicenow/sdk/automation'
 
 import { read_catalog_request } from '../actions/read-catalog-request.now'
+import { create_and_assign_catalog_task } from '../actions/create-and-assign-catalog-task.now'
 import { catalog_request_validation } from './catalog-request-validation.now'
 import { catalog_request_logging } from '../actions/catalog-request-logging.now'
 
@@ -84,7 +85,7 @@ export const catalog_request_fulfillment = Flow(
                                 approval_reason:
                                     'Approval required for Generic IT Service Request',
                                 approval_conditions: wfa.approvalRules({
-                                    conditionType: "OR",
+                                    conditionType: 'OR',
                                     ruleSets: [
                                         {
                                             action: 'ApprovesRejects',
@@ -113,31 +114,35 @@ export const catalog_request_fulfillment = Flow(
                                 condition: `${wfa.dataPill(approval.approval_state, 'choice')}=approved`,
                             },
                             () => {
-                                wfa.action(
-                                    action.core.createCatalogTask,
+                                const fulfillment = wfa.action(
+                                    create_and_assign_catalog_task,
                                     {
-                                        $id: Now.ID['create_fulfillment_task'],
+                                        $id: Now.ID['create_and_assign_catalog_task_instance'],
                                     },
                                     {
-                                        ah_requested_item: wfa.dataPill(
+                                        requestItemId: wfa.dataPill(
                                             params.trigger.request_item,
                                             'reference',
                                         ),
-                                        ah_short_description:
-                                            'Fulfill Generic IT Service Request',
-                                        ah_wait: false,
+                                        configurationName:
+                                            'Default IT Fulfillment',
                                     },
                                 )
 
                                 wfa.action(
                                     catalog_request_logging,
                                     {
-                                        $id: Now.ID['log_request_success'],
+                                        $id: Now.ID['log_fulfillment_result'],
                                     },
                                     {
-                                        requestNumber: 'Generic IT Request',
-                                        logMessage:
-                                            'Request approved and fulfillment task created.',
+                                        requestNumber: wfa.dataPill(
+                                            fulfillment.taskNumber,
+                                            'string',
+                                        ),
+                                        logMessage: wfa.dataPill(
+                                            fulfillment.message,
+                                            'string',
+                                        ),
                                     },
                                 )
                             },
