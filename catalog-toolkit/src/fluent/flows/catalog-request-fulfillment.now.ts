@@ -9,6 +9,8 @@ import { read_catalog_request } from '../actions/read-catalog-request.now'
 import { catalog_request_validation } from './catalog-request-validation.now'
 import { catalog_request_logging } from '../actions/catalog-request-logging.now'
 
+const CATALOG_APPROVER_GROUP = '4e8e3bfd2fec93107e554b707fa4e307'
+
 export const catalog_request_fulfillment = Flow(
     {
         $id: Now.ID['catalog_request_fulfillment'],
@@ -68,31 +70,95 @@ export const catalog_request_fulfillment = Flow(
                         condition: `${wfa.dataPill(validation.isValid, 'boolean')}=true`,
                     },
                     () => {
-                        wfa.action(
-                            action.core.createCatalogTask,
+                        const approval = wfa.action(
+                            action.core.askForApproval,
                             {
-                                $id: Now.ID['create_fulfillment_task'],
+                                $id: Now.ID['catalog_request_approval'],
                             },
                             {
-                                ah_requested_item: wfa.dataPill(
+                                record: wfa.dataPill(
                                     params.trigger.request_item,
                                     'reference',
                                 ),
-                                ah_short_description:
-                                    'Fulfill Generic IT Service Request',
-                                ah_wait: false,
+                                table: 'sc_req_item',
+                                approval_reason:
+                                    'Approval required for Generic IT Service Request',
+                                approval_conditions: wfa.approvalRules({
+                                    conditionType: "OR",
+                                    ruleSets: [
+                                        {
+                                            action: 'ApprovesRejects',
+                                            conditionType: 'AND',
+                                            rules: [
+                                                [
+                                                    {
+                                                        ruleType: 'Any',
+                                                        users: [],
+                                                        groups: [
+                                                            CATALOG_APPROVER_GROUP,
+                                                        ],
+                                                        manual: false,
+                                                    },
+                                                ],
+                                            ],
+                                        },
+                                    ],
+                                }),
                             },
                         )
 
-                        wfa.action(
-                            catalog_request_logging,
+                        wfa.flowLogic.if(
                             {
-                                $id: Now.ID['log_request_success'],
+                                $id: Now.ID['catalog_request_approved'],
+                                condition: `${wfa.dataPill(approval.approval_state, 'choice')}=approved`,
                             },
+                            () => {
+                                wfa.action(
+                                    action.core.createCatalogTask,
+                                    {
+                                        $id: Now.ID['create_fulfillment_task'],
+                                    },
+                                    {
+                                        ah_requested_item: wfa.dataPill(
+                                            params.trigger.request_item,
+                                            'reference',
+                                        ),
+                                        ah_short_description:
+                                            'Fulfill Generic IT Service Request',
+                                        ah_wait: false,
+                                    },
+                                )
+
+                                wfa.action(
+                                    catalog_request_logging,
+                                    {
+                                        $id: Now.ID['log_request_success'],
+                                    },
+                                    {
+                                        requestNumber: 'Generic IT Request',
+                                        logMessage:
+                                            'Request approved and fulfillment task created.',
+                                    },
+                                )
+                            },
+                        )
+
+                        wfa.flowLogic.else(
                             {
-                                requestNumber: 'Generic IT Request',
-                                logMessage:
-                                    'Request validated successfully. Fulfillment task created.',
+                                $id: Now.ID['catalog_request_not_approved'],
+                            },
+                            () => {
+                                wfa.action(
+                                    catalog_request_logging,
+                                    {
+                                        $id: Now.ID['log_approval_rejection'],
+                                    },
+                                    {
+                                        requestNumber: 'Generic IT Request',
+                                        logMessage:
+                                            'Request was not approved. Fulfillment task was not created.',
+                                    },
+                                )
                             },
                         )
                     },

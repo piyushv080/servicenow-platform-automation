@@ -18,6 +18,14 @@ declare global {
                         id: 'ddb94cbf24ff44f8b2de3115367a887e'
                         deleted: true
                     }
+                    catalog_request_approval: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'b4dd809de7174984a49b0412080fc1c4'
+                    }
+                    catalog_request_approved: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '79a8d35a3a474fae9b2f322ff52bc8b3'
+                    }
                     catalog_request_fulfillment: {
                         table: 'sys_hub_flow'
                         id: '6e1091481a854d5392207ad270e08466'
@@ -29,6 +37,10 @@ declare global {
                     catalog_request_logging: {
                         table: 'sys_hub_action_type_definition'
                         id: 'be3949ef96d8457fb6c1efa6f4621aba'
+                    }
+                    catalog_request_not_approved: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '912293c4bbfd4f64b1e156af1fdad209'
                     }
                     catalog_request_valid: {
                         table: 'sys_hub_flow_logic_instance_v2'
@@ -74,6 +86,10 @@ declare global {
                     generic_request_validation: {
                         table: 'catalog_script_client'
                         id: '61b676ac7aac4ee09718fe74aeb056f7'
+                    }
+                    log_approval_rejection: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'd784d676f1c04cd38e88b073c0c91410'
                     }
                     log_catalog_request: {
                         table: 'sys_hub_action_instance_v2'
