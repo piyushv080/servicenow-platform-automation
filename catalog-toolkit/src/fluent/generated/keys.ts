@@ -79,6 +79,14 @@ declare global {
                         table: 'sys_module'
                         id: '07b77f6824384073a8bd12b4360c8146'
                     }
+                    read_catalog_request: {
+                        table: 'sys_hub_action_type_definition'
+                        id: '5e464c59519d4bb983b4823259cff23e'
+                    }
+                    read_catalog_request_script: {
+                        table: 'sys_hub_step_instance'
+                        id: 'a4fcd570c3db451ba64276cfd3ca883d'
+                    }
                     src_server_script_ts: {
                         table: 'sys_module'
                         id: 'df0653f5b2ab4fd5a750d7a245239bbd'
@@ -86,6 +94,10 @@ declare global {
                     'src_server_script-includes_catalog-request-utils_js': {
                         table: 'sys_module'
                         id: '8964153184bb4355b24c469fd5320fda'
+                    }
+                    'src_server_scripts_read-catalog-request_js': {
+                        table: 'sys_module'
+                        id: '5ae9a52f502640e7a9a4eb5a97c5fc50'
                     }
                 }
                 composite: [
@@ -120,6 +132,14 @@ declare global {
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'requestType'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_input'
+                        id: '09d88c8297a5483bb7c80754e399fa20'
+                        key: {
+                            model: '5e464c59519d4bb983b4823259cff23e'
+                            element: 'requestItemId'
                         }
                     },
                     {
@@ -162,6 +182,22 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_variable_value'
+                        id: '1532a88e1f25481da1f237d9b3889441'
+                        key: {
+                            document_key: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            variable: '74315b04b3201300176b051a16a8dc2b'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: '174f2aafcf2742939554a1324f882cc7'
+                        key: {
+                            model: '5e464c59519d4bb983b4823259cff23e'
+                            element: 'businessJustification'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: '1b06b6e8906e45edb27a0fb29514b252'
                         key: {
@@ -176,6 +212,15 @@ declare global {
                         key: {
                             name: 'var__m_sys_hub_action_output_be3949ef96d8457fb6c1efa6f4621aba'
                             element: 'logged'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '1d7d02fbd8014ffdbb6e637ee50c3b05'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            element: '__dont_treat_as_error__'
                             language: 'en'
                         }
                     },
@@ -202,10 +247,27 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '1f95e94e69d8427d88f97a789a9be0c4'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            element: 'businessJustification'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'ua_table_licensing_config'
                         id: '22581ffb780149ae8cab9625f1ca4bd7'
                         key: {
                             name: 'x_servicenow_catal_config'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: '29acf439b9724db0b0acb0a8e5750b31'
+                        key: {
+                            model: '5e464c59519d4bb983b4823259cff23e'
+                            element: 'environment'
                         }
                     },
                     {
@@ -218,12 +280,38 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '2b1dd39e565849409f528a2a35655413'
+                        key: {
+                            name: 'var__m_sys_hub_action_input_5e464c59519d4bb983b4823259cff23e'
+                            element: 'requestItemId'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: '2ee3e8c6c8af47ff905a0eae74d0f4e9'
                         key: {
                             id: 'be3949ef96d8457fb6c1efa6f4621aba'
                             table: 'var__m_sys_hub_action_output_be3949ef96d8457fb6c1efa6f4621aba'
                             field: 'logged'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '382d38bf5d4a432b96c4d0c6f2490cf3'
+                        key: {
+                            id: '5e464c59519d4bb983b4823259cff23e'
+                            table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            field: 'businessJustification'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_output'
+                        id: '3913febd44834dd5b4f9e07810d9f079'
+                        key: {
+                            model: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            element: 'message'
                         }
                     },
                     {
@@ -246,6 +334,40 @@ declare global {
                             }
                             element: 'description'
                             position: '3'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '49896b2d7e2046dd80572e360548353a'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            element: 'requestType'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '49ae0e097e694b9d99b91abb3e3e7580'
+                        key: {
+                            id: '5e464c59519d4bb983b4823259cff23e'
+                            table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            field: 'environment'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: '4d26ab1263354d4f976d62a2be422786'
+                        key: {
+                            model: '5e464c59519d4bb983b4823259cff23e'
+                            element: '__dont_treat_as_error__'
+                        }
+                    },
+                    {
+                        table: 'sys_variable_value'
+                        id: '4fb17ba9bc6c49c9b52aa034e26b0580'
+                        key: {
+                            document_key: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            variable: '71aa7f6647032200b4fad7527c9a719b'
                         }
                     },
                     {
@@ -273,12 +395,38 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: '5ecb157d61a34dfcb25e13359730ccc0'
+                        key: {
+                            model: '5e464c59519d4bb983b4823259cff23e'
+                            element: 'found'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '6184c10f32a64db59ef0ee8e7ed18b49'
                         key: {
                             name: 'var__m_sys_hub_action_output_be3949ef96d8457fb6c1efa6f4621aba'
                             element: '__action_status__'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '64c5fae166954deaa385f4f073dfe99f'
+                        key: {
+                            id: '5e464c59519d4bb983b4823259cff23e'
+                            table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            field: 'found'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '64e81e2eb1fc4f24a4765f1675bce7d1'
+                        key: {
+                            id: '5e464c59519d4bb983b4823259cff23e'
+                            table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            field: 'requiredDate'
                         }
                     },
                     {
@@ -294,6 +442,15 @@ declare global {
                         id: '777a2be0fef54ecb8067edd62621f90b'
                         key: {
                             name: 'x_servicenow_catal_config'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '78762a43566a473297d4a689001abffc'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            element: 'environment'
+                            language: 'en'
                         }
                     },
                     {
@@ -321,6 +478,31 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: '81ea604771d645e9903bbba524361614'
+                        key: {
+                            model: '5e464c59519d4bb983b4823259cff23e'
+                            element: 'requiredDate'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_output'
+                        id: '832585a9644b41c194b5f851c7a4b637'
+                        key: {
+                            model: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            element: 'business_justification'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '839177dfd0874957aac37801257bc4d4'
+                        key: {
+                            id: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            table: 'var__m_sys_hub_step_ext_input_a4fcd570c3db451ba64276cfd3ca883d'
+                            field: 'request_item_id'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '84951eae794a46138f1f2ee8f0e983c5'
                         key: {
@@ -330,11 +512,61 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: '85d90c02f46b42cd95aeeaca7e915a4a'
+                        key: {
+                            model: '5e464c59519d4bb983b4823259cff23e'
+                            element: '__action_status__'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '8a02212d027c46dab6b2c66584298111'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            element: 'message'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '8a84d351746f473fbcd48d6f6496b2fb'
+                        key: {
+                            id: '5e464c59519d4bb983b4823259cff23e'
+                            table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            field: 'message'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_output'
+                        id: '95c752a186924481984a4563a42bcbe4'
+                        key: {
+                            model: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            element: 'found'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: '985ba31a4e824e14985fd729df197815'
+                        key: {
+                            model: '5e464c59519d4bb983b4823259cff23e'
+                            element: 'message'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '99bb4cc0904143dbb3e0ed6e8de6ff9b'
                         key: {
                             name: 'x_servicenow_catal_config'
                             element: 'active'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_output'
+                        id: '9d0d196961864ff6be9d42a743dfe5b7'
+                        key: {
+                            model: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            element: 'environment'
                         }
                     },
                     {
@@ -405,6 +637,15 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: 'a62bf174832f4685bb761a3786a20e22'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            element: '__action_status__'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: 'b85ff466bc21425b97205e24e88ab251'
                         key: {
                             name: 'x_servicenow_catal_config'
@@ -418,6 +659,14 @@ declare global {
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'environment'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_output'
+                        id: 'c1c3f551d58e43eb9ff782834ee5ee63'
+                        key: {
+                            model: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            element: 'required_date'
                         }
                     },
                     {
@@ -463,6 +712,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_element_mapping'
+                        id: 'cbf8f23d4ba0476da62702eb6d3fb54b'
+                        key: {
+                            id: '5e464c59519d4bb983b4823259cff23e'
+                            table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            field: 'requestType'
+                        }
+                    },
+                    {
                         table: 'sys_ui_form'
                         id: 'cf66b29371514bf0bde17e835e8e2256'
                         key: {
@@ -485,11 +743,36 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: 'dabdb7e4439649288eeb182970c2bd66'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            element: 'requiredDate'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_hub_flow_output'
                         id: 'dc272a03f5574b9ba54316fab2d01627'
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'isValid'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_input'
+                        id: 'df374652ce8f4db7acf33be6cd9f7d5c'
+                        key: {
+                            model: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            element: 'request_item_id'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_output'
+                        id: 'e6f422be23bf4a18b9b28dcfe0cf8649'
+                        key: {
+                            model: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            element: 'request_type'
                         }
                     },
                     {
@@ -499,6 +782,23 @@ declare global {
                             name: 'var__m_sys_hub_flow_output_8c74266b0b45403b85c13359e01f67c6'
                             element: 'isValid'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'ec4813b55c5e4b719f48f72e49afd733'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
+                            element: 'found'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: 'ef0448b08cc7465abbcb8f9f016713ed'
+                        key: {
+                            model: '5e464c59519d4bb983b4823259cff23e'
+                            element: 'requestType'
                         }
                     },
                     {
