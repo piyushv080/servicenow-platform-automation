@@ -19,6 +19,10 @@ declare global {
                         id: '1f86da27f68c414e99e8f986e74169b3'
                         deleted: true
                     }
+                    generic_it_service_request: {
+                        table: 'sc_cat_item'
+                        id: 'a676a847b4e84741afc14fe6f675bfbd'
+                    }
                     package_json: {
                         table: 'sys_module'
                         id: '07b77f6824384073a8bd12b4360c8146'
@@ -128,6 +132,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sc_cat_item_category'
+                        id: '5c691878e24f4521a76b81432e7f348a'
+                        key: {
+                            sc_cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                            sc_category: '803e95e1c3732100fca206e939ba8f2a'
+                        }
+                    },
+                    {
                         table: 'sys_db_object'
                         id: '777a2be0fef54ecb8067edd62621f90b'
                         key: {
@@ -164,6 +176,14 @@ declare global {
                         key: {
                             name: 'x_servicenow_catal_config'
                             element: 'active'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_catalog'
+                        id: '9ed26844685b42abb0213c2423988b7f'
+                        key: {
+                            sc_cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                            sc_catalog: 'e0d08b13c3330100c8b837659bba8fb4'
                         }
                     },
                     {
