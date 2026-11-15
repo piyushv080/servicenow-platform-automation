@@ -13,37 +13,58 @@
         '7': 'Closed Skipped'
     };
 
-    var taskId = inputs.task_id;
+    var taskId = String(inputs.task_id || '');
     var newState = String(inputs.state || '');
 
-    if (!taskId || !newState) {
-        outputs.message = 'Task ID and state are required.';
-        return;
-    }
-
-    if (!allowedStates[newState]) {
-        outputs.message = 'Unsupported catalog task state: ' + newState;
+    if (!taskId || !allowedStates[newState]) {
+        outputs.message = 'Invalid task ID or state.';
         return;
     }
 
     var task = new GlideRecord('sc_task');
 
     if (!task.get(taskId)) {
-        outputs.message = 'Catalog task was not found.';
+        outputs.message = 'Catalog task not found.';
         return;
     }
 
-    task.setValue('state', newState);
-
-    if (inputs.work_notes) {
-        task.setValue('work_notes', inputs.work_notes);
+    if (parseInt(task.getValue('state'), 10) >= 3) {
+        outputs.message = 'Catalog task is already closed.';
+        outputs.task_number = task.getValue('number');
+        outputs.state = task.getValue('state');
+        return;
     }
 
-    task.update();
+    try {
+        task.setValue('state', newState);
 
-    outputs.updated = true;
-    outputs.task_number = task.getValue('number');
-    outputs.state = task.getValue('state');
-    outputs.message = 'Catalog task updated to ' +
-        allowedStates[newState] + '.';
+        if (inputs.work_notes) {
+            task.setValue('work_notes', inputs.work_notes);
+        }
+
+        var updatedId = task.update();
+
+        if (!updatedId) {
+            outputs.message = 'ServiceNow did not confirm the task update.';
+            return;
+        }
+
+        var verify = new GlideRecord('sc_task');
+
+        if (!verify.get(taskId) ||
+            String(verify.getValue('state')) !== newState) {
+            outputs.message = 'Task update could not be verified.';
+            return;
+        }
+
+        outputs.updated = true;
+        outputs.task_number = verify.getValue('number');
+        outputs.state = verify.getValue('state');
+        outputs.message = 'Catalog task updated successfully: ' +
+            allowedStates[newState];
+
+    } catch (error) {
+        outputs.message = 'Task update failed: ' + error.message;
+        gs.error('Catalog Toolkit task update failed: ' + error.message);
+    }
 })(inputs, outputs);
