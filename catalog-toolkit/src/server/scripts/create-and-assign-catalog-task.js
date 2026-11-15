@@ -78,6 +78,20 @@
         return;
     }
 
+    // Synchronize the approved RITM after successful task creation.
+    ritm.setValue('approval', 'approved');
+    ritm.setValue('state', '2');
+    ritm.setValue('stage', 'fulfillment');
+
+    var ritmUpdated = ritm.update();
+
+    if (!ritmUpdated) {
+        gs.error(
+            'Catalog Toolkit: SCTASK created, but RITM lifecycle update failed: ' +
+            ritm.getValue('number')
+        );
+    }
+
     outputs.task_created = true;
     outputs.task_id = taskId.toString();
     outputs.task_number = task.getValue('number') || '';

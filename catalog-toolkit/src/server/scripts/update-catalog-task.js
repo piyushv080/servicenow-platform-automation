@@ -36,6 +36,8 @@
     }
 
     try {
+        var ritmId = task.getValue('request_item');
+
         task.setValue('state', newState);
 
         if (inputs.work_notes) {
@@ -57,14 +59,89 @@
             return;
         }
 
+        // Synchronize parent RITM using all its fulfillment tasks.
+        var ritm = new GlideRecord('sc_req_item');
+
+        if (!ritm.get(ritmId)) {
+            outputs.message =
+                'Task updated, but its parent RITM could not be found.';
+            return;
+        }
+
+        var tasks = new GlideRecord('sc_task');
+        tasks.addQuery('request_item', ritmId);
+        tasks.query();
+
+        var total = 0;
+        var complete = 0;
+        var incomplete = 0;
+        var active = 0;
+
+        while (tasks.next()) {
+            total++;
+
+            var taskState = String(tasks.getValue('state'));
+
+            if (taskState === '3') {
+                complete++;
+            } else if (taskState === '4' || taskState === '7') {
+                incomplete++;
+            } else {
+                active++;
+            }
+        }
+
+        var ritmState = '2';
+        var ritmStage = 'fulfillment';
+
+        if (total > 0 && active === 0) {
+            if (incomplete > 0) {
+                ritmState = '4';
+                ritmStage = 'delivery';
+            } else if (complete === total) {
+                ritmState = '3';
+                ritmStage = 'delivery';
+            }
+        }
+
+        ritm.setValue('state', ritmState);
+        ritm.setValue('stage', ritmStage);
+
+        var ritmUpdated = ritm.update();
+
+        if (!ritmUpdated) {
+            outputs.message =
+                'Task updated, but parent RITM synchronization failed.';
+            gs.error(
+                'Catalog Toolkit: RITM synchronization failed for ' +
+                ritm.getValue('number')
+            );
+            return;
+        }
+
+        var verifiedRitm = new GlideRecord('sc_req_item');
+
+        if (!verifiedRitm.get(ritmId) ||
+            String(verifiedRitm.getValue('state')) !== ritmState ||
+            String(verifiedRitm.getValue('stage')) !== ritmStage) {
+            outputs.message =
+                'Task updated, but RITM lifecycle verification failed.';
+            return;
+        }
+
         outputs.updated = true;
         outputs.task_number = verify.getValue('number');
         outputs.state = verify.getValue('state');
-        outputs.message = 'Catalog task updated successfully: ' +
-            allowedStates[newState];
+        outputs.message =
+            'Task updated: ' + allowedStates[newState] +
+            '. RITM ' + verifiedRitm.getValue('number') +
+            ' synchronized to state ' + ritmState +
+            ', stage ' + ritmStage + '.';
 
     } catch (error) {
         outputs.message = 'Task update failed: ' + error.message;
-        gs.error('Catalog Toolkit task update failed: ' + error.message);
+        gs.error(
+            'Catalog Toolkit task update failed: ' + error.message
+        );
     }
 })(inputs, outputs);
