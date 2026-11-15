@@ -4,7 +4,19 @@
     outputs.task_number = '';
     outputs.message = '';
 
-    var requestItemId = String(inputs.request_item_id || '');
+    var requestItemId = '';
+
+    if (inputs.request_item_id) {
+        if (typeof inputs.request_item_id.getUniqueValue === 'function') {
+            requestItemId = inputs.request_item_id.getUniqueValue();
+        } else if (inputs.request_item_id.sys_id) {
+            requestItemId = String(inputs.request_item_id.sys_id);
+        } else if (inputs.request_item_id.value) {
+            requestItemId = String(inputs.request_item_id.value);
+        } else {
+            requestItemId = String(inputs.request_item_id);
+        }
+    }
     var configurationName = String(inputs.configuration_name || '');
     var prefix = 'Catalog Toolkit: ';
 
@@ -103,6 +115,10 @@
         task.initialize();
         task.setValue('request_item', ritm.getUniqueValue());
         task.setValue('short_description', taskDescription);
+        task.setValue(
+            'description',
+            ritm.getValue('description') || ''
+        );
 
         if (autoAssign) {
             task.setValue('assignment_group', groupId);

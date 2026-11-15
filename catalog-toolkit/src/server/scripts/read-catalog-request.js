@@ -8,6 +8,24 @@
     }
 
     outputs.found = true
+
+    // Dynamically collect every readable catalog variable, including MRVS.
+    var requestUtils = new CatalogRequestUtils()
+    var requestDescription = requestUtils.buildRequestDescription(item)
+
+    item.setValue('description', requestDescription)
+
+    var descriptionUpdate = item.update()
+
+    if (!descriptionUpdate) {
+        outputs.message = 'Could not save dynamic catalog variables to RITM description.'
+        gs.error(
+            'Catalog Toolkit: Failed to save request payload for ' +
+            item.getValue('number')
+        )
+        return
+    }
+
     outputs.request_type = String(item.variables.request_type || '')
     outputs.environment = String(item.variables.environment || '')
     outputs.business_justification = String(

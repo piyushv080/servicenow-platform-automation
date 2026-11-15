@@ -9,6 +9,7 @@ import { read_catalog_request } from '../actions/read-catalog-request.now'
 import { create_and_assign_catalog_task } from '../actions/create-and-assign-catalog-task.now'
 import { catalog_request_validation } from './catalog-request-validation.now'
 import { catalog_request_logging } from '../actions/catalog-request-logging.now'
+import { sync_catalog_request_lifecycle } from '../actions/sync-catalog-request-lifecycle.now'
 
 const CATALOG_APPROVER_GROUP = '4e8e3bfd2fec93107e554b707fa4e307'
 
@@ -114,6 +115,20 @@ export const catalog_request_fulfillment = Flow(
                                 condition: `${wfa.dataPill(approval.approval_state, 'choice')}=approved`,
                             },
                             () => {
+                                wfa.action(
+                                    sync_catalog_request_lifecycle,
+                                    {
+                                        $id: Now.ID['sync_approved_request_lifecycle'],
+                                    },
+                                    {
+                                        requestItemId: wfa.dataPill(
+                                            params.trigger.request_item,
+                                            'reference',
+                                        ),
+                                        operation: 'approved',
+                                    },
+                                )
+
                                 const fulfillment = wfa.action(
                                     create_and_assign_catalog_task,
                                     {
@@ -153,6 +168,20 @@ export const catalog_request_fulfillment = Flow(
                                 $id: Now.ID['catalog_request_not_approved'],
                             },
                             () => {
+                                wfa.action(
+                                    sync_catalog_request_lifecycle,
+                                    {
+                                        $id: Now.ID['sync_rejected_request_lifecycle'],
+                                    },
+                                    {
+                                        requestItemId: wfa.dataPill(
+                                            params.trigger.request_item,
+                                            'reference',
+                                        ),
+                                        operation: 'rejected',
+                                    },
+                                )
+
                                 wfa.action(
                                     catalog_request_logging,
                                     {
