@@ -1,7 +1,7 @@
 import { Form, default_view } from '@servicenow/sdk/core'
 
 Form({
-    table: 'x_servicenow_catal_config',
+    table: 'x_412550_catal_config',
     view: default_view,
     sections: [
         {

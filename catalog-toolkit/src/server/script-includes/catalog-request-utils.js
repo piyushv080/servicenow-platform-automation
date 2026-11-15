@@ -58,7 +58,7 @@ CatalogRequestUtils.prototype = {
             return null
         }
 
-        var gr = new GlideRecord('x_servicenow_catal_config')
+        var gr = new GlideRecord('x_412550_catal_config')
         gr.addQuery('name', String(configurationName))
         gr.addQuery('active', true)
         gr.setLimit(1)

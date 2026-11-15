@@ -124,6 +124,10 @@ declare global {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: 'fbde5f74e88d412889d04880629254ff'
                     }
+                    requester_information: {
+                        table: 'item_option_new_set'
+                        id: '10a720b0e72848c8a10d2783cc7938b3'
+                    }
                     src_server_script_ts: {
                         table: 'sys_module'
                         id: 'df0653f5b2ab4fd5a750d7a245239bbd'
@@ -176,6 +180,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: '08fb6d54a6dd4bcf816a43eca44e14b8'
+                        key: {
+                            cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                            variable_set: 'NULL'
+                            name: 'required_date'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_input'
                         id: '09d88c8297a5483bb7c80754e399fa20'
                         key: {
@@ -187,9 +200,24 @@ declare global {
                         table: 'sys_documentation'
                         id: '10700983268c4f8daa1feb073e540c44'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'NULL'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '108867046d9b44938235d1935a730ccf'
+                        key: {
+                            question: {
+                                id: '4efb674ddd2d4a9ab53589a48f85ad34'
+                                key: {
+                                    cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'infrastructure'
                         }
                     },
                     {
@@ -207,7 +235,7 @@ declare global {
                             sys_ui_section: {
                                 id: '807ec15e2d624915836ffc142e94f1b7'
                                 key: {
-                                    name: 'x_servicenow_catal_config'
+                                    name: 'x_412550_catal_config'
                                     caption: 'Configuration Details'
                                     view: {
                                         id: 'Default view'
@@ -236,6 +264,21 @@ declare global {
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'businessJustification'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '18b5334124b64e418f750ad22934c7a5'
+                        key: {
+                            question: {
+                                id: '9f80dcdb1d234d10a9add2a0487197d1'
+                                key: {
+                                    cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                                    variable_set: 'NULL'
+                                    name: 'environment'
+                                }
+                            }
+                            value: 'staging'
                         }
                     },
                     {
@@ -272,7 +315,7 @@ declare global {
                             sys_ui_section: {
                                 id: '807ec15e2d624915836ffc142e94f1b7'
                                 key: {
-                                    name: 'x_servicenow_catal_config'
+                                    name: 'x_412550_catal_config'
                                     caption: 'Configuration Details'
                                     view: {
                                         id: 'Default view'
@@ -300,7 +343,15 @@ declare global {
                         table: 'ua_table_licensing_config'
                         id: '22581ffb780149ae8cab9625f1ca4bd7'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
+                        }
+                    },
+                    {
+                        table: 'io_set_item'
+                        id: '270419c2918e4114b4d7a20c6a348c98'
+                        key: {
+                            sc_cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                            variable_set: '10a720b0e72848c8a10d2783cc7938b3'
                         }
                     },
                     {
@@ -362,7 +413,7 @@ declare global {
                             sys_ui_section: {
                                 id: '807ec15e2d624915836ffc142e94f1b7'
                                 key: {
-                                    name: 'x_servicenow_catal_config'
+                                    name: 'x_412550_catal_config'
                                     caption: 'Configuration Details'
                                     view: {
                                         id: 'Default view'
@@ -404,6 +455,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: '4efb674ddd2d4a9ab53589a48f85ad34'
+                        key: {
+                            cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                            variable_set: 'NULL'
+                            name: 'request_type'
+                        }
+                    },
+                    {
                         table: 'sys_variable_value'
                         id: '4fb17ba9bc6c49c9b52aa034e26b0580'
                         key: {
@@ -415,21 +475,31 @@ declare global {
                         table: 'sys_dictionary'
                         id: '5125714db5244f8c9a75cce0f5620e7a'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'name'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '52afc6dff3c5441dab4112b72bd0cac7'
+                        key: {
+                            cat_item: 'NULL'
+                            variable_set: '10a720b0e72848c8a10d2783cc7938b3'
+                            name: 'requester_name'
                         }
                     },
                     {
                         table: 'sys_dictionary'
                         id: '55310cbebc354136b6c87b2e03bc9014'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'NULL'
                         }
                     },
                     {
                         table: 'sc_cat_item_category'
                         id: '5c691878e24f4521a76b81432e7f348a'
+                        deleted: true
                         key: {
                             sc_cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             sc_category: '803e95e1c3732100fca206e939ba8f2a'
@@ -471,6 +541,45 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: '65994efade924a95a23bd1b74bd48dc7'
+                        key: {
+                            question: {
+                                id: '4efb674ddd2d4a9ab53589a48f85ad34'
+                                key: {
+                                    cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'configuration'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '66a369e38be948eabd7927475a198ef5'
+                        key: {
+                            cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                            variable_set: 'NULL'
+                            name: 'business_justification'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '693dfd7bbfdd4d9f8c83500baf396d78'
+                        key: {
+                            question: {
+                                id: '9f80dcdb1d234d10a9add2a0487197d1'
+                                key: {
+                                    cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                                    variable_set: 'NULL'
+                                    name: 'environment'
+                                }
+                            }
+                            value: 'production'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_input'
                         id: '70c9e45e84414cddbe3b2bebea7a8a0a'
                         key: {
@@ -482,7 +591,7 @@ declare global {
                         table: 'sys_db_object'
                         id: '777a2be0fef54ecb8067edd62621f90b'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                         }
                     },
                     {
@@ -498,7 +607,7 @@ declare global {
                         table: 'sys_ui_section'
                         id: '807ec15e2d624915836ffc142e94f1b7'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             caption: 'Configuration Details'
                             view: {
                                 id: 'Default view'
@@ -547,7 +656,7 @@ declare global {
                         table: 'sys_documentation'
                         id: '84951eae794a46138f1f2ee8f0e983c5'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'description'
                             language: 'en'
                         }
@@ -598,7 +707,7 @@ declare global {
                         table: 'sys_dictionary'
                         id: '99bb4cc0904143dbb3e0ed6e8de6ff9b'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'active'
                         }
                     },
@@ -622,9 +731,18 @@ declare global {
                         table: 'sys_documentation'
                         id: '9f2c111cd4ad4d4a9381bf5068d3045c'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'integration_enabled'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '9f80dcdb1d234d10a9add2a0487197d1'
+                        key: {
+                            cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                            variable_set: 'NULL'
+                            name: 'environment'
                         }
                     },
                     {
@@ -634,7 +752,7 @@ declare global {
                             sys_ui_form: {
                                 id: 'cf66b29371514bf0bde17e835e8e2256'
                                 key: {
-                                    name: 'x_servicenow_catal_config'
+                                    name: 'x_412550_catal_config'
                                     view: {
                                         id: 'Default view'
                                         key: {
@@ -647,7 +765,7 @@ declare global {
                             sys_ui_section: {
                                 id: '807ec15e2d624915836ffc142e94f1b7'
                                 key: {
-                                    name: 'x_servicenow_catal_config'
+                                    name: 'x_412550_catal_config'
                                     caption: 'Configuration Details'
                                     view: {
                                         id: 'Default view'
@@ -661,10 +779,25 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: 'a290f8562d534789aa5c85cdeab5f07d'
+                        key: {
+                            question: {
+                                id: '9f80dcdb1d234d10a9add2a0487197d1'
+                                key: {
+                                    cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                                    variable_set: 'NULL'
+                                    name: 'environment'
+                                }
+                            }
+                            value: 'development'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'a2a7ddbe5cca41eda5317b60e4d0e03c'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'description'
                         }
                     },
@@ -689,7 +822,7 @@ declare global {
                         table: 'sys_documentation'
                         id: 'b85ff466bc21425b97205e24e88ab251'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'active'
                             language: 'en'
                         }
@@ -700,6 +833,32 @@ declare global {
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'environment'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'bdee2f2a06d84931be1beb2e3741d41f'
+                        key: {
+                            cat_item: 'NULL'
+                            variable_set: '10a720b0e72848c8a10d2783cc7938b3'
+                            name: 'contact_number'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'c07934e6e2494f3dba65545998c9277a'
+                        key: {
+                            cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                            variable_set: 'NULL'
+                            name: 'additional_information'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_category'
+                        id: 'c08cb01887c248db95bae1e978510233'
+                        key: {
+                            sc_cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                            sc_category: '109f0438c6112276003ae8ac13e7009d'
                         }
                     },
                     {
@@ -747,7 +906,7 @@ declare global {
                         table: 'sys_documentation'
                         id: 'cbe428082f4e419c9f2db23704d1a2ca'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'name'
                             language: 'en'
                         }
@@ -765,7 +924,7 @@ declare global {
                         table: 'sys_ui_form'
                         id: 'cf66b29371514bf0bde17e835e8e2256'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             view: {
                                 id: 'Default view'
                                 key: {
@@ -776,10 +935,40 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: 'd102d89ab8fb4d02b7a78fb21d7da344'
+                        key: {
+                            question: {
+                                id: '4efb674ddd2d4a9ab53589a48f85ad34'
+                                key: {
+                                    cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'access'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: 'd1bc16477ec44233a762ccb2a4098910'
+                        key: {
+                            question: {
+                                id: '9f80dcdb1d234d10a9add2a0487197d1'
+                                key: {
+                                    cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                                    variable_set: 'NULL'
+                                    name: 'environment'
+                                }
+                            }
+                            value: 'testing'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'd3ff31443c2b4555b518275c69ff11d1'
                         key: {
-                            name: 'x_servicenow_catal_config'
+                            name: 'x_412550_catal_config'
                             element: 'integration_enabled'
                         }
                     },
@@ -843,6 +1032,21 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: 'f31d790d96d1429a9950be46a87b63ec'
+                        key: {
+                            question: {
+                                id: '4efb674ddd2d4a9ab53589a48f85ad34'
+                                key: {
+                                    cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'support'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: 'f535929a0d544a678a1157456e8c9385'
                         key: {
@@ -858,7 +1062,7 @@ declare global {
                             sys_ui_section: {
                                 id: '807ec15e2d624915836ffc142e94f1b7'
                                 key: {
-                                    name: 'x_servicenow_catal_config'
+                                    name: 'x_412550_catal_config'
                                     caption: 'Configuration Details'
                                     view: {
                                         id: 'Default view'

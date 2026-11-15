@@ -1,5 +1,12 @@
+import {
+    CatalogItem,
+    SelectBoxVariable,
+    MultiLineTextVariable,
+    DateVariable,
+} from '@servicenow/sdk/core'
 
-import { CatalogItem } from '@servicenow/sdk/core'
+import { requester_information } from './catalog-variables.now'
+import { catalog_request_fulfillment } from './flows/catalog-request-fulfillment.now'
 
 export const generic_it_service_request = CatalogItem({
     $id: Now.ID['generic_it_service_request'],
@@ -14,16 +21,68 @@ export const generic_it_service_request = CatalogItem({
     ],
 
     categories: [
-        '803e95e1c3732100fca206e939ba8f2a',
+        '109f0438c6112276003ae8ac13e7009d',
     ],
 
-    active: false,
-    state: 'draft',
+    active: true,
+    state: 'published',
 
     availability: 'both',
     requestMethod: 'request',
 
-    fulfillmentAutomationLevel: 'unspecified',
+    variableSets: [
+        {
+            variableSet: requester_information,
+            order: 100,
+        },
+    ],
+
+    variables: {
+        request_type: SelectBoxVariable({
+            question: 'Request Type',
+            mandatory: true,
+            order: 100,
+            choices: {
+                access: { label: 'Access Request', sequence: 1 },
+                infrastructure: { label: 'Infrastructure Request', sequence: 2 },
+                configuration: { label: 'Configuration Change', sequence: 3 },
+                support: { label: 'Technical Support', sequence: 4 },
+            },
+        }),
+
+        environment: SelectBoxVariable({
+            question: 'Environment',
+            mandatory: true,
+            order: 200,
+            choices: {
+                development: { label: 'Development', sequence: 1 },
+                testing: { label: 'Testing', sequence: 2 },
+                staging: { label: 'Staging', sequence: 3 },
+                production: { label: 'Production', sequence: 4 },
+            },
+        }),
+
+        business_justification: MultiLineTextVariable({
+            question: 'Business Justification',
+            mandatory: true,
+            order: 300,
+        }),
+
+        required_date: DateVariable({
+            question: 'Required Date',
+            mandatory: true,
+            order: 400,
+        }),
+
+        additional_information: MultiLineTextVariable({
+            question: 'Additional Information',
+            mandatory: false,
+            order: 500,
+        }),
+    },
+
+    flow: catalog_request_fulfillment,
+    fulfillmentAutomationLevel: 'fullyAutomated',
 
     meta: [
         'IT',

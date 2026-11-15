@@ -9,7 +9,7 @@ import { read_catalog_request } from '../actions/read-catalog-request.now'
 import { catalog_request_validation } from './catalog-request-validation.now'
 import { catalog_request_logging } from '../actions/catalog-request-logging.now'
 
-Flow(
+export const catalog_request_fulfillment = Flow(
     {
         $id: Now.ID['catalog_request_fulfillment'],
         name: 'Generic IT Request - Fulfillment',

@@ -1,5 +1,5 @@
 {
-    "scope": "x_servicenow_catal",
+    "scope": "x_412550_catal",
     "scopeId": "d97e291395c04120b2950fe719001ab0",
     "name": "ServiceNow Catalog Toolkit",
     "tsconfigPath": "./src/server/tsconfig.json"

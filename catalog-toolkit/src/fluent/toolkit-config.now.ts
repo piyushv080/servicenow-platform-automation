@@ -5,8 +5,8 @@ import {
     MultiLineTextColumn,
 } from '@servicenow/sdk/core'
 
-export const x_servicenow_catal_config = Table({
-    name: 'x_servicenow_catal_config',
+export const x_412550_catal_config = Table({
+    name: 'x_412550_catal_config',
     label: 'Catalog Toolkit Configuration',
     display: 'name',
     schema: {
