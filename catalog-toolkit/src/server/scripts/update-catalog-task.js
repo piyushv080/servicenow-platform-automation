@@ -4,6 +4,8 @@
     outputs.state = '';
     outputs.message = '';
 
+    var prefix = 'Catalog Toolkit: ';
+
     var allowedStates = {
         '-5': 'Pending',
         '1': 'Open',
@@ -16,26 +18,36 @@
     var taskId = String(inputs.task_id || '');
     var newState = String(inputs.state || '');
 
-    if (!taskId || !allowedStates[newState]) {
-        outputs.message = 'Invalid task ID or state.';
-        return;
-    }
-
-    var task = new GlideRecord('sc_task');
-
-    if (!task.get(taskId)) {
-        outputs.message = 'Catalog task not found.';
-        return;
-    }
-
-    if (parseInt(task.getValue('state'), 10) >= 3) {
-        outputs.message = 'Catalog task is already closed.';
-        outputs.task_number = task.getValue('number');
-        outputs.state = task.getValue('state');
-        return;
-    }
-
     try {
+        if (!taskId || !allowedStates[newState]) {
+            outputs.message = 'Invalid task ID or state.';
+            gs.warn(prefix + outputs.message);
+            return;
+        }
+
+        var task = new GlideRecord('sc_task');
+
+        if (!task.get(taskId)) {
+            outputs.message = 'Catalog task not found.';
+            gs.error(prefix + outputs.message + ' Sys ID: ' + taskId);
+            return;
+        }
+
+        var currentState = String(task.getValue('state'));
+        var taskNumber = task.getValue('number');
+
+        if (['3', '4', '7'].indexOf(currentState) !== -1) {
+            outputs.message = 'Catalog task is already closed.';
+            outputs.task_number = taskNumber;
+            outputs.state = currentState;
+
+            gs.warn(
+                prefix + 'Update rejected because task is already closed: ' +
+                taskNumber
+            );
+            return;
+        }
+
         var ritmId = task.getValue('request_item');
 
         task.setValue('state', newState);
@@ -48,6 +60,7 @@
 
         if (!updatedId) {
             outputs.message = 'ServiceNow did not confirm the task update.';
+            gs.error(prefix + outputs.message + ' Task: ' + taskNumber);
             return;
         }
 
@@ -56,18 +69,23 @@
         if (!verify.get(taskId) ||
             String(verify.getValue('state')) !== newState) {
             outputs.message = 'Task update could not be verified.';
+            gs.error(prefix + outputs.message + ' Task: ' + taskNumber);
             return;
         }
 
-        // Synchronize parent RITM using all its fulfillment tasks.
+        // The after-update Business Rule also synchronizes the parent RITM.
         var ritm = new GlideRecord('sc_req_item');
 
         if (!ritm.get(ritmId)) {
             outputs.message =
                 'Task updated, but its parent RITM could not be found.';
+            gs.error(
+                prefix + outputs.message + ' Task: ' + taskNumber
+            );
             return;
         }
 
+        // Verify the parent lifecycle after the Business Rule executes.
         var tasks = new GlideRecord('sc_task');
         tasks.addQuery('request_item', ritmId);
         tasks.query();
@@ -80,52 +98,45 @@
         while (tasks.next()) {
             total++;
 
-            var taskState = String(tasks.getValue('state'));
+            var state = String(tasks.getValue('state'));
 
-            if (taskState === '3') {
+            if (state === '3') {
                 complete++;
-            } else if (taskState === '4' || taskState === '7') {
+            } else if (state === '4' || state === '7') {
                 incomplete++;
             } else {
                 active++;
             }
         }
 
-        var ritmState = '2';
-        var ritmStage = 'fulfillment';
+        var expectedState = '2';
+        var expectedStage = 'fulfillment';
 
         if (total > 0 && active === 0) {
+            expectedStage = 'delivery';
+
             if (incomplete > 0) {
-                ritmState = '4';
-                ritmStage = 'delivery';
+                expectedState = '4';
             } else if (complete === total) {
-                ritmState = '3';
-                ritmStage = 'delivery';
+                expectedState = '3';
             }
         }
 
-        ritm.setValue('state', ritmState);
-        ritm.setValue('stage', ritmStage);
+        var actualState = String(ritm.getValue('state'));
+        var actualStage = String(ritm.getValue('stage'));
 
-        var ritmUpdated = ritm.update();
-
-        if (!ritmUpdated) {
+        if (actualState !== expectedState ||
+            actualStage !== expectedStage) {
             outputs.message =
-                'Task updated, but parent RITM synchronization failed.';
+                'Task updated, but parent RITM lifecycle verification failed.';
+
             gs.error(
-                'Catalog Toolkit: RITM synchronization failed for ' +
-                ritm.getValue('number')
+                prefix + 'Lifecycle mismatch. RITM: ' +
+                ritm.getValue('number') +
+                ', expected state/stage: ' + expectedState + '/' +
+                expectedStage +
+                ', actual: ' + actualState + '/' + actualStage
             );
-            return;
-        }
-
-        var verifiedRitm = new GlideRecord('sc_req_item');
-
-        if (!verifiedRitm.get(ritmId) ||
-            String(verifiedRitm.getValue('state')) !== ritmState ||
-            String(verifiedRitm.getValue('stage')) !== ritmStage) {
-            outputs.message =
-                'Task updated, but RITM lifecycle verification failed.';
             return;
         }
 
@@ -134,14 +145,25 @@
         outputs.state = verify.getValue('state');
         outputs.message =
             'Task updated: ' + allowedStates[newState] +
-            '. RITM ' + verifiedRitm.getValue('number') +
-            ' synchronized to state ' + ritmState +
-            ', stage ' + ritmStage + '.';
+            '. RITM ' + ritm.getValue('number') +
+            ' synchronized to state ' + actualState +
+            ', stage ' + actualStage + '.';
+
+        gs.info(
+            prefix + 'Task lifecycle updated. Task: ' +
+            outputs.task_number +
+            ', previous state: ' + currentState +
+            ', new state: ' + newState +
+            ', RITM: ' + ritm.getValue('number') +
+            ', RITM state/stage: ' + actualState + '/' + actualStage
+        );
 
     } catch (error) {
         outputs.message = 'Task update failed: ' + error.message;
+
         gs.error(
-            'Catalog Toolkit task update failed: ' + error.message
+            prefix + 'Task lifecycle exception. Task: ' +
+            taskId + '. Error: ' + error.message
         );
     }
 })(inputs, outputs);
