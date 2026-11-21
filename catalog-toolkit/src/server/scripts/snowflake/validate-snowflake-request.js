@@ -19,7 +19,7 @@
 
         outputs.found = true;
 
-        // Same readable key: value description as the Generic IT flow (copied to the SCTASK later).
+        // Readable key: value description on the RITM (copied to the SCTASK later).
         ritm.setValue('description', new CatalogRequestUtils().buildRequestDescription(ritm));
 
         var requestType = utils.getRequestType(ritm);

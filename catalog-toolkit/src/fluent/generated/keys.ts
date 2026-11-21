@@ -32,6 +32,7 @@ declare global {
                     access_request_details_policy: {
                         table: 'catalog_ui_policy'
                         id: '228acba5c19446599b92f79cb989886d'
+                        deleted: true
                     }
                     access_snowflake_catalog_trigger: {
                         table: 'sys_hub_trigger_instance_v2'
@@ -84,10 +85,12 @@ declare global {
                     assign_catalog_task: {
                         table: 'sys_hub_action_type_definition'
                         id: '3ef594acf66a422da96a6c729001a5ee'
+                        deleted: true
                     }
                     assign_catalog_task_script: {
                         table: 'sys_hub_step_instance'
                         id: '938b82413cae435eb1c6a5884e6ff953'
+                        deleted: true
                     }
                     automatic_assignment_disabled: {
                         table: 'sys_hub_flow_logic_instance_v2'
@@ -131,14 +134,17 @@ declare global {
                     catalog_request_approval: {
                         table: 'sys_hub_action_instance_v2'
                         id: 'b4dd809de7174984a49b0412080fc1c4'
+                        deleted: true
                     }
                     catalog_request_approved: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '79a8d35a3a474fae9b2f322ff52bc8b3'
+                        deleted: true
                     }
                     catalog_request_fulfillment: {
                         table: 'sys_hub_flow'
                         id: '6e1091481a854d5392207ad270e08466'
+                        deleted: true
                     }
                     catalog_request_log_step: {
                         table: 'sys_hub_step_instance'
@@ -151,26 +157,32 @@ declare global {
                     catalog_request_not_approved: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '912293c4bbfd4f64b1e156af1fdad209'
+                        deleted: true
                     }
                     catalog_request_valid: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '6f6c857d3fdd4e6b89fdffdb5e3edd84'
+                        deleted: true
                     }
                     catalog_request_validation: {
                         table: 'sys_hub_flow'
                         id: '8c74266b0b45403b85c13359e01f67c6'
+                        deleted: true
                     }
                     catalog_validation_failed: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '690f3100d01e46f3bfabdf4a96f2cb3d'
+                        deleted: true
                     }
                     catalog_validation_failure: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: 'b5b00be11ad042559ba0daf5310fd820'
+                        deleted: true
                     }
                     catalog_validation_success: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '34b49e0c4c204e808910cc541cd5b571'
+                        deleted: true
                     }
                     CatalogRequestUtils: {
                         table: 'sys_script_include'
@@ -183,6 +195,7 @@ declare global {
                     create_and_assign_catalog_task_instance: {
                         table: 'sys_hub_action_instance_v2'
                         id: '9945c2835ef94bb1b2b65fbebe584f6c'
+                        deleted: true
                     }
                     create_and_assign_catalog_task_script: {
                         table: 'sys_hub_step_instance'
@@ -215,14 +228,17 @@ declare global {
                     generic_it_service_request: {
                         table: 'sc_cat_item'
                         id: 'a676a847b4e84741afc14fe6f675bfbd'
+                        deleted: true
                     }
                     generic_request_catalog_trigger: {
                         table: 'sys_hub_trigger_instance_v2'
                         id: '6d942fd9afda41ebbd98b0175256bb71'
+                        deleted: true
                     }
                     generic_request_validation: {
                         table: 'catalog_script_client'
                         id: '61b676ac7aac4ee09718fe74aeb056f7'
+                        deleted: true
                     }
                     launch_awx_job: {
                         table: 'sys_hub_action_type_definition'
@@ -239,6 +255,7 @@ declare global {
                     log_approval_rejection: {
                         table: 'sys_hub_action_instance_v2'
                         id: 'd784d676f1c04cd38e88b073c0c91410'
+                        deleted: true
                     }
                     log_assignment_disabled: {
                         table: 'sys_hub_action_instance_v2'
@@ -263,10 +280,12 @@ declare global {
                     log_fulfillment_result: {
                         table: 'sys_hub_action_instance_v2'
                         id: 'c5a5dc3a11ea45f59da9cff041f41c28'
+                        deleted: true
                     }
                     log_request_not_found: {
                         table: 'sys_hub_action_instance_v2'
                         id: '89134d77cdd14a6e896bbf7d15ebd79c'
+                        deleted: true
                     }
                     log_request_success: {
                         table: 'sys_hub_action_instance_v2'
@@ -292,6 +311,7 @@ declare global {
                     log_validation_failure: {
                         table: 'sys_hub_action_instance_v2'
                         id: '9999bb8bba924b97949a14856f2e56c0'
+                        deleted: true
                     }
                     package_json: {
                         table: 'sys_module'
@@ -300,10 +320,12 @@ declare global {
                     read_catalog_request: {
                         table: 'sys_hub_action_type_definition'
                         id: '5e464c59519d4bb983b4823259cff23e'
+                        deleted: true
                     }
                     read_catalog_request_script: {
                         table: 'sys_hub_step_instance'
                         id: 'a4fcd570c3db451ba64276cfd3ca883d'
+                        deleted: true
                     }
                     read_default_fulfillment_config: {
                         table: 'sys_hub_action_instance_v2'
@@ -313,30 +335,37 @@ declare global {
                     read_fulfillment_config: {
                         table: 'sys_hub_action_type_definition'
                         id: 'b8f937f312c64a2c98296c47b37bad91'
+                        deleted: true
                     }
                     read_fulfillment_config_script: {
                         table: 'sys_hub_step_instance'
                         id: 'e561ec4bbeb84d9d9c69e25bbff8342d'
+                        deleted: true
                     }
                     read_request_variables: {
                         table: 'sys_hub_action_instance_v2'
                         id: '9031620766dc4855946b6c6a25a7014d'
+                        deleted: true
                     }
                     request_found: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '9218f555603544158e4739dab6bb18d1'
+                        deleted: true
                     }
                     request_is_valid: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: 'bc441c32ef2a4f76a52656d95ad8ad36'
+                        deleted: true
                     }
                     request_not_found: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '0535c3d4a2fb49d8ae7576b07a0fa69a'
+                        deleted: true
                     }
                     request_validation_failed: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: 'fbde5f74e88d412889d04880629254ff'
+                        deleted: true
                     }
                     requester_information: {
                         table: 'item_option_new_set'
@@ -425,6 +454,7 @@ declare global {
                     src_server_script_ts: {
                         table: 'sys_module'
                         id: 'df0653f5b2ab4fd5a750d7a245239bbd'
+                        deleted: true
                     }
                     'src_server_script-includes_catalog-request-utils_js': {
                         table: 'sys_module'
@@ -437,6 +467,7 @@ declare global {
                     'src_server_scripts_assign-catalog-task_js': {
                         table: 'sys_module'
                         id: '6667925dd6a6405c9c9811294606005a'
+                        deleted: true
                     }
                     'src_server_scripts_create-and-assign-catalog-task_js': {
                         table: 'sys_module'
@@ -445,10 +476,12 @@ declare global {
                     'src_server_scripts_read-catalog-request_js': {
                         table: 'sys_module'
                         id: '5ae9a52f502640e7a9a4eb5a97c5fc50'
+                        deleted: true
                     }
                     'src_server_scripts_read-fulfillment-config_js': {
                         table: 'sys_module'
                         id: '1f44b38b2d83467e816e88f85a050ef9'
+                        deleted: true
                     }
                     'src_server_scripts_snowflake_launch-awx-job_js': {
                         table: 'sys_module'
@@ -465,10 +498,12 @@ declare global {
                     'src_server_scripts_update-catalog-task_js': {
                         table: 'sys_module'
                         id: '20e0c40a90e1435b8b6940f08f9552a8'
+                        deleted: true
                     }
                     sync_approved_request_lifecycle: {
                         table: 'sys_hub_action_instance_v2'
                         id: 'd78a825c71084edfb7f88bf68179f891'
+                        deleted: true
                     }
                     sync_catalog_request_lifecycle: {
                         table: 'sys_hub_action_type_definition'
@@ -481,6 +516,7 @@ declare global {
                     sync_rejected_request_lifecycle: {
                         table: 'sys_hub_action_instance_v2'
                         id: 'e7288798a1584f12a298221d22a1edf5'
+                        deleted: true
                     }
                     sync_ritm_after_catalog_task_update: {
                         table: 'sys_script'
@@ -507,14 +543,17 @@ declare global {
                     update_catalog_task: {
                         table: 'sys_hub_action_type_definition'
                         id: 'caa4b2278e504d3f91f9449890c8f961'
+                        deleted: true
                     }
                     update_catalog_task_script: {
                         table: 'sys_hub_step_instance'
                         id: '5c1e331692644b329a8554a3604a07c7'
+                        deleted: true
                     }
                     validate_catalog_request: {
                         table: 'sys_hub_sub_flow_instance_v2'
                         id: 'ffa07f5c4e804ab98623e7ee4c40a965'
+                        deleted: true
                     }
                     validate_snowflake_request: {
                         table: 'sys_hub_action_type_definition'
@@ -533,6 +572,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '0030b4a582ef4fedb214513996b9da51'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_flow_output_8c74266b0b45403b85c13359e01f67c6'
                             element: 'message'
@@ -558,6 +598,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '0133e4b2b09942c09c3aa13e3c47b0b1'
+                        deleted: true
                         key: {
                             model: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             element: 'auto_assign'
@@ -566,6 +607,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: '014dc148fadd40b49b42116e038e26cb'
+                        deleted: true
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'businessJustification'
@@ -583,6 +625,7 @@ declare global {
                     {
                         table: 'sys_variable_value'
                         id: '01d35e0271f14545b391d8567b8c34fa'
+                        deleted: true
                         key: {
                             document_key: '5c1e331692644b329a8554a3604a07c7'
                             variable: '74315b04b3201300176b051a16a8dc2b'
@@ -609,6 +652,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_input'
                         id: '0586b39d34504fbdb9b9d363037ea5dc'
+                        deleted: true
                         key: {
                             model: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             element: 'configuration_name'
@@ -617,6 +661,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '059e982c3f874df08f3e93dcd2fde9a7'
+                        deleted: true
                         key: {
                             model: '5c1e331692644b329a8554a3604a07c7'
                             element: 'message'
@@ -625,6 +670,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '05a0d342c12a4e18b994f4af30269d3f'
+                        deleted: true
                         key: {
                             model: '5c1e331692644b329a8554a3604a07c7'
                             element: 'state'
@@ -641,6 +687,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: '06bfc18bb6764c86a85ed3b0f9433b64'
+                        deleted: true
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'requestType'
@@ -649,6 +696,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '076e263f960e4abea925e8a2733cc960'
+                        deleted: true
                         key: {
                             model: 'caa4b2278e504d3f91f9449890c8f961'
                             element: 'state'
@@ -674,6 +722,7 @@ declare global {
                     {
                         table: 'item_option_new'
                         id: '08fb6d54a6dd4bcf816a43eca44e14b8'
+                        deleted: true
                         key: {
                             cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             variable_set: 'NULL'
@@ -683,6 +732,7 @@ declare global {
                     {
                         table: 'sys_hub_action_input'
                         id: '09d88c8297a5483bb7c80754e399fa20'
+                        deleted: true
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'requestItemId'
@@ -708,6 +758,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '0ce2cf4d9188423c8eae6bc4ecd1d039'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
                             element: 'message'
@@ -717,6 +768,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '0d1664d7e4a44de8a09e09417d7d8bb9'
+                        deleted: true
                         key: {
                             model: 'b8f937f312c64a2c98296c47b37bad91'
                             element: 'fulfillmentGroup'
@@ -751,6 +803,7 @@ declare global {
                     {
                         table: 'question_choice'
                         id: '108867046d9b44938235d1935a730ccf'
+                        deleted: true
                         key: {
                             question: {
                                 id: '4efb674ddd2d4a9ab53589a48f85ad34'
@@ -766,6 +819,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_output'
                         id: '1088c348c07b42c2b41853eb8a5e04d9'
+                        deleted: true
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'message'
@@ -796,6 +850,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '118f0568500d451e92734b1a96e4321b'
+                        deleted: true
                         key: {
                             model: 'b8f937f312c64a2c98296c47b37bad91'
                             element: 'autoAssign'
@@ -836,6 +891,7 @@ declare global {
                     {
                         table: 'sys_variable_value'
                         id: '1532a88e1f25481da1f237d9b3889441'
+                        deleted: true
                         key: {
                             document_key: 'a4fcd570c3db451ba64276cfd3ca883d'
                             variable: '74315b04b3201300176b051a16a8dc2b'
@@ -868,6 +924,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '174f2aafcf2742939554a1324f882cc7'
+                        deleted: true
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'businessJustification'
@@ -900,6 +957,7 @@ declare global {
                     {
                         table: 'question_choice'
                         id: '18b5334124b64e418f750ad22934c7a5'
+                        deleted: true
                         key: {
                             question: {
                                 id: '9f80dcdb1d234d10a9add2a0487197d1'
@@ -941,6 +999,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '1af9de4b66ae466c9c2f6c88f3e40a84'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
                             element: '__action_status__'
@@ -992,6 +1051,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '1d7d02fbd8014ffdbb6e637ee50c3b05'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             element: '__dont_treat_as_error__'
@@ -1001,6 +1061,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '1d807aff651f40edb22aabf721d9f6ee'
+                        deleted: true
                         key: {
                             model: 'caa4b2278e504d3f91f9449890c8f961'
                             element: 'message'
@@ -1031,6 +1092,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '1f95e94e69d8427d88f97a789a9be0c4'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             element: 'businessJustification'
@@ -1048,6 +1110,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '222e778eb4894bf18199acea5ba235fe'
+                        deleted: true
                         key: {
                             id: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             table: 'var__m_sys_hub_step_ext_input_e561ec4bbeb84d9d9c69e25bbff8342d'
@@ -1057,6 +1120,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '2257a682b1f541cc84aa416fba2400e7'
+                        deleted: true
                         key: {
                             id: '5c1e331692644b329a8554a3604a07c7'
                             table: 'var__m_sys_hub_step_ext_input_5c1e331692644b329a8554a3604a07c7'
@@ -1073,6 +1137,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '23e21e09a006426887caf193a6591e4c'
+                        deleted: true
                         key: {
                             id: 'b8f937f312c64a2c98296c47b37bad91'
                             table: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
@@ -1091,6 +1156,7 @@ declare global {
                     {
                         table: 'sys_variable_value'
                         id: '25c3740898654344bcc8fc0c9baa12d2'
+                        deleted: true
                         key: {
                             document_key: '938b82413cae435eb1c6a5884e6ff953'
                             variable: '71aa7f6647032200b4fad7527c9a719b'
@@ -1099,6 +1165,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '26940ffbcd2e46b09d8dad68e04fb033'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
                             element: 'found'
@@ -1108,6 +1175,7 @@ declare global {
                     {
                         table: 'io_set_item'
                         id: '270419c2918e4114b4d7a20c6a348c98'
+                        deleted: true
                         key: {
                             sc_cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             variable_set: '10a720b0e72848c8a10d2783cc7938b3'
@@ -1116,6 +1184,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '27db00f918c94cf1b9152b7d7ba04367'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_3ef594acf66a422da96a6c729001a5ee'
                             element: 'assigned'
@@ -1133,6 +1202,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '285bec1c53e147b1931a53e85d50791a'
+                        deleted: true
                         key: {
                             model: '3ef594acf66a422da96a6c729001a5ee'
                             element: '__action_status__'
@@ -1150,6 +1220,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '29acf439b9724db0b0acb0a8e5750b31'
+                        deleted: true
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'environment'
@@ -1158,6 +1229,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '2a8dfb22bf9640f3bb48ffaa2251c91b'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_flow_input_8c74266b0b45403b85c13359e01f67c6'
                             element: 'businessJustification'
@@ -1167,6 +1239,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '2ab019438e07487e95decc7a3f6b40b2'
+                        deleted: true
                         key: {
                             model: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             element: 'fulfillment_group'
@@ -1175,6 +1248,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '2b1dd39e565849409f528a2a35655413'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_input_5e464c59519d4bb983b4823259cff23e'
                             element: 'requestItemId'
@@ -1184,6 +1258,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '2b298928912941ebbda58d05f9f3f25f'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
                             element: 'message'
@@ -1211,6 +1286,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '2f4bef50cd764c0f8f47d61adb7e7a4a'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_input_3ef594acf66a422da96a6c729001a5ee'
                             element: 'taskId'
@@ -1229,6 +1305,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_input'
                         id: '315826a8a49b459884343e6f9888a58f'
+                        deleted: true
                         key: {
                             model: '938b82413cae435eb1c6a5884e6ff953'
                             element: 'fulfillment_group'
@@ -1245,6 +1322,7 @@ declare global {
                     {
                         table: 'sys_hub_action_input'
                         id: '331db0d573f64e63b1b2cfe3e164f7af'
+                        deleted: true
                         key: {
                             model: 'caa4b2278e504d3f91f9449890c8f961'
                             element: 'state'
@@ -1303,6 +1381,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '3725d506b7594bac9ed80ddac250eb13'
+                        deleted: true
                         key: {
                             id: 'b8f937f312c64a2c98296c47b37bad91'
                             table: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
@@ -1312,6 +1391,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '382d38bf5d4a432b96c4d0c6f2490cf3'
+                        deleted: true
                         key: {
                             id: '5e464c59519d4bb983b4823259cff23e'
                             table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
@@ -1330,6 +1410,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '3913febd44834dd5b4f9e07810d9f079'
+                        deleted: true
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
                             element: 'message'
@@ -1380,6 +1461,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '3fc4ba6472794a328b1f5115bf9bbc33'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_input_caa4b2278e504d3f91f9449890c8f961'
                             element: 'taskId'
@@ -1407,6 +1489,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '428172b43fa7413d8ee7314562ad9056'
+                        deleted: true
                         key: {
                             model: 'caa4b2278e504d3f91f9449890c8f961'
                             element: 'updated'
@@ -1432,6 +1515,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '43f8b08a71f14e90968d14dc057e228c'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
                             element: 'fulfillmentGroup'
@@ -1496,6 +1580,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '483ea54ddc46425d9040b043f69cd668'
+                        deleted: true
                         key: {
                             id: '3ef594acf66a422da96a6c729001a5ee'
                             table: 'var__m_sys_hub_action_output_3ef594acf66a422da96a6c729001a5ee'
@@ -1520,6 +1605,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '49896b2d7e2046dd80572e360548353a'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             element: 'requestType'
@@ -1538,6 +1624,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '49ae0e097e694b9d99b91abb3e3e7580'
+                        deleted: true
                         key: {
                             id: '5e464c59519d4bb983b4823259cff23e'
                             table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
@@ -1562,6 +1649,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '4ab91cb2449e43f899226b600ff6763d'
+                        deleted: true
                         key: {
                             model: 'b8f937f312c64a2c98296c47b37bad91'
                             element: 'message'
@@ -1578,6 +1666,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_input'
                         id: '4c03cbb6eaca446187db22b76bc46ec9'
+                        deleted: true
                         key: {
                             model: '938b82413cae435eb1c6a5884e6ff953'
                             element: 'task_id'
@@ -1586,6 +1675,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '4d26ab1263354d4f976d62a2be422786'
+                        deleted: true
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: '__dont_treat_as_error__'
@@ -1603,6 +1693,7 @@ declare global {
                     {
                         table: 'item_option_new'
                         id: '4efb674ddd2d4a9ab53589a48f85ad34'
+                        deleted: true
                         key: {
                             cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             variable_set: 'NULL'
@@ -1629,6 +1720,7 @@ declare global {
                     {
                         table: 'sys_variable_value'
                         id: '4fb17ba9bc6c49c9b52aa034e26b0580'
+                        deleted: true
                         key: {
                             document_key: 'a4fcd570c3db451ba64276cfd3ca883d'
                             variable: '71aa7f6647032200b4fad7527c9a719b'
@@ -1637,6 +1729,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '5105fe55a9da40d3baa632dcd52894ba'
+                        deleted: true
                         key: {
                             model: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             element: 'message'
@@ -1680,6 +1773,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '551b136546c44326b7ac440d8fced9e9'
+                        deleted: true
                         key: {
                             model: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             element: 'assigned_technician'
@@ -1711,6 +1805,7 @@ declare global {
                     {
                         table: 'sys_hub_action_input'
                         id: '5697d9ff3cb84dad93851e8ea25c32a6'
+                        deleted: true
                         key: {
                             model: '3ef594acf66a422da96a6c729001a5ee'
                             element: 'taskId'
@@ -1719,6 +1814,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '57d9d7a765a14a88a61e193d06344a51'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
                             element: '__action_status__'
@@ -1803,6 +1899,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '5ecb157d61a34dfcb25e13359730ccc0'
+                        deleted: true
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'found'
@@ -1819,6 +1916,7 @@ declare global {
                     {
                         table: 'sys_hub_action_input'
                         id: '5fd01112173e49478fb09eb69adbb9c8'
+                        deleted: true
                         key: {
                             model: 'b8f937f312c64a2c98296c47b37bad91'
                             element: 'configurationName'
@@ -1827,6 +1925,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '60770f4ab8d947e88a113a957cf66e75'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_3ef594acf66a422da96a6c729001a5ee'
                             element: '__action_status__'
@@ -1836,6 +1935,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '616fed558d9544d8bc97aa23767f682f'
+                        deleted: true
                         key: {
                             model: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             element: 'found'
@@ -1853,6 +1953,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '624020180ff046068f34ab53b4468383'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
                             element: 'updated'
@@ -1862,6 +1963,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '62935dddc4844268b7a9976aeedc9ee1'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_input_caa4b2278e504d3f91f9449890c8f961'
                             element: 'workNotes'
@@ -1871,6 +1973,7 @@ declare global {
                     {
                         table: 'sys_hub_action_input'
                         id: '633f4b8549404f938058080022fadbcd'
+                        deleted: true
                         key: {
                             model: '3ef594acf66a422da96a6c729001a5ee'
                             element: 'fulfillmentGroup'
@@ -1879,6 +1982,7 @@ declare global {
                     {
                         table: 'sys_hub_action_input'
                         id: '6371a8238e864c8dbb8e418714471ef6'
+                        deleted: true
                         key: {
                             model: '3ef594acf66a422da96a6c729001a5ee'
                             element: 'assignedTechnician'
@@ -1887,6 +1991,7 @@ declare global {
                     {
                         table: 'sys_variable_value'
                         id: '638f8473f5914d28b53c1ba950684c5e'
+                        deleted: true
                         key: {
                             document_key: '938b82413cae435eb1c6a5884e6ff953'
                             variable: '74315b04b3201300176b051a16a8dc2b'
@@ -1895,6 +2000,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '6403175ab9b94ab39878ce383e8b9427'
+                        deleted: true
                         key: {
                             model: 'caa4b2278e504d3f91f9449890c8f961'
                             element: '__action_status__'
@@ -1903,6 +2009,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '64c5fae166954deaa385f4f073dfe99f'
+                        deleted: true
                         key: {
                             id: '5e464c59519d4bb983b4823259cff23e'
                             table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
@@ -1912,6 +2019,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '64e81e2eb1fc4f24a4765f1675bce7d1'
+                        deleted: true
                         key: {
                             id: '5e464c59519d4bb983b4823259cff23e'
                             table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
@@ -1929,6 +2037,7 @@ declare global {
                     {
                         table: 'question_choice'
                         id: '65994efade924a95a23bd1b74bd48dc7'
+                        deleted: true
                         key: {
                             question: {
                                 id: '4efb674ddd2d4a9ab53589a48f85ad34'
@@ -1944,6 +2053,7 @@ declare global {
                     {
                         table: 'item_option_new'
                         id: '66a369e38be948eabd7927475a198ef5'
+                        deleted: true
                         key: {
                             cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             variable_set: 'NULL'
@@ -1961,6 +2071,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '68faa59993e746589226dfe0111c9502'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
                             element: 'taskNumber'
@@ -1970,6 +2081,7 @@ declare global {
                     {
                         table: 'question_choice'
                         id: '693dfd7bbfdd4d9f8c83500baf396d78'
+                        deleted: true
                         key: {
                             question: {
                                 id: '9f80dcdb1d234d10a9add2a0487197d1'
@@ -2011,6 +2123,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '6af9a48a778243a6a9bd532f9a85dc60'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_input_3ef594acf66a422da96a6c729001a5ee'
                             element: 'assignedTechnician'
@@ -2097,6 +2210,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '73bf1c9cc1e748d98c454c616220f14f'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
                             element: 'assignedTechnician'
@@ -2153,6 +2267,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '78762a43566a473297d4a689001abffc'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             element: 'environment'
@@ -2162,6 +2277,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_input'
                         id: '7a041cc013934363b017d00efd4c0670'
+                        deleted: true
                         key: {
                             model: '5c1e331692644b329a8554a3604a07c7'
                             element: 'task_id'
@@ -2178,6 +2294,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_input'
                         id: '7d7427e2dc7546a9a6deab122a1224e3'
+                        deleted: true
                         key: {
                             model: '938b82413cae435eb1c6a5884e6ff953'
                             element: 'assigned_technician'
@@ -2186,6 +2303,7 @@ declare global {
                     {
                         table: 'sys_variable_value'
                         id: '7dd87a0cb0c64eeeab4e200f306b1d3a'
+                        deleted: true
                         key: {
                             document_key: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             variable: '74315b04b3201300176b051a16a8dc2b'
@@ -2267,6 +2385,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '81ea604771d645e9903bbba524361614'
+                        deleted: true
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'requiredDate'
@@ -2306,6 +2425,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '832585a9644b41c194b5f851c7a4b637'
+                        deleted: true
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
                             element: 'business_justification'
@@ -2314,6 +2434,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '839177dfd0874957aac37801257bc4d4'
+                        deleted: true
                         key: {
                             id: 'a4fcd570c3db451ba64276cfd3ca883d'
                             table: 'var__m_sys_hub_step_ext_input_a4fcd570c3db451ba64276cfd3ca883d'
@@ -2332,6 +2453,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '84f63a3996e64ddbbe90d1598cdb44e5'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
                             element: 'autoAssign'
@@ -2341,6 +2463,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '85ceb1c2c586458f9b82f992de3108b2'
+                        deleted: true
                         key: {
                             id: 'caa4b2278e504d3f91f9449890c8f961'
                             table: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
@@ -2350,6 +2473,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '85d90c02f46b42cd95aeeaca7e915a4a'
+                        deleted: true
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: '__action_status__'
@@ -2400,6 +2524,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '8a02212d027c46dab6b2c66584298111'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             element: 'message'
@@ -2409,6 +2534,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '8a84d351746f473fbcd48d6f6496b2fb'
+                        deleted: true
                         key: {
                             id: '5e464c59519d4bb983b4823259cff23e'
                             table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
@@ -2426,6 +2552,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '8c2c13e957b64eb4a83e7e9d5407ab40'
+                        deleted: true
                         key: {
                             id: 'b8f937f312c64a2c98296c47b37bad91'
                             table: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
@@ -2460,6 +2587,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '927e324aadbc411a8224f0ab2cb7b1b5'
+                        deleted: true
                         key: {
                             id: 'b8f937f312c64a2c98296c47b37bad91'
                             table: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
@@ -2477,6 +2605,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '95c752a186924481984a4563a42bcbe4'
+                        deleted: true
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
                             element: 'found'
@@ -2502,6 +2631,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: '985ba31a4e824e14985fd729df197815'
+                        deleted: true
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'message'
@@ -2554,6 +2684,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: '9d0d196961864ff6be9d42a743dfe5b7'
+                        deleted: true
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
                             element: 'environment'
@@ -2562,6 +2693,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: '9d8228b9fd8c47a4a007946e072e7b35'
+                        deleted: true
                         key: {
                             id: '3ef594acf66a422da96a6c729001a5ee'
                             table: 'var__m_sys_hub_action_output_3ef594acf66a422da96a6c729001a5ee'
@@ -2579,6 +2711,7 @@ declare global {
                     {
                         table: 'sc_cat_item_catalog'
                         id: '9ed26844685b42abb0213c2423988b7f'
+                        deleted: true
                         key: {
                             sc_cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             sc_catalog: 'e0d08b13c3330100c8b837659bba8fb4'
@@ -2596,6 +2729,7 @@ declare global {
                     {
                         table: 'item_option_new'
                         id: '9f80dcdb1d234d10a9add2a0487197d1'
+                        deleted: true
                         key: {
                             cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             variable_set: 'NULL'
@@ -2638,6 +2772,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'a134164bf17c4f6e8c0d73a7d41b1f58'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_3ef594acf66a422da96a6c729001a5ee'
                             element: 'message'
@@ -2647,6 +2782,7 @@ declare global {
                     {
                         table: 'sys_hub_action_input'
                         id: 'a244e5cc073a42b0ac055386e9d0be62'
+                        deleted: true
                         key: {
                             model: 'caa4b2278e504d3f91f9449890c8f961'
                             element: 'taskId'
@@ -2655,6 +2791,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'a27e2b32493d47c6a5070f413314d149'
+                        deleted: true
                         key: {
                             model: '3ef594acf66a422da96a6c729001a5ee'
                             element: 'message'
@@ -2663,6 +2800,7 @@ declare global {
                     {
                         table: 'question_choice'
                         id: 'a290f8562d534789aa5c85cdeab5f07d'
+                        deleted: true
                         key: {
                             question: {
                                 id: '9f80dcdb1d234d10a9add2a0487197d1'
@@ -2686,6 +2824,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'a3c2cc9a9a6c41fc8fea219978a41a71'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_input_b8f937f312c64a2c98296c47b37bad91'
                             element: 'configurationName'
@@ -2703,6 +2842,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'a62bf174832f4685bb761a3786a20e22'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             element: '__action_status__'
@@ -2737,6 +2877,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'a7a3b2a220c5479a83f07ad5c7edc139'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
                             element: '__dont_treat_as_error__'
@@ -2746,6 +2887,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'a7d7ce2d31354cc78c9b0483c27f801e'
+                        deleted: true
                         key: {
                             model: 'caa4b2278e504d3f91f9449890c8f961'
                             element: 'taskNumber'
@@ -2809,6 +2951,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'abc49a16cf43428f852ff00dae9f4280'
+                        deleted: true
                         key: {
                             id: '938b82413cae435eb1c6a5884e6ff953'
                             table: 'var__m_sys_hub_step_ext_input_938b82413cae435eb1c6a5884e6ff953'
@@ -2905,6 +3048,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'b6605354efce4a8080d7c090ec9108c9'
+                        deleted: true
                         key: {
                             id: 'caa4b2278e504d3f91f9449890c8f961'
                             table: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
@@ -2931,6 +3075,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'b7712160afcb4fc187b5173c2f16dbc7'
+                        deleted: true
                         key: {
                             id: 'caa4b2278e504d3f91f9449890c8f961'
                             table: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
@@ -2990,6 +3135,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: 'bcc76a2ecb0e40adabe6856b76f34ea8'
+                        deleted: true
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'environment'
@@ -3007,6 +3153,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'bd47bd1ec8cb4be2901cf46611b95c1f'
+                        deleted: true
                         key: {
                             id: 'caa4b2278e504d3f91f9449890c8f961'
                             table: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
@@ -3057,6 +3204,7 @@ declare global {
                     {
                         table: 'item_option_new'
                         id: 'c07934e6e2494f3dba65545998c9277a'
+                        deleted: true
                         key: {
                             cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             variable_set: 'NULL'
@@ -3066,6 +3214,7 @@ declare global {
                     {
                         table: 'sc_cat_item_category'
                         id: 'c08cb01887c248db95bae1e978510233'
+                        deleted: true
                         key: {
                             sc_cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             sc_category: '109f0438c6112276003ae8ac13e7009d'
@@ -3082,6 +3231,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'c124cd1166b64270a2e7df180f5e4cb5'
+                        deleted: true
                         key: {
                             model: 'b8f937f312c64a2c98296c47b37bad91'
                             element: '__action_status__'
@@ -3090,6 +3240,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: 'c1c3f551d58e43eb9ff782834ee5ee63'
+                        deleted: true
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
                             element: 'required_date'
@@ -3148,6 +3299,7 @@ declare global {
                     {
                         table: 'catalog_ui_policy_action'
                         id: 'c99664db3c6d49eea285ba5ebabaec4f'
+                        deleted: true
                         key: {
                             ui_policy: '228acba5c19446599b92f79cb989886d'
                             catalog_variable: 'IO:additional_information'
@@ -3165,6 +3317,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'ca4ef534efea4820bbc3e3692c17c2d5'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_flow_input_8c74266b0b45403b85c13359e01f67c6'
                             element: 'environment'
@@ -3183,6 +3336,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'cbf8f23d4ba0476da62702eb6d3fb54b'
+                        deleted: true
                         key: {
                             id: '5e464c59519d4bb983b4823259cff23e'
                             table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
@@ -3200,6 +3354,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'cc6c55a58f6b4c85a343848bf535b4a0'
+                        deleted: true
                         key: {
                             id: '938b82413cae435eb1c6a5884e6ff953'
                             table: 'var__m_sys_hub_step_ext_input_938b82413cae435eb1c6a5884e6ff953'
@@ -3239,6 +3394,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'd03e9ff0f3194412aef82d6367b45f9a'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_3ef594acf66a422da96a6c729001a5ee'
                             element: '__dont_treat_as_error__'
@@ -3257,6 +3413,7 @@ declare global {
                     {
                         table: 'question_choice'
                         id: 'd102d89ab8fb4d02b7a78fb21d7da344'
+                        deleted: true
                         key: {
                             question: {
                                 id: '4efb674ddd2d4a9ab53589a48f85ad34'
@@ -3272,6 +3429,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'd11ad695f91a4d8bb3129f0440c06bd1'
+                        deleted: true
                         key: {
                             id: '938b82413cae435eb1c6a5884e6ff953'
                             table: 'var__m_sys_hub_step_ext_input_938b82413cae435eb1c6a5884e6ff953'
@@ -3290,6 +3448,7 @@ declare global {
                     {
                         table: 'question_choice'
                         id: 'd1bc16477ec44233a762ccb2a4098910'
+                        deleted: true
                         key: {
                             question: {
                                 id: '9f80dcdb1d234d10a9add2a0487197d1'
@@ -3305,6 +3464,7 @@ declare global {
                     {
                         table: 'sys_hub_action_input'
                         id: 'd1fd996ee3494d2b95bf519c01f7811f'
+                        deleted: true
                         key: {
                             model: 'caa4b2278e504d3f91f9449890c8f961'
                             element: 'workNotes'
@@ -3313,6 +3473,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'd21c24e1a3a14f3d956e40d48ff9ba69'
+                        deleted: true
                         key: {
                             id: '5c1e331692644b329a8554a3604a07c7'
                             table: 'var__m_sys_hub_step_ext_input_5c1e331692644b329a8554a3604a07c7'
@@ -3361,6 +3522,7 @@ declare global {
                     {
                         table: 'sys_variable_value'
                         id: 'd55e4e64f240460090d4275603225ba9'
+                        deleted: true
                         key: {
                             document_key: '5c1e331692644b329a8554a3604a07c7'
                             variable: '71aa7f6647032200b4fad7527c9a719b'
@@ -3378,6 +3540,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_input'
                         id: 'd69a0b648061474eb47cf7e584b4fde1'
+                        deleted: true
                         key: {
                             model: '5c1e331692644b329a8554a3604a07c7'
                             element: 'state'
@@ -3386,6 +3549,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'd7198c1e001944ebb3c4d62e72770188'
+                        deleted: true
                         key: {
                             model: 'b8f937f312c64a2c98296c47b37bad91'
                             element: 'found'
@@ -3403,6 +3567,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'd9f2a4997ff6487e9c4758b4f23761bc'
+                        deleted: true
                         key: {
                             id: '5c1e331692644b329a8554a3604a07c7'
                             table: 'var__m_sys_hub_step_ext_input_5c1e331692644b329a8554a3604a07c7'
@@ -3412,6 +3577,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'dabdb7e4439649288eeb182970c2bd66'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             element: 'requiredDate'
@@ -3421,6 +3587,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'dbe1148e552e4717816bf80e73349489'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_input_3ef594acf66a422da96a6c729001a5ee'
                             element: 'fulfillmentGroup'
@@ -3430,6 +3597,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_output'
                         id: 'dc272a03f5574b9ba54316fab2d01627'
+                        deleted: true
                         key: {
                             model: '8c74266b0b45403b85c13359e01f67c6'
                             element: 'isValid'
@@ -3438,6 +3606,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: 'dc6477aa55a745029e6ced3d6f38b452'
+                        deleted: true
                         key: {
                             model: '5c1e331692644b329a8554a3604a07c7'
                             element: 'task_number'
@@ -3446,6 +3615,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'dc71a632259f4f8babb8f78dea1b0ac0'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_input_caa4b2278e504d3f91f9449890c8f961'
                             element: 'state'
@@ -3463,6 +3633,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: 'dd38d05f9b9b487f97839d24b2ce4430'
+                        deleted: true
                         key: {
                             model: '938b82413cae435eb1c6a5884e6ff953'
                             element: 'message'
@@ -3480,6 +3651,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'ddf0e58158334639b25536b31a1fabd9'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
                             element: '__dont_treat_as_error__'
@@ -3489,6 +3661,7 @@ declare global {
                     {
                         table: 'sys_variable_value'
                         id: 'df17878472fb49d6a864296ed7b0dff7'
+                        deleted: true
                         key: {
                             document_key: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             variable: '71aa7f6647032200b4fad7527c9a719b'
@@ -3497,6 +3670,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_input'
                         id: 'df374652ce8f4db7acf33be6cd9f7d5c'
+                        deleted: true
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
                             element: 'request_item_id'
@@ -3513,6 +3687,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'e1ba30b7f547450ea83fb8f846b94ff3'
+                        deleted: true
                         key: {
                             model: 'b8f937f312c64a2c98296c47b37bad91'
                             element: '__dont_treat_as_error__'
@@ -3536,6 +3711,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'e35aebe2249647aba4ebea0c253671c7'
+                        deleted: true
                         key: {
                             model: '3ef594acf66a422da96a6c729001a5ee'
                             element: '__dont_treat_as_error__'
@@ -3571,6 +3747,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: 'e6f422be23bf4a18b9b28dcfe0cf8649'
+                        deleted: true
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
                             element: 'request_type'
@@ -3579,6 +3756,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'e79567901ff54a399b69c3683176b5e2'
+                        deleted: true
                         key: {
                             model: 'b8f937f312c64a2c98296c47b37bad91'
                             element: 'assignedTechnician'
@@ -3587,6 +3765,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'e7da79b94cb94345b6c2d5a679d5c220'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_flow_output_8c74266b0b45403b85c13359e01f67c6'
                             element: 'isValid'
@@ -3596,6 +3775,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'e80d6da2420043f6a70b91d42be425cd'
+                        deleted: true
                         key: {
                             model: 'caa4b2278e504d3f91f9449890c8f961'
                             element: '__dont_treat_as_error__'
@@ -3612,6 +3792,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_input'
                         id: 'eb3edaa685764bf28be039a24d3e659b'
+                        deleted: true
                         key: {
                             model: '5c1e331692644b329a8554a3604a07c7'
                             element: 'work_notes'
@@ -3638,6 +3819,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'ec4813b55c5e4b719f48f72e49afd733'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             element: 'found'
@@ -3673,6 +3855,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'ef0448b08cc7465abbcb8f9f016713ed'
+                        deleted: true
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'requestType'
@@ -3681,6 +3864,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: 'f0301ae3fecb4174b16c55f83692838a'
+                        deleted: true
                         key: {
                             model: '938b82413cae435eb1c6a5884e6ff953'
                             element: 'assigned'
@@ -3704,6 +3888,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'f2c9a3fc43e24bcf901f304799e73ff6'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_action_output_caa4b2278e504d3f91f9449890c8f961'
                             element: 'state'
@@ -3713,6 +3898,7 @@ declare global {
                     {
                         table: 'question_choice'
                         id: 'f31d790d96d1429a9950be46a87b63ec'
+                        deleted: true
                         key: {
                             question: {
                                 id: '4efb674ddd2d4a9ab53589a48f85ad34'
@@ -3736,6 +3922,7 @@ declare global {
                     {
                         table: 'sys_hub_action_output'
                         id: 'f51e12a3ad6443be97e22f0c1d8b5f7c'
+                        deleted: true
                         key: {
                             model: '3ef594acf66a422da96a6c729001a5ee'
                             element: 'assigned'
@@ -3744,6 +3931,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'f535929a0d544a678a1157456e8c9385'
+                        deleted: true
                         key: {
                             name: 'var__m_sys_hub_flow_input_8c74266b0b45403b85c13359e01f67c6'
                             element: 'requestType'
@@ -3775,6 +3963,7 @@ declare global {
                     {
                         table: 'sys_element_mapping'
                         id: 'f767732c83854618824c33810ce50f9f'
+                        deleted: true
                         key: {
                             id: 'b8f937f312c64a2c98296c47b37bad91'
                             table: 'var__m_sys_hub_action_output_b8f937f312c64a2c98296c47b37bad91'
@@ -3835,6 +4024,7 @@ declare global {
                     {
                         table: 'sys_hub_step_ext_output'
                         id: 'fcdbdb0485d24f4f845d55a5c6b31e3a'
+                        deleted: true
                         key: {
                             model: '5c1e331692644b329a8554a3604a07c7'
                             element: 'updated'

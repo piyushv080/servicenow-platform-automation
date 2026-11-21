@@ -1,306 +1,126 @@
-# ServiceNow Catalog Toolkit
+# Catalog Toolkit — Snowflake Self-Service
 
-A reusable ServiceNow application for standardizing catalog request intake, validation, approval, fulfillment, and request lifecycle management.
+A ServiceNow scoped application, written with the ServiceNow SDK (Fluent, TypeScript), that turns
+Snowflake requests into an approved, automated and audited lifecycle. Fulfilment is done by AWX
+through a MID Server, using the playbooks in the `snowflake-platform-automation` repository.
 
-The toolkit currently provides a **Generic IT Service Request** catalog item and supporting configuration, server-side utilities, Flow Designer automation, and fulfillment-task synchronization.
+| | |
+|---|---|
+| Application scope | `x_412550_catal` |
+| ServiceNow SDK | `4.14.2` |
+| Development | TypeScript + Fluent, scripts as plain JavaScript (`Now.include`) |
+| Deployment | GitHub Actions (`now-sdk install`) |
 
-## Project status
+## Catalog
 
-- ServiceNow application scope: `x_412550_catal`
-- ServiceNow SDK: `4.14.2`
-- Development approach: TypeScript + ServiceNow Fluent SDK
-- Target instance: ServiceNow Personal Developer Instance (PDI)
-- Current development branch: `feature/catalog-toolkit`
+| Entry | Type | Fulfilled by |
+|---|---|---|
+| Snowflake Warehouse Request | Catalog item | AWX job template "SF - 10 Request Warehouse" (`10_request_warehouse.yml`) |
+| Snowflake Access Request | Catalog item | AWX job template "SF - 11 Request Access" (`11_request_access.yml`) |
+| Snowflake Onboarding | Order guide | Both items; shared answers cascaded |
 
-## Features built
-
-### 1. Catalog configuration
-
-- Custom configuration table for fulfillment settings.
-- Configuration form for managing fulfillment behavior.
-- Active configuration lookup from server-side utilities.
-- Support for automatic assignment to a configured fulfillment group and optional technician.
-
-### 2. Generic IT Service Request catalog item
-
-- Generic IT Service Request catalog item.
-- Requester Information variable set.
-- Catalog variables:
-  - `requester_name`
-  - `contact_number`
-  - `request_type`
-  - `environment`
-  - `business_justification`
-  - `required_date`
-  - `additional_information`
-- Catalog UI policy and client-side validation.
-
-### 3. Server-side validation and utilities
-
-- `CatalogRequestUtils` Script Include.
-- Business-justification validation.
-- Required-date validation.
-- Active fulfillment-configuration lookup.
-- Dynamic catalog-variable collection for the submitted Requested Item.
-- Human-readable `key: value` request details written to the RITM description.
-- Sensitive-variable name filtering for fields matching patterns such as password, secret, token, credential, private key, and API key.
-- Collector includes handling for multi-row variable sets (MRVS); MRVS behavior still requires dedicated instance-level verification.
-
-### 4. Flow Designer automation
-
-- Catalog request fulfillment flow.
-- Request-variable read action.
-- Catalog request validation subflow.
-- Approval using the configured Catalog Toolkit Approvers group.
-- Approved and rejected lifecycle handling.
-- Fulfillment task creation and result logging.
-
-### 5. Fulfillment task management
-
-- Creates a catalog task (`sc_task`) for an approved RITM.
-- Prevents duplicate toolkit fulfillment tasks for the same RITM.
-- Assigns the task to the configured fulfillment group and optional technician.
-- Copies the complete RITM description into the SCTASK description.
-- Synchronizes the RITM lifecycle when the fulfillment task changes state.
-
-### 6. Lifecycle synchronization
-
-- Synchronizes the parent RITM when its catalog task is updated.
-- Supports fulfillment progress and completion lifecycle handling.
-- Includes audit and diagnostic logging in the server-side scripts.
-
-## Important source files
-
-```text
-src/
-├── client/
-│   └── validate-request.js
-├── fluent/
-│   ├── toolkit-config.now.ts
-│   ├── config-form.now.ts
-│   ├── catalog-item.now.ts
-│   ├── catalog-variables.now.ts
-│   ├── catalog-policies.now.ts
-│   ├── catalog-client-scripts.now.ts
-│   ├── catalog-script-includes.now.ts
-│   ├── actions/
-│   │   ├── catalog-request-logging.now.ts
-│   │   ├── read-catalog-request.now.ts
-│   │   ├── create-and-assign-catalog-task.now.ts
-│   │   ├── update-catalog-task.now.ts
-│   │   └── sync-catalog-request-lifecycle.now.ts
-│   ├── flows/
-│   │   ├── catalog-request-validation.now.ts
-│   │   └── catalog-request-fulfillment.now.ts
-│   └── business-rules/
-│       └── sync-ritm-after-catalog-task-update.now.ts
-└── server/
-    ├── script-includes/
-    │   └── catalog-request-utils.js
-    ├── scripts/
-    │   ├── read-catalog-request.js
-    │   ├── create-and-assign-catalog-task.js
-    │   ├── update-catalog-task.js
-    │   └── sync-catalog-request-lifecycle.js
-    └── business-rules/
-        └── sync-ritm-after-catalog-task-update.js
-```
-
-> The tree highlights the main implementation files. Exact generated metadata and supporting project files may vary with the SDK build.
-
-## Request processing flow
-
-1. A requester submits the Generic IT Service Request catalog item.
-2. The fulfillment flow reads the Requested Item and its submitted variables.
-3. `CatalogRequestUtils` dynamically collects readable catalog variables and formats them as plain-text `key: value` details.
-4. The formatted request details are written to the RITM description.
-5. The validation subflow checks the request.
-6. A valid request is sent for approval.
-7. When approved, the fulfillment action creates an SCTASK.
-8. The SCTASK receives the same description as the RITM and is assigned using the active fulfillment configuration.
-9. Task lifecycle updates synchronize the parent RITM.
-
-## Example request description
-
-The collector produces readable plain text rather than a JSON payload:
-
-```text
-========== REQUEST DETAILS ==========
-request_number: REQ...
-requested_item_number: RITM...
-catalog_item: Generic IT Service Request
-
-========== CATALOG VARIABLES ==========
-request_type: Access Request
-requester_name: Example User
-contact_number: 9999999999
-environment: Development
-business_justification: Access is required for development activities.
-required_date: 2026-11-22
-additional_information: Example request details.
-
-========== END REQUEST DETAILS ==========
-```
-
-The values above are illustrative. Actual values come from the submitted catalog request.
-
-## Technology
-
-- ServiceNow Platform
-- ServiceNow Fluent SDK
-- ServiceNow SDK CLI
-- TypeScript
-- JavaScript
-- Flow Designer
-- Service Catalog
-- GlideRecord and ServiceNow server-side APIs
-- pnpm
-- Node.js
-
-## Development and deployment
-
-Run these commands from the project root.
-
-### Install dependencies
-
-```bash
-pnpm install
-```
-
-### Build and type-check
-
-```bash
-pnpm build
-```
-
-### Deploy to the configured ServiceNow instance
-
-```bash
-pnpm exec now-sdk install
-```
-
-The SDK uses the project's `now.config.json` and configured ServiceNow authentication. Do not commit credentials or instance secrets.
-
-### Deploy with GitHub Actions
-
-`.github/workflows/servicenow-app.yml` builds every push and pull request with
-`now-sdk build --frozenKeys` (fails if `src/fluent/generated/keys.ts` is not committed) and deploys with
-`now-sdk install` on a manual run (**Actions → servicenow-app → Run workflow**) or a push to `main`.
-
-Deploy credentials live in the GitHub environment `servicenow-dev`: variables `SN_SDK_INSTANCE_URL` and
-`SN_SDK_AUTH_TYPE` (`basic` or `oauth`), secrets `SN_SDK_USER` / `SN_SDK_USER_PWD` or
-`SN_SDK_OAUTH_CLIENT_ID` / `SN_SDK_OAUTH_CLIENT_SECRET`.
-
-## Verification performed
-
-The following standard-variable fulfillment path was verified on the development PDI:
-
-- Submitted catalog variables were present in the RITM description.
-- The fulfillment action accepted the Requested Item reference after input normalization.
-- Duplicate-task protection returned the existing task rather than creating a duplicate.
-- A fulfillment task was present and assigned to the Help Desk group.
-- RITM stage was `fulfillment`.
-- RITM and SCTASK descriptions were both 523 characters and matched exactly.
-
-The tested records were RITM0010011 and SCTASK0010006.
-
-### Verification limitations
-
-- Standard catalog variables and description copying were verified.
-- MRVS collection is implemented in the collector but has not yet been verified with an actual MRVS submission.
-- Sensitive-variable filtering is based on variable names/labels; broader field-type and masking behavior requires additional verification.
-- The test-only `Request_LifeCycle.js` file is not part of the application source tree and should not be committed unless it is intentionally promoted into a maintained project test asset.
-
-## Configuration notes
-
-The current development configuration uses:
-
-- Application scope: `x_412550_catal`
-- Fulfillment configuration name: `Default IT Fulfillment`
-- Fulfillment assignment group: `Help Desk`
-- Approval group: `Catalog Toolkit Approvers`
-
-Configure equivalent records and groups in any other ServiceNow instance before expecting the fulfillment flow to run there. Sys_ids from a PDI should not be assumed to exist in another instance.
-
-## Repository workflow
-
-The current working branch is:
-
-```bash
-git switch feature/catalog-toolkit
-```
-
-Review changes before committing:
-
-```bash
-git status --short
-git diff
-```
-
-Commit only intended application source files and documentation. Keep local test scripts, credentials, generated secrets, and instance-specific exports out of the repository unless deliberately maintained as project assets.
-
-## Snowflake Warehouse Request (AWX via MID Server)
-
-A second catalog item built on the same toolkit lifecycle. The automation side lives in the
-`snowflake-platform-automation` repository (`snowflake-iac/10_request_warehouse.yml`).
+## Lifecycle
 
 ```text
 Submit -> Validate (SnowflakeRequestUtils policy) -> Approval (Catalog Toolkit Approvers)
-  approved -> RITM approved/fulfillment -> SCTASK "Provision Snowflake warehouse (AWX)"
-           -> Launch AWX Snowflake Job (REST through the MID Server)
+  approved -> RITM approved / fulfillment -> SCTASK ("Provision Snowflake warehouse (AWX)" / "Update Snowflake access (AWX)")
+           -> Launch AWX Snowflake Job (REST through the MID Server, correlation_id awx:<job id>)
            -> AWX: SCTASK Work in Progress -> Closed Complete / Closed Incomplete + work notes
            -> business rule syncs the RITM state and stage from the SCTASK
   rejected -> RITM closed incomplete, no task, no automation
   invalid  -> work note on the RITM, no approval, no automation
 ```
 
-| Piece | File |
+If AWX is not configured or the launch fails, the SCTASK gets a work note and stays open for manual
+fulfilment.
+
+## Source
+
+| Piece | File (`src/…`) |
 |---|---|
-| Catalog item and variables | `src/fluent/snowflake/snowflake-warehouse-item.now.ts` |
-| Client validation | `src/client/validate-snowflake-request.js` |
-| Policy and AWX payload | `src/server/script-includes/snowflake-request-utils.js` |
-| Validate action | `src/fluent/snowflake/actions/validate-snowflake-request.now.ts` |
-| Launch AWX action | `src/fluent/snowflake/actions/launch-awx-job.now.ts` |
-| Fulfillment flow | `src/fluent/snowflake/snowflake-warehouse-fulfillment.now.ts` |
-| Fulfillment configuration record | `src/fluent/snowflake/snowflake-fulfillment-config.now.ts` |
-| AWX system properties | `src/fluent/snowflake/snowflake-properties.now.ts` |
+| Warehouse catalog item | `fluent/snowflake/snowflake-warehouse-item.now.ts` |
+| Access catalog item | `fluent/snowflake/snowflake-access-item.now.ts` |
+| Order guide (guide, rule base, cascaded variable sets) | `fluent/snowflake/snowflake-order-guide.now.ts` |
+| Fulfilment flows | `fluent/snowflake/snowflake-warehouse-fulfillment.now.ts`, `fluent/snowflake/snowflake-access-fulfillment.now.ts` |
+| Validate action (shared) | `fluent/snowflake/actions/validate-snowflake-request.now.ts` + `server/scripts/snowflake/validate-snowflake-request.js` |
+| Launch AWX action (shared) | `fluent/snowflake/actions/launch-awx-job.now.ts` + `server/scripts/snowflake/launch-awx-job.js` |
+| Policy, routing, AWX payloads | `server/script-includes/snowflake-request-utils.js` (`SnowflakeRequestUtils`) |
+| Client validation | `client/validate-snowflake-request.js`, `client/validate-snowflake-access.js` |
+| AWX system properties | `fluent/snowflake/snowflake-properties.now.ts` |
+| Fulfilment configuration record | `fluent/snowflake/snowflake-fulfillment-config.now.ts` |
 
-Reused from the toolkit: `CatalogRequestUtils`, `sync_catalog_request_lifecycle`, `create_and_assign_catalog_task`
-(new optional input `taskShortDescription`; the Generic IT flow is unchanged), `catalog_request_logging` and the
-SCTASK -> RITM business rule.
+**Shared lifecycle components** used by every Snowflake item:
 
-### Instance setup (values are never stored in this repository)
+| Component | File (`src/…`) |
+|---|---|
+| Requester Information variable set | `fluent/catalog-variables.now.ts` |
+| `CatalogRequestUtils` (readable RITM description, sensitive-variable filtering) | `fluent/catalog-script-includes.now.ts` + `server/script-includes/catalog-request-utils.js` |
+| Create and Assign Catalog Task (duplicate protection, assignment from configuration) | `fluent/actions/create-and-assign-catalog-task.now.ts` + `server/scripts/create-and-assign-catalog-task.js` |
+| Synchronize Catalog Request Lifecycle (approved / rejected) | `fluent/actions/sync-catalog-request-lifecycle.now.ts` + `server/scripts/sync-catalog-request-lifecycle.js` |
+| Catalog Request Logging | `fluent/actions/catalog-request-logging.now.ts` |
+| SCTASK → RITM synchronisation business rule | `fluent/business-rules/sync-ritm-after-catalog-task-update.now.ts` + `server/business-rules/…` |
+| Fulfilment configuration table and form | `fluent/toolkit-config.now.ts`, `fluent/config-form.now.ts` |
 
-1. Install and validate a MID Server on the machine that can reach AWX.
+## Request routing
+
+`SnowflakeRequestUtils.REQUEST_TYPES` maps the catalog item name to its request type, policy, AWX
+payload and job-template property. The validate and launch actions are shared, so a new Snowflake
+item needs a new entry there — not new actions.
+
+## Policy (mirrors `snowflake-iac/group_vars/all/request_policy.yml`)
+
+| | Warehouse | Access |
+|---|---|---|
+| Name | `WH_REQ_` + 3–30 of `A–Z 0–9 _` | starts with a letter, 3–41 of `A–Z 0–9 _` |
+| Allowed values | XSMALL / SMALL, auto-suspend 60 / 300 / 600 s, monitor `RM_PLATFORM_DEV` | `PLATFORM_READER` / `PLATFORM_ENGINEER`, grant / revoke, email required to grant |
+| Environment | `dev` only | `dev` only |
+| Justification | ≥ 20 characters | ≥ 20 characters |
+
+Ansible enforces the same rules again and additionally refuses to change any Snowflake user that was
+not created by a request.
+
+## Instance setup (values are never stored in this repository)
+
+1. Install and validate a MID Server on a machine that can reach AWX.
 2. Set the system properties:
-   - `x_412550_catal.awx.base_url` — AWX URL as seen from the MID Server, e.g. `http://localhost:8052`
+   - `x_412550_catal.awx.base_url` — AWX URL as seen from the MID Server
    - `x_412550_catal.awx.token` — AWX OAuth2 token (write scope) of a user that may only execute the Snowflake templates
    - `x_412550_catal.awx.mid_server` — MID Server name
    - `x_412550_catal.awx.snowflake_warehouse_template_id` — id of "SF - 10 Request Warehouse (dev)"
-3. Give the AWX "ServiceNow - PDI" credential a dedicated integration user that can update `sc_task`.
-4. Optional: set a Fulfillment Group on the "Snowflake Platform Fulfillment" configuration and enable Auto Assign.
+   - `x_412550_catal.awx.snowflake_access_template_id` — id of "SF - 11 Request Access (dev)"
+3. Give AWX's "ServiceNow - PDI" credential a dedicated integration user that can update `sc_task`.
+4. Make sure the **Catalog Toolkit Approvers** group exists (the flows reference it).
+5. Optional: set a Fulfillment Group on the "Snowflake Platform Fulfillment" configuration and enable Auto Assign.
 
-Without the properties the flow still creates the SCTASK and adds a work note that manual fulfillment is required.
+## Development and deployment
 
-## Snowflake Access Request and the Snowflake Onboarding order guide
+Run from this folder.
 
-**Snowflake Access Request** grants or removes one standard role (`PLATFORM_READER`, `PLATFORM_ENGINEER`) for one
-person. It uses the same lifecycle as the warehouse request (validate -> approval -> SCTASK -> AWX -> SCTASK closed)
-and is fulfilled by `snowflake-iac/11_request_access.yml`. Admin roles cannot be requested, and AWX refuses to change
-any existing Snowflake user that was not created by a request (admins, service users, AD-synced users).
+```bash
+pnpm install
+pnpm exec now-sdk build               # type-check and build; updates src/fluent/generated/keys.ts
+pnpm exec now-sdk build --frozenKeys  # what CI runs
+```
 
-The validate and launch actions are shared: `SnowflakeRequestUtils.REQUEST_TYPES` maps the catalog item name to its
-policy, AWX payload and job template property.
+Commit `src/fluent/generated/keys.ts` with every change: it fixes the sys_id of every record, so each
+deploy updates existing records instead of creating duplicates. Records removed from the code are
+deleted from the instance on the next deploy.
 
-**Snowflake Onboarding** (order guide) orders both items in one form. Requester information, environment and
-business justification are entered once and cascaded to both items. Each item still gets its own RITM, approval,
-SCTASK and AWX job; the requester can switch either item off before ordering.
+### Deploy with GitHub Actions
 
-| Piece | File |
-|---|---|
-| Access catalog item | `src/fluent/snowflake/snowflake-access-item.now.ts` |
-| Access client validation | `src/client/validate-snowflake-access.js` |
-| Access fulfillment flow | `src/fluent/snowflake/snowflake-access-fulfillment.now.ts` |
-| Order guide (records: guide, rule base, cascaded variable sets) | `src/fluent/snowflake/snowflake-order-guide.now.ts` |
+`.github/workflows/servicenow-app.yml` builds every push and pull request with
+`now-sdk build --frozenKeys` and deploys with `now-sdk install` on a manual run
+(**Actions → servicenow-app → Run workflow**) or a push to `main`.
 
-Extra instance setting: `x_412550_catal.awx.snowflake_access_template_id` = id of "SF - 11 Request Access (dev)".
+Deploy credentials live in the GitHub environment `servicenow-dev`: variables `SN_SDK_INSTANCE_URL` and
+`SN_SDK_AUTH_TYPE` (`basic` or `oauth`), secrets `SN_SDK_USER` / `SN_SDK_USER_PWD` or
+`SN_SDK_OAUTH_CLIENT_ID` / `SN_SDK_OAUTH_CLIENT_SECRET`.
+
+## Verification
+
+- `now-sdk build --frozenKeys` passes; every record is present in the build output.
+- Offline unit tests of `SnowflakeRequestUtils`: warehouse and access policy, routing, and the AWX
+  payload contract (extra-var names match the playbooks).
+- Deployed through GitHub Actions; warehouse request verified on the instance from submit through
+  approval, SCTASK creation and the AWX launch step (safe "AWX is not configured" path).
+- Pending: live AWX launch through the MID Server and AWX closing the SCTASK.

@@ -11,7 +11,7 @@ import { create_and_assign_catalog_task } from '../actions/create-and-assign-cat
 import { catalog_request_logging } from '../actions/catalog-request-logging.now'
 import { sync_catalog_request_lifecycle } from '../actions/sync-catalog-request-lifecycle.now'
 
-// Same "Catalog Toolkit Approvers" group as the Generic IT Service Request flow.
+// "Catalog Toolkit Approvers" group on the developer instance.
 const CATALOG_APPROVER_GROUP = '4e8e3bfd2fec93107e554b707fa4e307'
 
 /**
