@@ -43,3 +43,13 @@ export const awx_warehouse_template_id = Property({
         'Numeric id of the AWX job template "SF - 10 Request Warehouse (dev)".',
     roles: { read: ['admin'], write: ['admin'] },
 })
+
+export const awx_access_template_id = Property({
+    $id: Now.ID['awx_access_template_id_property'],
+    name: 'x_412550_catal.awx.snowflake_access_template_id',
+    type: 'integer',
+    value: 0,
+    description:
+        'Numeric id of the AWX job template "SF - 11 Request Access (dev)".',
+    roles: { read: ['admin'], write: ['admin'] },
+})

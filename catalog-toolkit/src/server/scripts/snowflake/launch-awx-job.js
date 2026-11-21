@@ -40,9 +40,18 @@
             return;
         }
 
+        var requestType = utils.getRequestType(ritm);
+
+        if (!requestType) {
+            outputs.message = 'Catalog item is not a supported Snowflake request. Manual fulfillment required.';
+            noteOnTask(outputs.message);
+            gs.error(prefix + outputs.message);
+            return;
+        }
+
         // Defence in depth: validate again right before execution.
-        var request = utils.readWarehouseRequest(ritm);
-        var validation = utils.validateWarehouseRequest(request);
+        var request = utils.readRequest(ritm, requestType);
+        var validation = utils.validateRequest(request, requestType);
 
         if (!validation.valid) {
             outputs.message = 'Launch blocked by policy: ' + validation.message;
@@ -54,7 +63,7 @@
         var baseUrl = String(gs.getProperty('x_412550_catal.awx.base_url', '')).replace(/\/+$/, '');
         var token = String(gs.getProperty('x_412550_catal.awx.token', ''));
         var midServer = String(gs.getProperty('x_412550_catal.awx.mid_server', ''));
-        var templateId = parseInt(gs.getProperty('x_412550_catal.awx.snowflake_warehouse_template_id', '0'), 10);
+        var templateId = parseInt(gs.getProperty(requestType.templateProperty, '0'), 10);
 
         if (!baseUrl || !token || !(templateId > 0)) {
             outputs.message =
@@ -64,7 +73,7 @@
             return;
         }
 
-        var extraVars = utils.buildAwxExtraVars(request, ritm, task);
+        var extraVars = utils.buildPayload(request, requestType, ritm, task);
 
         var rm = new sn_ws.RESTMessageV2();
         rm.setEndpoint(baseUrl + '/api/v2/job_templates/' + templateId + '/launch/');
@@ -98,8 +107,8 @@
         task.setValue('correlation_id', 'awx:' + jobId);
         task.setValue('correlation_display', 'AWX');
         task.work_notes =
-            'AWX job ' + jobId + ' launched (template ' + templateId + ') for warehouse ' +
-            request.warehouseName + '. AWX will update this task when it finishes.';
+            'AWX job ' + jobId + ' launched (template ' + templateId + ') for ' +
+            utils.describeRequest(request, requestType) + '. AWX will update this task when it finishes.';
         task.update();
 
         outputs.launched = true;

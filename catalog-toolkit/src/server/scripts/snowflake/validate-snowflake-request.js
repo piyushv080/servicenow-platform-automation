@@ -22,11 +22,20 @@
         // Same readable key: value description as the Generic IT flow (copied to the SCTASK later).
         ritm.setValue('description', new CatalogRequestUtils().buildRequestDescription(ritm));
 
-        var request = utils.readWarehouseRequest(ritm);
-        var result = utils.validateWarehouseRequest(request);
+        var requestType = utils.getRequestType(ritm);
+
+        if (!requestType) {
+            outputs.message = 'Catalog item is not a supported Snowflake request.';
+            gs.error(prefix + outputs.message + ' RITM: ' + ritm.getValue('number'));
+            return;
+        }
+
+        var request = utils.readRequest(ritm, requestType);
+        var result = utils.validateRequest(request, requestType);
 
         outputs.valid = result.valid;
-        outputs.warehouse_name = request.warehouseName;
+        // Output keeps its original name for compatibility; it holds the request subject label.
+        outputs.warehouse_name = utils.describeRequest(request, requestType);
         outputs.message = result.message;
 
         if (!result.valid) {

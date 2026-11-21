@@ -5,9 +5,81 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    access_create_snowflake_catalog_task: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '3960b87301d3487c8ca4aa21b14ee94e'
+                    }
+                    access_launch_snowflake_awx_job: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'c1737ef4bdad4d8db90b7cfa8ce02af0'
+                    }
+                    access_log_snowflake_awx_launch: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '1141be8bf6f14e83a46ff8a19bf850bb'
+                    }
+                    access_log_snowflake_rejection: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '6b6239b2318248b9b2681d7ba05c2fc2'
+                    }
+                    access_log_snowflake_task_failure: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '9612e88164c04799afc424798a2c9782'
+                    }
+                    access_log_snowflake_validation_failure: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '01db39e8f98a49c0ad9c695354bb0803'
+                    }
                     access_request_details_policy: {
                         table: 'catalog_ui_policy'
                         id: '228acba5c19446599b92f79cb989886d'
+                    }
+                    access_snowflake_catalog_trigger: {
+                        table: 'sys_hub_trigger_instance_v2'
+                        id: 'b7a99599aa0748c485df99945aba2246'
+                    }
+                    access_snowflake_fulfillment: {
+                        table: 'sys_hub_flow'
+                        id: '6d5ae538f1e7495a80795818b85ac033'
+                    }
+                    access_snowflake_request_approval: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'e8133c927d494008abcdf032ba5a9324'
+                    }
+                    access_snowflake_request_approved: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: 'c1a45bc00fd64fe29dc386caf60f5d8a'
+                    }
+                    access_snowflake_request_invalid: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '11080158f42648e4a949dfc45d5de68b'
+                    }
+                    access_snowflake_request_is_valid: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: 'fa6801685ee34da18a1b11081d3ba0d7'
+                    }
+                    access_snowflake_request_not_approved: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: 'd4fe5a19f2014145ad0d96504a6ccf8f'
+                    }
+                    access_snowflake_task_created: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '5872d7a106e14e99ae949b9a6ca6ea3d'
+                    }
+                    access_snowflake_task_not_created: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '558e3d4014194f049393c8445041525a'
+                    }
+                    access_sync_snowflake_approved_lifecycle: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'c0dcf76f5fcb4ca381c1ace93e0edf25'
+                    }
+                    access_sync_snowflake_rejected_lifecycle: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '29806a99c6e84fd7ac5cca3f68c8190b'
+                    }
+                    access_validate_snowflake_request: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'bb65963d831d43218aceb663a4181b89'
                     }
                     assign_catalog_task: {
                         table: 'sys_hub_action_type_definition'
@@ -26,6 +98,10 @@ declare global {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '950b5439a1b5465496d463b90f3639f9'
                         deleted: true
+                    }
+                    awx_access_template_id_property: {
+                        table: 'sys_properties'
+                        id: 'c7253db7dc1a4c6193259d5a40d05a0f'
                     }
                     awx_base_url_property: {
                         table: 'sys_properties'
@@ -266,9 +342,33 @@ declare global {
                         table: 'item_option_new_set'
                         id: '10a720b0e72848c8a10d2783cc7938b3'
                     }
+                    snowflake_access_request: {
+                        table: 'sc_cat_item'
+                        id: '2b43219683be434d8ec9d41c2414a681'
+                    }
+                    snowflake_access_validation: {
+                        table: 'catalog_script_client'
+                        id: 'c1e8c2e42f264d1ca1ecf9415d15407a'
+                    }
                     snowflake_fulfillment_config: {
                         table: 'x_412550_catal_config'
                         id: 'ea063b64809a40d281f022205894abaf'
+                    }
+                    snowflake_onboarding_context: {
+                        table: 'item_option_new_set'
+                        id: '58bba01e9a9c43f68e13aecd5066168b'
+                    }
+                    snowflake_onboarding_guide: {
+                        table: 'sc_cat_item_guide'
+                        id: 'f9d486d5b7a24b5f961639a19a27cae7'
+                    }
+                    snowflake_onboarding_rule_access: {
+                        table: 'sc_cat_item_guide_items'
+                        id: 'ba20546367704d2c99fdf18efd72bcff'
+                    }
+                    snowflake_onboarding_rule_warehouse: {
+                        table: 'sc_cat_item_guide_items'
+                        id: '3f2fca31b4b04ae496aa2ac06474e51b'
                     }
                     snowflake_request_approval: {
                         table: 'sys_hub_action_instance_v2'
@@ -498,6 +598,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: '04e16b23d6cf4391a1584e23d1499e7c'
+                        key: {
+                            cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            variable_set: 'NULL'
+                            name: 'business_justification'
+                        }
+                    },
+                    {
                         table: 'sys_hub_step_ext_input'
                         id: '0586b39d34504fbdb9b9d363037ea5dc'
                         key: {
@@ -551,6 +660,15 @@ declare global {
                         key: {
                             model: '6c399e42a5fa44b983ce73f7091a030f'
                             element: 'request_item_id'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '088e850395d34beb8b313bd232e87d3c'
+                        key: {
+                            cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            variable_set: 'NULL'
+                            name: 'access_action'
                         }
                     },
                     {
@@ -836,6 +954,21 @@ declare global {
                             id: '4965ceb0f53343b39564b7044321b2a3'
                             table: 'var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1'
                             field: 'log_message'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '1bbb08de3f9642a8847a8d9192896980'
+                        key: {
+                            question: {
+                                id: 'ecd289d8b8434dd7a7c332465d491d81'
+                                key: {
+                                    cat_item: '2b43219683be434d8ec9d41c2414a681'
+                                    variable_set: 'NULL'
+                                    name: 'access_role'
+                                }
+                            }
+                            value: 'PLATFORM_READER'
                         }
                     },
                     {
@@ -1135,12 +1268,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'io_set_item'
+                        id: '3444cc1eb60a47f89c318b36685f15ae'
+                        key: {
+                            sc_cat_item: 'f9d486d5b7a24b5f961639a19a27cae7'
+                            variable_set: '10a720b0e72848c8a10d2783cc7938b3'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: '356c1695ec094aa18cfebfebd6f43727'
                         key: {
                             id: '846bedc96ac1404ca575e9caf1147300'
                             table: 'var__m_sys_hub_action_output_846bedc96ac1404ca575e9caf1147300'
                             field: 'taskId'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_category'
+                        id: '364d9431a8954e978f637f6729821571'
+                        key: {
+                            sc_cat_item: 'f9d486d5b7a24b5f961639a19a27cae7'
+                            sc_category: '109f0438c6112276003ae8ac13e7009d'
                         }
                     },
                     {
@@ -1321,6 +1470,30 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: '4566b8db95144ea3beaea52186b77057'
+                        key: {
+                            cat_item: 'NULL'
+                            variable_set: '58bba01e9a9c43f68e13aecd5066168b'
+                            name: 'environment'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '46fcac40bb0c4686a02150efd5c3d799'
+                        key: {
+                            question: {
+                                id: '088e850395d34beb8b313bd232e87d3c'
+                                key: {
+                                    cat_item: '2b43219683be434d8ec9d41c2414a681'
+                                    variable_set: 'NULL'
+                                    name: 'access_action'
+                                }
+                            }
+                            value: 'revoke'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: '483ea54ddc46425d9040b043f69cd668'
                         key: {
@@ -1369,6 +1542,21 @@ declare global {
                             id: '5e464c59519d4bb983b4823259cff23e'
                             table: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             field: 'environment'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '49e4ad294b2b4ae5bd9eb131a6faba3b'
+                        key: {
+                            question: {
+                                id: '088e850395d34beb8b313bd232e87d3c'
+                                key: {
+                                    cat_item: '2b43219683be434d8ec9d41c2414a681'
+                                    variable_set: 'NULL'
+                                    name: 'access_action'
+                                }
+                            }
+                            value: 'grant'
                         }
                     },
                     {
@@ -1481,6 +1669,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: '53ac1266546c4ca5a21513d46cc13c7f'
+                        key: {
+                            cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            variable_set: 'NULL'
+                            name: 'user_display_name'
+                        }
+                    },
+                    {
                         table: 'sys_hub_step_ext_output'
                         id: '551b136546c44326b7ac440d8fced9e9'
                         key: {
@@ -1494,6 +1691,21 @@ declare global {
                         key: {
                             name: 'x_412550_catal_config'
                             element: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '55fd1db7fd9d4993ac28240fb8f21fcf'
+                        key: {
+                            question: {
+                                id: 'baa57f80b4f64270b82aa10c4efb00df'
+                                key: {
+                                    cat_item: '2b43219683be434d8ec9d41c2414a681'
+                                    variable_set: 'NULL'
+                                    name: 'environment'
+                                }
+                            }
+                            value: 'dev'
                         }
                     },
                     {
@@ -1527,6 +1739,14 @@ declare global {
                         key: {
                             model: '754e1ddbcff34bb1baf8354cb75d3f79'
                             element: 'warehouse_name'
+                        }
+                    },
+                    {
+                        table: 'io_set_item'
+                        id: '5bb6b127b2824970b6313376d7f8c66c'
+                        key: {
+                            sc_cat_item: 'f9d486d5b7a24b5f961639a19a27cae7'
+                            variable_set: '58bba01e9a9c43f68e13aecd5066168b'
                         }
                     },
                     {
@@ -2136,6 +2356,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: '85d9c00cff564cc092fb8710d0b88dcf'
+                        key: {
+                            cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            variable_set: 'NULL'
+                            name: 'snowflake_username'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: '892f275b49714d23ba01f0c704b9da09'
                         key: {
@@ -2221,6 +2450,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sc_cat_item_category'
+                        id: '92023408f214410892dbfdeacf93c394'
+                        key: {
+                            sc_cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            sc_category: '109f0438c6112276003ae8ac13e7009d'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: '927e324aadbc411a8224f0ab2cb7b1b5'
                         key: {
@@ -2243,6 +2480,15 @@ declare global {
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
                             element: 'found'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '961f13fbe6204075b40eda2a3a043a42'
+                        key: {
+                            cat_item: 'NULL'
+                            variable_set: '58bba01e9a9c43f68e13aecd5066168b'
+                            name: 'business_justification'
                         }
                     },
                     {
@@ -2530,6 +2776,29 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: 'aa162144a7714315a566fd4125706391'
+                        key: {
+                            question: {
+                                id: '4566b8db95144ea3beaea52186b77057'
+                                key: {
+                                    cat_item: 'NULL'
+                                    variable_set: '58bba01e9a9c43f68e13aecd5066168b'
+                                    name: 'environment'
+                                }
+                            }
+                            value: 'dev'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_catalog'
+                        id: 'aa721987102a4add924bcf4e1ef1a165'
+                        key: {
+                            sc_cat_item: 'f9d486d5b7a24b5f961639a19a27cae7'
+                            sc_catalog: 'e0d08b13c3330100c8b837659bba8fb4'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_output'
                         id: 'aabaa5e283804d5095d61af4be81c10e'
                         key: {
@@ -2643,6 +2912,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'io_set_item'
+                        id: 'b68f8e972dd649cda201c592a7f917c3'
+                        key: {
+                            sc_cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            variable_set: '10a720b0e72848c8a10d2783cc7938b3'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: 'b72a048cd3f843dca177db100b38c540'
                         key: {
@@ -2691,6 +2968,15 @@ declare global {
                         key: {
                             model: 'c5e1323322b647e2b7a4b034577958b7'
                             element: '__action_status__'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'baa57f80b4f64270b82aa10c4efb00df'
+                        key: {
+                            cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            variable_set: 'NULL'
+                            name: 'environment'
                         }
                     },
                     {
@@ -2757,6 +3043,15 @@ declare global {
                                 }
                             }
                             value: 'SMALL'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'c0402cdf84b44d48b13ebca8bed3d5cf'
+                        key: {
+                            cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            variable_set: 'NULL'
+                            name: 'user_email'
                         }
                     },
                     {
@@ -3049,6 +3344,21 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: 'd49b33c728f349819eaa5eac77d51674'
+                        key: {
+                            question: {
+                                id: 'ecd289d8b8434dd7a7c332465d491d81'
+                                key: {
+                                    cat_item: '2b43219683be434d8ec9d41c2414a681'
+                                    variable_set: 'NULL'
+                                    name: 'access_role'
+                                }
+                            }
+                            value: 'PLATFORM_ENGINEER'
+                        }
+                    },
+                    {
                         table: 'sys_variable_value'
                         id: 'd55e4e64f240460090d4275603225ba9'
                         key: {
@@ -3292,6 +3602,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sc_cat_item_catalog'
+                        id: 'e972afe90079407cb6063472104bbe57'
+                        key: {
+                            sc_cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            sc_catalog: 'e0d08b13c3330100c8b837659bba8fb4'
+                        }
+                    },
+                    {
                         table: 'sys_hub_step_ext_input'
                         id: 'eb3edaa685764bf28be039a24d3e659b'
                         key: {
@@ -3333,6 +3651,15 @@ declare global {
                             name: 'x_412550_catal_config'
                             element: 'fulfillment_group'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'ecd289d8b8434dd7a7c332465d491d81'
+                        key: {
+                            cat_item: '2b43219683be434d8ec9d41c2414a681'
+                            variable_set: 'NULL'
+                            name: 'access_role'
                         }
                     },
                     {

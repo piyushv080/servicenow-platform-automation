@@ -34,7 +34,7 @@ export const snowflake_warehouse_request = CatalogItem({
     variableSets: [
         {
             variableSet: requester_information,
-            order: 100,
+            order: 50, // show requester details before the warehouse fields
         },
     ],
 

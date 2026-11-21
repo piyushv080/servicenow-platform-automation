@@ -271,3 +271,26 @@ SCTASK -> RITM business rule.
 4. Optional: set a Fulfillment Group on the "Snowflake Platform Fulfillment" configuration and enable Auto Assign.
 
 Without the properties the flow still creates the SCTASK and adds a work note that manual fulfillment is required.
+
+## Snowflake Access Request and the Snowflake Onboarding order guide
+
+**Snowflake Access Request** grants or removes one standard role (`PLATFORM_READER`, `PLATFORM_ENGINEER`) for one
+person. It uses the same lifecycle as the warehouse request (validate -> approval -> SCTASK -> AWX -> SCTASK closed)
+and is fulfilled by `snowflake-iac/11_request_access.yml`. Admin roles cannot be requested, and AWX refuses to change
+any existing Snowflake user that was not created by a request (admins, service users, AD-synced users).
+
+The validate and launch actions are shared: `SnowflakeRequestUtils.REQUEST_TYPES` maps the catalog item name to its
+policy, AWX payload and job template property.
+
+**Snowflake Onboarding** (order guide) orders both items in one form. Requester information, environment and
+business justification are entered once and cascaded to both items. Each item still gets its own RITM, approval,
+SCTASK and AWX job; the requester can switch either item off before ordering.
+
+| Piece | File |
+|---|---|
+| Access catalog item | `src/fluent/snowflake/snowflake-access-item.now.ts` |
+| Access client validation | `src/client/validate-snowflake-access.js` |
+| Access fulfillment flow | `src/fluent/snowflake/snowflake-access-fulfillment.now.ts` |
+| Order guide (records: guide, rule base, cascaded variable sets) | `src/fluent/snowflake/snowflake-order-guide.now.ts` |
+
+Extra instance setting: `x_412550_catal.awx.snowflake_access_template_id` = id of "SF - 11 Request Access (dev)".
