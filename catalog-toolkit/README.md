@@ -228,3 +228,46 @@ git diff
 ```
 
 Commit only intended application source files and documentation. Keep local test scripts, credentials, generated secrets, and instance-specific exports out of the repository unless deliberately maintained as project assets.
+
+## Snowflake Warehouse Request (AWX via MID Server)
+
+A second catalog item built on the same toolkit lifecycle. The automation side lives in the
+`snowflake-platform-automation` repository (`snowflake-iac/10_request_warehouse.yml`).
+
+```text
+Submit -> Validate (SnowflakeRequestUtils policy) -> Approval (Catalog Toolkit Approvers)
+  approved -> RITM approved/fulfillment -> SCTASK "Provision Snowflake warehouse (AWX)"
+           -> Launch AWX Snowflake Job (REST through the MID Server)
+           -> AWX: SCTASK Work in Progress -> Closed Complete / Closed Incomplete + work notes
+           -> business rule syncs the RITM state and stage from the SCTASK
+  rejected -> RITM closed incomplete, no task, no automation
+  invalid  -> work note on the RITM, no approval, no automation
+```
+
+| Piece | File |
+|---|---|
+| Catalog item and variables | `src/fluent/snowflake/snowflake-warehouse-item.now.ts` |
+| Client validation | `src/client/validate-snowflake-request.js` |
+| Policy and AWX payload | `src/server/script-includes/snowflake-request-utils.js` |
+| Validate action | `src/fluent/snowflake/actions/validate-snowflake-request.now.ts` |
+| Launch AWX action | `src/fluent/snowflake/actions/launch-awx-job.now.ts` |
+| Fulfillment flow | `src/fluent/snowflake/snowflake-warehouse-fulfillment.now.ts` |
+| Fulfillment configuration record | `src/fluent/snowflake/snowflake-fulfillment-config.now.ts` |
+| AWX system properties | `src/fluent/snowflake/snowflake-properties.now.ts` |
+
+Reused from the toolkit: `CatalogRequestUtils`, `sync_catalog_request_lifecycle`, `create_and_assign_catalog_task`
+(new optional input `taskShortDescription`; the Generic IT flow is unchanged), `catalog_request_logging` and the
+SCTASK -> RITM business rule.
+
+### Instance setup (values are never stored in this repository)
+
+1. Install and validate a MID Server on the machine that can reach AWX.
+2. Set the system properties:
+   - `x_412550_catal.awx.base_url` — AWX URL as seen from the MID Server, e.g. `http://localhost:8052`
+   - `x_412550_catal.awx.token` — AWX OAuth2 token (write scope) of a user that may only execute the Snowflake templates
+   - `x_412550_catal.awx.mid_server` — MID Server name
+   - `x_412550_catal.awx.snowflake_warehouse_template_id` — id of "SF - 10 Request Warehouse (dev)"
+3. Give the AWX "ServiceNow - PDI" credential a dedicated integration user that can update `sc_task`.
+4. Optional: set a Fulfillment Group on the "Snowflake Platform Fulfillment" configuration and enable Auto Assign.
+
+Without the properties the flow still creates the SCTASK and adds a work note that manual fulfillment is required.

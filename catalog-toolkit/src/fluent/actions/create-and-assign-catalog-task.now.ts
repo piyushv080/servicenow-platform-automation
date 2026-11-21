@@ -27,6 +27,10 @@ export const create_and_assign_catalog_task = Action(
                 label: 'Configuration Name',
                 mandatory: true,
             }),
+            taskShortDescription: StringColumn({
+                label: 'Task Short Description',
+                mandatory: false,
+            }),
         },
 
         outputs: {
@@ -69,6 +73,13 @@ export const create_and_assign_catalog_task = Action(
                         label: 'Configuration Name',
                         value: wfa.dataPill(
                             params.inputs.configurationName,
+                            'string',
+                        ),
+                    },
+                    task_short_description: {
+                        label: 'Task Short Description',
+                        value: wfa.dataPill(
+                            params.inputs.taskShortDescription,
                             'string',
                         ),
                     },

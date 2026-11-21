@@ -27,6 +27,22 @@ declare global {
                         id: '950b5439a1b5465496d463b90f3639f9'
                         deleted: true
                     }
+                    awx_base_url_property: {
+                        table: 'sys_properties'
+                        id: 'bb40b343fe144ed5a1dd039f30002907'
+                    }
+                    awx_mid_server_property: {
+                        table: 'sys_properties'
+                        id: '71bd069dbe0347e3bae7137bc6f4e0bd'
+                    }
+                    awx_token_property: {
+                        table: 'sys_properties'
+                        id: '4ef59cd33b6f4a62968ef91739064c99'
+                    }
+                    awx_warehouse_template_id_property: {
+                        table: 'sys_properties'
+                        id: 'e47608d42f044162b27ef7df4f3634c9'
+                    }
                     bom_json: {
                         table: 'sys_module'
                         id: '7b94ae1e78834f05b9ee270705a084da'
@@ -101,6 +117,10 @@ declare global {
                         id: '01387dd80ad4457e9015a4503e33754c'
                         deleted: true
                     }
+                    create_snowflake_catalog_task: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '713be2101c4e4fcbb39c004caef9048b'
+                    }
                     cs0: {
                         table: 'sys_script_client'
                         id: '1f86da27f68c414e99e8f986e74169b3'
@@ -127,6 +147,18 @@ declare global {
                     generic_request_validation: {
                         table: 'catalog_script_client'
                         id: '61b676ac7aac4ee09718fe74aeb056f7'
+                    }
+                    launch_awx_job: {
+                        table: 'sys_hub_action_type_definition'
+                        id: 'a5527048ebde44e7aaeaa65e330d2baa'
+                    }
+                    launch_awx_job_script: {
+                        table: 'sys_hub_step_instance'
+                        id: 'a2b090027b094f189d914abe81bf3e98'
+                    }
+                    launch_snowflake_awx_job: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'bf01d00f6b5640a68ce30fec3bea2a66'
                     }
                     log_approval_rejection: {
                         table: 'sys_hub_action_instance_v2'
@@ -164,6 +196,22 @@ declare global {
                         table: 'sys_hub_action_instance_v2'
                         id: '6dc81256c89f4596a7e68b9c50e50dd5'
                         deleted: true
+                    }
+                    log_snowflake_awx_launch: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '2d51894ea4ad4051b6bb9e9421f22813'
+                    }
+                    log_snowflake_rejection: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '50704e8041f944c4bd43594988a9bfd5'
+                    }
+                    log_snowflake_task_failure: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '4c1164fc706d4ef4a056a0a137324c93'
+                    }
+                    log_snowflake_validation_failure: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'e0d82bc5f641475496ef56f272922b4a'
                     }
                     log_validation_failure: {
                         table: 'sys_hub_action_instance_v2'
@@ -218,6 +266,58 @@ declare global {
                         table: 'item_option_new_set'
                         id: '10a720b0e72848c8a10d2783cc7938b3'
                     }
+                    snowflake_fulfillment_config: {
+                        table: 'x_412550_catal_config'
+                        id: 'ea063b64809a40d281f022205894abaf'
+                    }
+                    snowflake_request_approval: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'e2f605d5d1e5437a83f0efeb929d3b5c'
+                    }
+                    snowflake_request_approved: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '838dc4ce0c7946e591f17b1484bff1e2'
+                    }
+                    snowflake_request_invalid: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '178feefe2c5742758152be406dad22c7'
+                    }
+                    snowflake_request_is_valid: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '58054250dc4741fb8adafe395e8da716'
+                    }
+                    snowflake_request_not_approved: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: 'fc1faccd0956431fbd94677b759fb000'
+                    }
+                    snowflake_request_validation: {
+                        table: 'catalog_script_client'
+                        id: '24aa31fdec1b4fd5929ab1ec7d947979'
+                    }
+                    snowflake_task_created: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '2194514038974ff6ad4180324ba334eb'
+                    }
+                    snowflake_task_not_created: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '6d8a6354f82d4d3dae5d394cf8f06848'
+                    }
+                    snowflake_warehouse_catalog_trigger: {
+                        table: 'sys_hub_trigger_instance_v2'
+                        id: 'b2c44de574c1453993fca74064106549'
+                    }
+                    snowflake_warehouse_fulfillment: {
+                        table: 'sys_hub_flow'
+                        id: '03a2b00954e14cca9f79e1663ecbdcbd'
+                    }
+                    snowflake_warehouse_request: {
+                        table: 'sc_cat_item'
+                        id: '7fff5c8050a84ae08ece2beef289932a'
+                    }
+                    SnowflakeRequestUtils: {
+                        table: 'sys_script_include'
+                        id: '2599b584eb4f4d7c885a209edec6f137'
+                    }
                     'src_server_business-rules_sync-ritm-after-catalog-task-update_js': {
                         table: 'sys_module'
                         id: '35aabc48ecea441f932c14b9c7d19d93'
@@ -229,6 +329,10 @@ declare global {
                     'src_server_script-includes_catalog-request-utils_js': {
                         table: 'sys_module'
                         id: '8964153184bb4355b24c469fd5320fda'
+                    }
+                    'src_server_script-includes_snowflake-request-utils_js': {
+                        table: 'sys_module'
+                        id: '3d866c42124142cfbbd773544f2723f8'
                     }
                     'src_server_scripts_assign-catalog-task_js': {
                         table: 'sys_module'
@@ -245,6 +349,14 @@ declare global {
                     'src_server_scripts_read-fulfillment-config_js': {
                         table: 'sys_module'
                         id: '1f44b38b2d83467e816e88f85a050ef9'
+                    }
+                    'src_server_scripts_snowflake_launch-awx-job_js': {
+                        table: 'sys_module'
+                        id: '1f01b5a68299426895c85bb65f142cc5'
+                    }
+                    'src_server_scripts_snowflake_validate-snowflake-request_js': {
+                        table: 'sys_module'
+                        id: '9284af0b501f4240ac445f611f7d7fe5'
                     }
                     'src_server_scripts_sync-catalog-request-lifecycle_js': {
                         table: 'sys_module'
@@ -274,6 +386,14 @@ declare global {
                         table: 'sys_script'
                         id: 'c347275683f744f78dd129e9ac87af80'
                     }
+                    sync_snowflake_approved_lifecycle: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '328fb7c3289d4a2bb7861a8f005c2dfc'
+                    }
+                    sync_snowflake_rejected_lifecycle: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '2013a357e1fd406884a623a75187e58e'
+                    }
                     task_assignment_failed: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '15159c80e6cc40fdb9e1d2a3a222bb8d'
@@ -295,6 +415,18 @@ declare global {
                     validate_catalog_request: {
                         table: 'sys_hub_sub_flow_instance_v2'
                         id: 'ffa07f5c4e804ab98623e7ee4c40a965'
+                    }
+                    validate_snowflake_request: {
+                        table: 'sys_hub_action_type_definition'
+                        id: 'c5e1323322b647e2b7a4b034577958b7'
+                    }
+                    validate_snowflake_request_script: {
+                        table: 'sys_hub_step_instance'
+                        id: '754e1ddbcff34bb1baf8354cb75d3f79'
+                    }
+                    validate_snowflake_warehouse_request: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '0e7aff973e594b43a46a278e0cccc802'
                     }
                 }
                 composite: [
@@ -390,6 +522,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: '05e91017437d4b1fa35d3ce2de181b50'
+                        key: {
+                            model: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            element: '__action_status__'
+                        }
+                    },
+                    {
                         table: 'sys_hub_flow_input'
                         id: '06bfc18bb6764c86a85ed3b0f9433b64'
                         key: {
@@ -465,6 +605,23 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: '0e48f6cd134a4b559308729c2c352701'
+                        key: {
+                            model: 'c5e1323322b647e2b7a4b034577958b7'
+                            element: 'warehouseName'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '0f021f2b3841427c878c6b7e9088722f'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'launched'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '10700983268c4f8daa1feb073e540c44'
                         key: {
@@ -527,11 +684,27 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_step_ext_output'
+                        id: '11ac775fb8854b4c9b8739cde435523a'
+                        key: {
+                            model: 'a2b090027b094f189d914abe81bf3e98'
+                            element: 'message'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '1324c6f4fa6b40789e33740be75c7ab4'
                         key: {
                             name: 'x_412550_catal_config'
                             element: 'assigned_technician'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: '139bc9b4985e4bda9dd413bfda0a1143'
+                        key: {
+                            model: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'jobId'
                         }
                     },
                     {
@@ -568,10 +741,33 @@ declare global {
                     },
                     {
                         table: 'sys_hub_action_output'
+                        id: '16239b7b7c9b4a9692373133bfe2b38e'
+                        key: {
+                            model: 'c5e1323322b647e2b7a4b034577958b7'
+                            element: 'found'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
                         id: '174f2aafcf2742939554a1324f882cc7'
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'businessJustification'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '1797ba45e95e4d7ebab62f3d71942fe7'
+                        key: {
+                            question: {
+                                id: '71d60310c3434121a6eec665322027a6'
+                                key: {
+                                    cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                                    variable_set: 'NULL'
+                                    name: 'warehouse_size'
+                                }
+                            }
+                            value: 'XSMALL'
                         }
                     },
                     {
@@ -599,6 +795,23 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_input'
+                        id: '197d47fccbbe466784a1c751b17d7fa6'
+                        key: {
+                            model: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'taskId'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '1991e23ee3e1476396f461bde6f9f8f4'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'jobId'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '19ac5ee669ef48dab9d5a84b69922116'
                         key: {
@@ -623,6 +836,15 @@ declare global {
                             id: '4965ceb0f53343b39564b7044321b2a3'
                             table: 'var__m_sys_flow_step_definition_input_a03fea9bc712220061f553c6f09763b1'
                             field: 'log_message'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '1c1f11d35ee54931b43a5a66beaa6e85'
+                        key: {
+                            name: 'var__m_sys_hub_action_input_c5e1323322b647e2b7a4b034577958b7'
+                            element: 'requestItemId'
+                            language: 'en'
                         }
                     },
                     {
@@ -784,6 +1006,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_element_mapping'
+                        id: '2922c639aef04ee3b6696be27262aeed'
+                        key: {
+                            id: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            table: 'var__m_sys_hub_action_output_a5527048ebde44e7aaeaa65e330d2baa'
+                            field: 'launched'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_output'
                         id: '29acf439b9724db0b0acb0a8e5750b31'
                         key: {
@@ -896,6 +1127,15 @@ declare global {
                     },
                     {
                         table: 'sys_element_mapping'
+                        id: '34307bf7052548df9cc4a6257a9a509d'
+                        key: {
+                            id: 'c5e1323322b647e2b7a4b034577958b7'
+                            table: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            field: 'found'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
                         id: '356c1695ec094aa18cfebfebd6f43727'
                         key: {
                             id: '846bedc96ac1404ca575e9caf1147300'
@@ -930,10 +1170,27 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '386267572c12482fbada2b71909dca8f'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            element: 'valid'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_hub_step_ext_output'
                         id: '3913febd44834dd5b4f9e07810d9f079'
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
+                            element: 'message'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: '39480fe937bd40699fbbe05118998299'
+                        key: {
+                            model: 'c5e1323322b647e2b7a4b034577958b7'
                             element: 'message'
                         }
                     },
@@ -955,6 +1212,23 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: '3e50b8c3dbcf4d7385f9081cced8346a'
+                        key: {
+                            model: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'message'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '3ee873f50e89437cbba4248021b85e0a'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_a5527048ebde44e7aaeaa65e330d2baa'
+                            element: '__dont_treat_as_error__'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '3fc4ba6472794a328b1f5115bf9bbc33'
                         key: {
@@ -973,6 +1247,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_element_mapping'
+                        id: '4263a2dad4e5475795c9404df29e8cb4'
+                        key: {
+                            id: '754e1ddbcff34bb1baf8354cb75d3f79'
+                            table: 'var__m_sys_hub_step_ext_input_754e1ddbcff34bb1baf8354cb75d3f79'
+                            field: 'request_item_id'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_output'
                         id: '428172b43fa7413d8ee7314562ad9056'
                         key: {
@@ -987,6 +1270,14 @@ declare global {
                             name: 'var__m_sys_hub_action_output_b26a1494969c4bbcb87eaa053808313d'
                             element: 'approval'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_output'
+                        id: '43dad693d99a4af89c6322df4762e8ce'
+                        key: {
+                            model: 'a2b090027b094f189d914abe81bf3e98'
+                            element: 'job_id'
                         }
                     },
                     {
@@ -1039,12 +1330,36 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: '488f2008d98a4763a29a91bc70970473'
+                        key: {
+                            question: {
+                                id: '756df8cbb910495ba9dce9430526dacd'
+                                key: {
+                                    cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                                    variable_set: 'NULL'
+                                    name: 'auto_suspend_seconds'
+                                }
+                            }
+                            value: '300'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '49896b2d7e2046dd80572e360548353a'
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
                             element: 'requestType'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '499d8087dbae494c91dcde6ab8362421'
+                        key: {
+                            cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                            variable_set: 'NULL'
+                            name: 'environment'
                         }
                     },
                     {
@@ -1065,6 +1380,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: '4bce38ad897840fd838792375fde9533'
+                        key: {
+                            model: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'launched'
+                        }
+                    },
+                    {
                         table: 'sys_hub_step_ext_input'
                         id: '4c03cbb6eaca446187db22b76bc46ec9'
                         key: {
@@ -1078,6 +1401,15 @@ declare global {
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: '__dont_treat_as_error__'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '4dcbc3b1bdc04590a542cb5ab16aa530'
+                        key: {
+                            id: 'a2b090027b094f189d914abe81bf3e98'
+                            table: 'var__m_sys_hub_step_ext_input_a2b090027b094f189d914abe81bf3e98'
+                            field: 'task_id'
                         }
                     },
                     {
@@ -1096,6 +1428,14 @@ declare global {
                             name: 'var__m_sys_hub_action_output_846bedc96ac1404ca575e9caf1147300'
                             element: 'taskNumber'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_output'
+                        id: '4f669f3429b24d3e87560a9c7d4abdc5'
+                        key: {
+                            model: '754e1ddbcff34bb1baf8354cb75d3f79'
+                            element: 'message'
                         }
                     },
                     {
@@ -1129,6 +1469,15 @@ declare global {
                             cat_item: 'NULL'
                             variable_set: '10a720b0e72848c8a10d2783cc7938b3'
                             name: 'requester_name'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '53854c282265432aba1c2892fe75f27c'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'message'
+                            language: 'en'
                         }
                     },
                     {
@@ -1173,12 +1522,54 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_step_ext_output'
+                        id: '59903f09decb4d44845bf6b3098b8966'
+                        key: {
+                            model: '754e1ddbcff34bb1baf8354cb75d3f79'
+                            element: 'warehouse_name'
+                        }
+                    },
+                    {
                         table: 'sc_cat_item_category'
                         id: '5c691878e24f4521a76b81432e7f348a'
                         deleted: true
                         key: {
                             sc_cat_item: 'a676a847b4e84741afc14fe6f675bfbd'
                             sc_category: '803e95e1c3732100fca206e939ba8f2a'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '5ca11c2b129644a994832f7cfd7ec1c7'
+                        key: {
+                            cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                            variable_set: 'NULL'
+                            name: 'resource_monitor'
+                        }
+                    },
+                    {
+                        table: 'sys_variable_value'
+                        id: '5d2c80f2caa3470ba2333c733eeb0d4a'
+                        key: {
+                            document_key: '754e1ddbcff34bb1baf8354cb75d3f79'
+                            variable: '74315b04b3201300176b051a16a8dc2b'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '5d719ebdd2c24e13848107e4dbfc3007'
+                        key: {
+                            id: 'c5e1323322b647e2b7a4b034577958b7'
+                            table: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            field: 'valid'
+                        }
+                    },
+                    {
+                        table: 'sys_variable_value'
+                        id: '5ddb187949664e1baa48900d9d488cc8'
+                        key: {
+                            document_key: '754e1ddbcff34bb1baf8354cb75d3f79'
+                            variable: '71aa7f6647032200b4fad7527c9a719b'
                         }
                     },
                     {
@@ -1308,6 +1699,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sc_cat_item_catalog'
+                        id: '651d35a457f842618effeaded8a9eb39'
+                        key: {
+                            sc_cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                            sc_catalog: 'e0d08b13c3330100c8b837659bba8fb4'
+                        }
+                    },
+                    {
                         table: 'question_choice'
                         id: '65994efade924a95a23bd1b74bd48dc7'
                         key: {
@@ -1399,6 +1798,40 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_step_ext_input'
+                        id: '6bfd28bb736d44e4947b882604c42c17'
+                        key: {
+                            model: '754e1ddbcff34bb1baf8354cb75d3f79'
+                            element: 'request_item_id'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '6e3016f844834a12aef4e40b7e2f5cea'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            element: '__dont_treat_as_error__'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '6f4499afeae14118bd1e04935cb5101d'
+                        key: {
+                            name: 'var__m_sys_hub_action_input_a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'taskId'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_input'
+                        id: '6ff991368c264f0c88dfc296ee695857'
+                        key: {
+                            model: 'a2b090027b094f189d914abe81bf3e98'
+                            element: 'task_id'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_input'
                         id: '70c9e45e84414cddbe3b2bebea7a8a0a'
                         key: {
@@ -1412,6 +1845,24 @@ declare global {
                         key: {
                             model: '6c399e42a5fa44b983ce73f7091a030f'
                             element: 'updated'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '7167a6234c0c4f0dab64603877b31d3e'
+                        key: {
+                            name: 'var__m_sys_hub_action_input_846bedc96ac1404ca575e9caf1147300'
+                            element: 'taskShortDescription'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '71d60310c3434121a6eec665322027a6'
+                        key: {
+                            cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                            variable_set: 'NULL'
+                            name: 'warehouse_size'
                         }
                     },
                     {
@@ -1464,6 +1915,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: '756df8cbb910495ba9dce9430526dacd'
+                        key: {
+                            cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                            variable_set: 'NULL'
+                            name: 'auto_suspend_seconds'
+                        }
+                    },
+                    {
                         table: 'sys_db_object'
                         id: '777a2be0fef54ecb8067edd62621f90b'
                         key: {
@@ -1488,6 +1948,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'io_set_item'
+                        id: '7c8fd3d82a8740f1a631df43c3171f07'
+                        key: {
+                            sc_cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                            variable_set: '10a720b0e72848c8a10d2783cc7938b3'
+                        }
+                    },
+                    {
                         table: 'sys_hub_step_ext_input'
                         id: '7d7427e2dc7546a9a6deab122a1224e3'
                         key: {
@@ -1501,6 +1969,30 @@ declare global {
                         key: {
                             document_key: 'e561ec4bbeb84d9d9c69e25bbff8342d'
                             variable: '74315b04b3201300176b051a16a8dc2b'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '7e609a2029844b4c806579fb3135c312'
+                        key: {
+                            question: {
+                                id: '5ca11c2b129644a994832f7cfd7ec1c7'
+                                key: {
+                                    cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                                    variable_set: 'NULL'
+                                    name: 'resource_monitor'
+                                }
+                            }
+                            value: 'RM_PLATFORM_DEV'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: '7f39188f560244ce9146d090e751dc65'
+                        key: {
+                            id: 'c5e1323322b647e2b7a4b034577958b7'
+                            table: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            field: 'message'
                         }
                     },
                     {
@@ -1536,6 +2028,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_step_ext_output'
+                        id: '80ee8c7fa6694f6580db7339791db6ea'
+                        key: {
+                            model: '754e1ddbcff34bb1baf8354cb75d3f79'
+                            element: 'valid'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: '81b79eb162504613986d4fb6c260637d'
                         key: {
@@ -1550,6 +2050,15 @@ declare global {
                         key: {
                             model: '5e464c59519d4bb983b4823259cff23e'
                             element: 'requiredDate'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '81f42258d5f04c359e77c9ffc2717f17'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            element: 'warehouseName'
+                            language: 'en'
                         }
                     },
                     {
@@ -1627,12 +2136,36 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_element_mapping'
+                        id: '892f275b49714d23ba01f0c704b9da09'
+                        key: {
+                            id: 'a2b090027b094f189d914abe81bf3e98'
+                            table: 'var__m_sys_hub_step_ext_input_a2b090027b094f189d914abe81bf3e98'
+                            field: 'request_item_id'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '8951646382dd4382beaa04167a80740e'
                         key: {
                             name: 'var__m_sys_hub_action_output_b26a1494969c4bbcb87eaa053808313d'
                             element: 'requestNumber'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '89571f12191c4ccdbf81845f39b2b104'
+                        key: {
+                            question: {
+                                id: '499d8087dbae494c91dcde6ab8362421'
+                                key: {
+                                    cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                                    variable_set: 'NULL'
+                                    name: 'environment'
+                                }
+                            }
+                            value: 'dev'
                         }
                     },
                     {
@@ -1654,6 +2187,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_step_ext_output'
+                        id: '8b62e429cfaa466880fa2c9d7a5adf9a'
+                        key: {
+                            model: '754e1ddbcff34bb1baf8354cb75d3f79'
+                            element: 'found'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: '8c2c13e957b64eb4a83e7e9d5407ab40'
                         key: {
@@ -1672,6 +2213,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_output'
+                        id: '8fc8d3fe4f8249d5881ec4d1510d0a18'
+                        key: {
+                            model: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            element: '__dont_treat_as_error__'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: '927e324aadbc411a8224f0ab2cb7b1b5'
                         key: {
@@ -1681,11 +2230,27 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_input'
+                        id: '93e3502ff90246c58cbc60e706be7859'
+                        key: {
+                            model: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'requestItemId'
+                        }
+                    },
+                    {
                         table: 'sys_hub_step_ext_output'
                         id: '95c752a186924481984a4563a42bcbe4'
                         key: {
                             model: 'a4fcd570c3db451ba64276cfd3ca883d'
                             element: 'found'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_step_ext_output'
+                        id: '96716e5678e34506b9b01b3c4c3ddd29'
+                        key: {
+                            model: 'a2b090027b094f189d914abe81bf3e98'
+                            element: 'launched'
                         }
                     },
                     {
@@ -1702,6 +2267,24 @@ declare global {
                         key: {
                             name: 'x_412550_catal_config'
                             element: 'active'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '9a6c77958dd340e4acb87bcaf51c97e1'
+                        key: {
+                            cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                            variable_set: 'NULL'
+                            name: 'warehouse_name'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '9a9d6ec30b0b4591bba7256960f40b95'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            element: 'found'
+                            language: 'en'
                         }
                     },
                     {
@@ -1737,6 +2320,14 @@ declare global {
                             id: '3ef594acf66a422da96a6c729001a5ee'
                             table: 'var__m_sys_hub_action_output_3ef594acf66a422da96a6c729001a5ee'
                             field: 'assigned'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_category'
+                        id: '9ebb4d33ef1040609ff36d74ee2c322e'
+                        key: {
+                            sc_cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                            sc_category: '109f0438c6112276003ae8ac13e7009d'
                         }
                     },
                     {
@@ -1931,6 +2522,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_step_ext_input'
+                        id: 'a9fbeb72fa3744b793d39ab75160cdb6'
+                        key: {
+                            model: 'c59b2e0cb52146668e1921a2084e34f7'
+                            element: 'task_short_description'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_output'
                         id: 'aabaa5e283804d5095d61af4be81c10e'
                         key: {
@@ -1953,6 +2552,15 @@ declare global {
                         key: {
                             model: '6c399e42a5fa44b983ce73f7091a030f'
                             element: 'message'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: 'afee87754eb047b6a756cfc6fd20942c'
+                        key: {
+                            id: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            table: 'var__m_sys_hub_action_output_a5527048ebde44e7aaeaa65e330d2baa'
+                            field: 'jobId'
                         }
                     },
                     {
@@ -1984,6 +2592,23 @@ declare global {
                             name: 'var__m_sys_hub_action_output_846bedc96ac1404ca575e9caf1147300'
                             element: 'taskCreated'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'b125365c081b437cb36f22c4ca42ba95'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            element: 'message'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: 'b1439583031c4dfeaf224f25b6e1b6f4'
+                        key: {
+                            model: 'c5e1323322b647e2b7a4b034577958b7'
+                            element: '__dont_treat_as_error__'
                         }
                     },
                     {
@@ -2036,6 +2661,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_input'
+                        id: 'b783e2f4cd3f4a13b51e5a2aeca94478'
+                        key: {
+                            model: '846bedc96ac1404ca575e9caf1147300'
+                            element: 'taskShortDescription'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_output'
                         id: 'b85baf1a03804ec483850282dd1aecfe'
                         key: {
@@ -2050,6 +2683,14 @@ declare global {
                             name: 'x_412550_catal_config'
                             element: 'active'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: 'b986d280d8994b95a332a935ff1680d4'
+                        key: {
+                            model: 'c5e1323322b647e2b7a4b034577958b7'
+                            element: '__action_status__'
                         }
                     },
                     {
@@ -2104,6 +2745,21 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: 'beaf60edc35541b3917cab5eb7986aed'
+                        key: {
+                            question: {
+                                id: '71d60310c3434121a6eec665322027a6'
+                                key: {
+                                    cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                                    variable_set: 'NULL'
+                                    name: 'warehouse_size'
+                                }
+                            }
+                            value: 'SMALL'
+                        }
+                    },
+                    {
                         table: 'item_option_new'
                         id: 'c07934e6e2494f3dba65545998c9277a'
                         key: {
@@ -2145,6 +2801,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_step_ext_input'
+                        id: 'c377d6f569834a4d90a2907b38895653'
+                        key: {
+                            model: 'a2b090027b094f189d914abe81bf3e98'
+                            element: 'request_item_id'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_input'
                         id: 'c380b487fcb74e5d9eb799eac118ed2c'
                         key: {
@@ -2161,11 +2825,29 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: 'c47bd8859d9449c79be96a6d5257d953'
+                        key: {
+                            cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                            variable_set: 'NULL'
+                            name: 'business_justification'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_output'
                         id: 'c67f2c0b50bb4746852d3f44eef3fdf7'
                         key: {
                             model: '846bedc96ac1404ca575e9caf1147300'
                             element: 'taskNumber'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: 'c71c3e75b7e743da957ada12648bddb3'
+                        key: {
+                            id: 'a5527048ebde44e7aaeaa65e330d2baa'
+                            table: 'var__m_sys_hub_action_output_a5527048ebde44e7aaeaa65e330d2baa'
+                            field: 'message'
                         }
                     },
                     {
@@ -2213,12 +2895,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_action_input'
+                        id: 'cc262d3c4ca64092bbfc89966f41a202'
+                        key: {
+                            model: 'c5e1323322b647e2b7a4b034577958b7'
+                            element: 'requestItemId'
+                        }
+                    },
+                    {
                         table: 'sys_element_mapping'
                         id: 'cc6c55a58f6b4c85a343848bf535b4a0'
                         key: {
                             id: '938b82413cae435eb1c6a5884e6ff953'
                             table: 'var__m_sys_hub_step_ext_input_938b82413cae435eb1c6a5884e6ff953'
                             field: 'assigned_technician'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_action_output'
+                        id: 'ce80bde79c2243e593a3034de40f1cc4'
+                        key: {
+                            model: 'c5e1323322b647e2b7a4b034577958b7'
+                            element: 'valid'
                         }
                     },
                     {
@@ -2327,6 +3025,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_variable_value'
+                        id: 'd280d18527f148a895c95dab6e7342c3'
+                        key: {
+                            document_key: 'a2b090027b094f189d914abe81bf3e98'
+                            variable: '74315b04b3201300176b051a16a8dc2b'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_input'
                         id: 'd38466ca4c9c418c9a93fb4516e3085d'
                         key: {
@@ -2373,6 +3079,15 @@ declare global {
                         key: {
                             model: 'b8f937f312c64a2c98296c47b37bad91'
                             element: 'found'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'd9116a0be4a942b099df1edf912de773'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            element: '__action_status__'
+                            language: 'en'
                         }
                     },
                     {
@@ -2428,11 +3143,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_variable_value'
+                        id: 'dca5e6a8e6b14a4dbf945cbfce3ddcf9'
+                        key: {
+                            document_key: 'a2b090027b094f189d914abe81bf3e98'
+                            variable: '71aa7f6647032200b4fad7527c9a719b'
+                        }
+                    },
+                    {
                         table: 'sys_hub_step_ext_output'
                         id: 'dd38d05f9b9b487f97839d24b2ce4430'
                         key: {
                             model: '938b82413cae435eb1c6a5884e6ff953'
                             element: 'message'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: 'ddbe434617374db495a982ca53312624'
+                        key: {
+                            id: 'c5e1323322b647e2b7a4b034577958b7'
+                            table: 'var__m_sys_hub_action_output_c5e1323322b647e2b7a4b034577958b7'
+                            field: 'warehouseName'
                         }
                     },
                     {
@@ -2477,6 +3209,21 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: 'e3026f4c65e14f69b194535928ef22d0'
+                        key: {
+                            question: {
+                                id: '756df8cbb910495ba9dce9430526dacd'
+                                key: {
+                                    cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                                    variable_set: 'NULL'
+                                    name: 'auto_suspend_seconds'
+                                }
+                            }
+                            value: '60'
+                        }
+                    },
+                    {
                         table: 'sys_hub_action_output'
                         id: 'e35aebe2249647aba4ebea0c253671c7'
                         key: {
@@ -2499,6 +3246,15 @@ declare global {
                         key: {
                             name: 'var__m_sys_hub_action_output_b26a1494969c4bbcb87eaa053808313d'
                             element: 'state'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'e5df34907f0c4724af6188a97f653224'
+                        key: {
+                            name: 'var__m_sys_hub_action_input_a5527048ebde44e7aaeaa65e330d2baa'
+                            element: 'requestItemId'
                             language: 'en'
                         }
                     },
@@ -2554,6 +3310,15 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: 'ec03a6b02c43436c8765fc706669ede3'
+                        key: {
+                            name: 'var__m_sys_hub_action_output_a5527048ebde44e7aaeaa65e330d2baa'
+                            element: '__action_status__'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: 'ec4813b55c5e4b719f48f72e49afd733'
                         key: {
                             name: 'var__m_sys_hub_action_output_5e464c59519d4bb983b4823259cff23e'
@@ -2592,6 +3357,21 @@ declare global {
                         key: {
                             model: '938b82413cae435eb1c6a5884e6ff953'
                             element: 'assigned'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: 'f1060e8f7adb42edb20d981505ef33bd'
+                        key: {
+                            question: {
+                                id: '756df8cbb910495ba9dce9430526dacd'
+                                key: {
+                                    cat_item: '7fff5c8050a84ae08ece2beef289932a'
+                                    variable_set: 'NULL'
+                                    name: 'auto_suspend_seconds'
+                                }
+                            }
+                            value: '600'
                         }
                     },
                     {
@@ -2705,6 +3485,15 @@ declare global {
                         key: {
                             document_key: '6c399e42a5fa44b983ce73f7091a030f'
                             variable: '74315b04b3201300176b051a16a8dc2b'
+                        }
+                    },
+                    {
+                        table: 'sys_element_mapping'
+                        id: 'fa143e778da04e40809168f85f195306'
+                        key: {
+                            id: 'c59b2e0cb52146668e1921a2084e34f7'
+                            table: 'var__m_sys_hub_step_ext_input_c59b2e0cb52146668e1921a2084e34f7'
+                            field: 'task_short_description'
                         }
                     },
                     {

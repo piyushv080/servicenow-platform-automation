@@ -36,7 +36,10 @@
         }
 
         var ritmNumber = ritm.getValue('number');
-        var taskDescription = 'Fulfill Generic IT Service Request';
+        // Optional input; the Generic IT flow does not pass it and keeps the original text.
+        var taskDescription =
+            String(inputs.task_short_description || '').trim() ||
+            'Fulfill Generic IT Service Request';
 
         // Prevent duplicate toolkit fulfillment tasks for this RITM.
         var existingTask = new GlideRecord('sc_task');
