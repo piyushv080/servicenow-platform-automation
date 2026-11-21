@@ -18,6 +18,39 @@ No proprietary or employer-specific code is included.
 **Certifications:**
 - ServiceNow CSA & CAD
 ---
+## ServiceNow as Code — Snowflake Self-Service
+
+The [`catalog-toolkit/`](catalog-toolkit/) application is written entirely in code with the
+**ServiceNow SDK (Fluent, TypeScript)** and deployed by GitHub Actions — no Studio clicks, no update sets.
+
+```
+Service Portal ──► Catalog item / order guide ──► Flow: validate → approve → SCTASK ──► AWX (via MID Server)
+                                                                                         │
+     RITM closed  ◄── business rule ◄── SCTASK closed with result ◄── Ansible + Snowflake ◄┘
+```
+
+| What you can order | What happens |
+|---|---|
+| **Snowflake Warehouse Request** | Validated, approved, then AWX creates a cost-controlled `WH_REQ_*` warehouse |
+| **Snowflake Access Request** | Validated, approved, then AWX grants or removes one standard role (no admin roles) |
+| **Snowflake Onboarding** (order guide) | Both items in one form; shared answers entered once and cascaded |
+
+**How it is built**
+
+- Catalog items, variables, flows, actions, script includes, client scripts, business rules,
+  properties and the order guide are `.now.ts` / `.js` files under `catalog-toolkit/src/`.
+- The Snowflake items reuse the Catalog Toolkit lifecycle (approval, task creation, SCTASK → RITM sync)
+  and share one validate action and one *Launch AWX* action for every Snowflake request type.
+- Policy is enforced on the form, on the server before approval and before launch, and again in Ansible.
+- `src/fluent/generated/keys.ts` fixes the sys_id of every record, so each deploy updates the same records.
+- No credentials live in the repository: AWX settings are instance properties, deploy credentials are
+  GitHub environment secrets.
+
+The automation side (playbooks and custom Ansible modules) lives in
+[`snowflake-platform-automation`](https://github.com/piyushv080/snowflake-platform-automation).
+Details: [`catalog-toolkit/README.md`](catalog-toolkit/README.md).
+
+---
 ## What This Repo Covers
 ### CMDB Automation
 - CMDB Health scorecard scheduling (Completeness, Correctness, Compliance)
@@ -45,6 +78,7 @@ No proprietary or employer-specific code is included.
 |---|---|---|
 | `export-servicenow.yml` | Scheduled (every 2 days) or manual | Archives a named update set; optional supplemental table snapshots |
 | `import-servicenow.yml` | Manual | Experimental partial import; does not restore update sets or a full instance |
+| `servicenow-app.yml` | Push / PR (build); manual or push to `main` (deploy) | `now-sdk build --frozenKeys`, then `now-sdk install` of the Catalog Toolkit app through the `servicenow-dev` environment |
 
 ### Archive a specific update set
 

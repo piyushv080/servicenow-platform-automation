@@ -181,6 +181,16 @@ pnpm exec now-sdk install
 
 The SDK uses the project's `now.config.json` and configured ServiceNow authentication. Do not commit credentials or instance secrets.
 
+### Deploy with GitHub Actions
+
+`.github/workflows/servicenow-app.yml` builds every push and pull request with
+`now-sdk build --frozenKeys` (fails if `src/fluent/generated/keys.ts` is not committed) and deploys with
+`now-sdk install` on a manual run (**Actions → servicenow-app → Run workflow**) or a push to `main`.
+
+Deploy credentials live in the GitHub environment `servicenow-dev`: variables `SN_SDK_INSTANCE_URL` and
+`SN_SDK_AUTH_TYPE` (`basic` or `oauth`), secrets `SN_SDK_USER` / `SN_SDK_USER_PWD` or
+`SN_SDK_OAUTH_CLIENT_ID` / `SN_SDK_OAUTH_CLIENT_SECRET`.
+
 ## Verification performed
 
 The following standard-variable fulfillment path was verified on the development PDI:
