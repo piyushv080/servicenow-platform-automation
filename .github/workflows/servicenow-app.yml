@@ -1,0 +1,124 @@
+name: servicenow-app
+
+# Build (every push / PR) and deploy (manual or main) the Catalog Toolkit Fluent app with the Now SDK.
+# Follows the SDK's CI guide: node_modules/@servicenow/sdk/docs/configuration/ci-integration.md
+#
+# One-time setup in GitHub: Settings -> Environments -> New environment "servicenow-dev"
+#   Variables: SN_SDK_INSTANCE_URL  e.g. https://dev427791.service-now.com
+#              SN_SDK_AUTH_TYPE     oauth (recommended) or basic
+#   Secrets (oauth): SN_SDK_OAUTH_CLIENT_ID, SN_SDK_OAUTH_CLIENT_SECRET
+#   Secrets (basic): SN_SDK_USER, SN_SDK_USER_PWD
+#   Optional: "Required reviewers" on the environment = manual approval before every deploy.
+
+on:
+  pull_request:
+    branches: [main, dev]
+    paths:
+      - "catalog-toolkit/**"
+      - ".github/workflows/servicenow-app.yml"
+  push:
+    branches: [main, dev, "feature/**"]
+    paths:
+      - "catalog-toolkit/**"
+      - ".github/workflows/servicenow-app.yml"
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Install the app on the developer instance after a successful build"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: servicenow-app-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: catalog-toolkit
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.21.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: catalog-toolkit/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and verify keys.ts is committed
+        # Fails if the build would change keys.ts: a changed sys_id would create duplicate records on the instance.
+        run: pnpm exec now-sdk build --frozenKeys
+
+      - name: Keep the build output for the deploy job
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-toolkit-dist
+          path: catalog-toolkit/dist
+          retention-days: 7
+
+  deploy:
+    needs: build
+    # Manual run with deploy=true, or a push to main. Feature branches and PRs only build.
+    if: >-
+      (github.event_name == 'workflow_dispatch' && inputs.deploy) ||
+      (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    environment: servicenow-dev
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.21.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: catalog-toolkit/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download the verified build
+        uses: actions/download-artifact@v4
+        with:
+          name: catalog-toolkit-dist
+          path: catalog-toolkit/dist
+
+      - name: Install app on the instance
+        env:
+          SN_SDK_NODE_ENV: SN_SDK_CI_INSTALL
+          SN_SDK_INSTANCE_URL: ${{ vars.SN_SDK_INSTANCE_URL }}
+          SN_SDK_AUTH_TYPE: ${{ vars.SN_SDK_AUTH_TYPE }}
+          SN_SDK_OAUTH_CLIENT_ID: ${{ secrets.SN_SDK_OAUTH_CLIENT_ID }}
+          SN_SDK_OAUTH_CLIENT_SECRET: ${{ secrets.SN_SDK_OAUTH_CLIENT_SECRET }}
+          SN_SDK_USER: ${{ secrets.SN_SDK_USER }}
+          SN_SDK_USER_PWD: ${{ secrets.SN_SDK_USER_PWD }}
+        run: |
+          if [ -z "$SN_SDK_INSTANCE_URL" ]; then
+            echo "::error::Set the SN_SDK_INSTANCE_URL variable on the servicenow-dev environment"; exit 1
+          fi
+          pnpm exec now-sdk install
+
+      - name: Summary
+        run: |
+          {
+            echo "### ServiceNow app deployed"
+            echo "- Instance: ${{ vars.SN_SDK_INSTANCE_URL }}"
+            echo "- Commit: \`${GITHUB_SHA::7}\` on \`${GITHUB_REF_NAME}\`"
+            echo "- Scope: \`$(node -p "require('./now.config.json').scope")\`"
+          } >> "$GITHUB_STEP_SUMMARY"
